@@ -1,79 +1,65 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Do_an_tot_nghiep
 
-# Getting Started
+## Code convention
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+1. Cài extension `ESLint`
+2. Các block code nên cách dòng
+3. Trước khi commit, kiểm tra format code và lint:
+   ```bash
+   $ yarn format
+   $ yarn lint
+   ```
+4. Trước khi commit, kiểm tra và loại bỏ những dòng `log` không cần thiết
+5. Import file bằng absolute path đã config (root path sẽ là `src/...`, `assets/...`)
+6. Thống nhất cách đặt tên `folder`, tên `file`, viết chữ thường (`under_score`) hoặc chữ hoa (`PascalCase`), tránh lẫn lộn giữa cách đặt tên file-folder và tên biến.
 
-## Step 1: Start the Metro Server
+   > Ví dụ folder `loginScreen` -> `LoginScreen` hoặc `login_screen` hay `login-screen`.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+7. Đặt tên biến, hàm theo kiểu `camelCase`, tránh dùng `PascalCase` bừa bãi. Những biến kiểu `constant` thì `UPPERCASE` hết. (Ngoại trừ tên các `component` thì viết hoàn toàn kiểu `PascalCase`).
 
-To start Metro, run the following command from the _root_ of your React Native project:
+8. Nếu không chắc chắn, nên cài thêm extension để check spell (chính tả) của những từ tiếng anh, tránh sai chính tả, cũng rất khó để debug.
 
-```bash
-# using npm
-npm start
+9. Uninstall những thư viện không dùng ngay
 
-# OR using Yarn
-yarn start
+## Commit convention
+
+### Commit message header
+
+```
+<type>: <short summary>
 ```
 
-## Step 2: Start your Application
+`The <type> and <summary> fields are mandatory.`
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+#### Type
 
-### For Android
+Must be one of the following:
 
-```bash
-# using npm
-npm run android
+- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- **ci**: Changes to our CI configuration files and scripts (example scopes: Gitlab CI, Circle, BrowserStack, SauceLabs)
+- **chore**: add something without touching production code (Eg: update npm dependencies)
+- **docs**: Documentation only changes
+- **feat**: A new feature
+- **fix**: A bug fix
+- **perf**: A code change that improves performance
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **revert**: Reverts a previous commit
+- **style**: Changes that do not affect the meaning of the code (Eg: adding white-space, formatting, missing semi-colons, etc)
+- **test**: Adding missing tests or correcting existing tests
+  > Note: If your commit is not user-facing, you can use `chore` instead of `fix` or `feat`.
 
-# OR using Yarn
-yarn android
-```
+> Example: `chore: update dependencies`
 
-### For iOS
+`scope` là _optional_, phạm vi ảnh hưởng của commit hiện tại
 
-```bash
-# using npm
-npm run ios
+`subject` là nội dung của commit
 
-# OR using Yarn
-yarn ios
-```
+### Revert commits
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+If the commit reverts a previous commit, it should begin with `revert: `, followed by the header of the reverted commit.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+The content of the commit message body should contain:
 
-## Step 3: Modifying your App
+- information about the SHA of the commit being reverted in the following format: `This reverts commit <SHA>`,
+- a clear description of the reason for reverting the commit message.
 
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.

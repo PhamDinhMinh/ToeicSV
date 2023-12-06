@@ -1,4 +1,4 @@
-package com.awesomeproject;
+package com.do_an_tot_nghiep;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

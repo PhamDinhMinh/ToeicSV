@@ -5660,6 +5660,11 @@ react-native-dotenv@^3.4.9:
   dependencies:
     dotenv "^16.3.1"
 
+react-native-image-crop-picker@^0.40.2:
+  version "0.40.2"
+  resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.40.2.tgz#be9098435504b8a2083f7cad553dfeedc442a804"
+  integrity sha512-u9iceozX8985vtZV5ozLMfNuCDjtm00GivExSxKwZmwv2wZYyv30VJkKhVJffVYsujvIzMfSCaWJPBsb5nSfZg==
+
 react-native-ratings@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/react-native-ratings/-/react-native-ratings-8.1.0.tgz#3fa9ad29128dc3a88e59518ba151e61c59dd0647"

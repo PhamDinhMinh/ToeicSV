@@ -2,3 +2,5 @@ rootProject.name = 'Do_an_tot_nghiep'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')
+include ':tuya-react-sdk'
+project(':tuya-react-sdk').projectDir = new File(rootProject.projectDir, '../sdk/android')

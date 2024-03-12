@@ -62,4 +62,3 @@ The content of the commit message body should contain:
 
 - information about the SHA of the commit being reverted in the following format: `This reverts commit <SHA>`,
 - a clear description of the reason for reverting the commit message.
-

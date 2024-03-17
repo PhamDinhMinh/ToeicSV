@@ -2,15 +2,18 @@ import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
-  Text,
+  ScrollView,
   TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
-import {ScrollView} from 'react-native-gesture-handler';
 import {Icon} from '@rneui/themed';
+import {StackScreenProps} from '@react-navigation/stack';
+import {TAuthStackParamList} from '@/routes/AuthStack';
 
-const RegisterScreen = () => {
+type props = StackScreenProps<TAuthStackParamList, 'LoginScreen'>;
+
+const RegisterScreen = ({navigation}: props) => {
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -28,7 +31,7 @@ const RegisterScreen = () => {
               paddingLeft: 10,
               paddingVertical: 10,
             }}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Icon name="chevron-left" size={30} color="black" />
             </TouchableOpacity>
           </View>

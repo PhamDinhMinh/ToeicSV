@@ -24,7 +24,6 @@ const ControlledTooltip = ({
   ...props
 }: any) => {
   const language = useTranslation();
-  console.log(open);
   const {theme} = useTheme();
 
   const handlePress = (lang: string) => {

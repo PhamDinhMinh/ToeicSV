@@ -142,6 +142,14 @@ const LoginScreen = ({navigation}: props) => {
                   }}
                 />
               ))}
+              <Text
+                // onPress={() => navigation.navigate('ForgotPassword')}
+                style={[
+                  {textAlign: 'right', color: color.green_700},
+                  globalStyles.text16Regular,
+                ]}>
+                {language.t('forgotPass')}?
+              </Text>
               <Button
                 onPress={handleSubmit(onSubmit, onError)}
                 containerStyle={{marginTop: 20}}

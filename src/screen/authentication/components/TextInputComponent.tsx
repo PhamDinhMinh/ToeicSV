@@ -16,6 +16,19 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+type TTextInputComponent = {
+  containerStyle?: StyleProp<ViewStyle>;
+  inputStyle?: StyleProp<TextStyle>;
+  placeholder?: string;
+  value: string;
+  defaultValue?: string;
+  onChangeText: (v: string) => void;
+  error?: string;
+  secureTextEntry?: boolean;
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
+  isTenancy?: boolean;
+};
+
 const TextInputComponent = ({
   containerStyle = {},
   inputStyle = {},
@@ -27,20 +40,10 @@ const TextInputComponent = ({
   secureTextEntry = false,
   autoCapitalize = 'none',
   isTenancy = false,
-}: {
-  containerStyle?: StyleProp<ViewStyle>;
-  inputStyle?: StyleProp<TextStyle>;
-  placeholder?: string;
-  value: string;
-  defaultValue?: string;
-  onChangeText: (v: string) => void;
-  error?: string;
-  secureTextEntry?: boolean;
-  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
-  isTenancy?: boolean;
-}) => {
+}: TTextInputComponent) => {
   const [isSecurity, setIsSecurity] = useState(secureTextEntry);
   const opacityValue = useSharedValue(0.5);
+
   const animatedStyle = useAnimatedStyle(() => {
     return {
       opacity: !isTenancy
@@ -50,6 +53,7 @@ const TextInputComponent = ({
           : 1,
     };
   });
+
   return (
     <View>
       <Animated.View
@@ -80,7 +84,7 @@ const TextInputComponent = ({
             // setIsFocused(false);
             opacityValue.value = withTiming(0.5, {duration: 200});
           }}
-          placeholderTextColor={color.green_700}
+          placeholderTextColor={color.grey_700}
           placeholder={placeholder}
           style={[
             {
@@ -110,7 +114,7 @@ const TextInputComponent = ({
       </Animated.View>
       <Text
         style={{
-          color: '#FFB800',
+          color: '#dc3545',
           paddingHorizontal: '5%',
           fontWeight: '700',
           fontSize: 10,

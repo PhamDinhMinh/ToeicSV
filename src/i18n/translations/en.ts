@@ -9,7 +9,7 @@ const error = {
   'required-error-message': 'This field is required',
   'password-pattern-error-message':
     'Minimum 8 characters, including letters and numbers',
-  'password-nomatching-error-message': 'Passwords do not match',
+  'password-not-matching-error-message': 'Passwords do not match',
   passwordInvalid:
     'Password must be at least 8 characters and contain both letters and numbers',
   userNameInvalid:

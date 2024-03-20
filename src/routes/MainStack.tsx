@@ -1,5 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
+
+export type TMainStackParamsList = {};
+
+const Stack = createStackNavigator<TMainStackParamsList>();
 
 const MainStack = () => {
   return (

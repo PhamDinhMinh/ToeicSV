@@ -23,7 +23,7 @@ import * as yup from 'yup';
 
 const {width} = Dimensions.get('screen');
 
-type props = StackScreenProps<TAuthStackParamList, 'LoginScreen'>;
+type props = StackScreenProps<TAuthStackParamList, 'RegisterScreen'>;
 
 const RegisterScreen = ({navigation}: props) => {
   const toast = useToast();

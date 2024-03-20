@@ -9,7 +9,7 @@ const error = {
   'required-error-message': 'Không được bỏ trống',
   'password-pattern-error-message':
     'Tối thiểu 8 ký tự, bao gồm chữ cái và chữ số',
-  'password-nomatching-error-message': 'Không khớp',
+  'password-not-matching-error-message': 'Không khớp',
   passwordInvalid: 'Mật khẩu có tối thiểu 8 ký tự, chứa cả chữ cái và chữ số',
   userNameInvalid:
     'Tên người dùng chứa 6 đến 20 ký tự, không chứa dấu cách và kí tự đặc biệt',
@@ -18,6 +18,7 @@ const error = {
 };
 
 export const vi = {
+  //auth
   userOrEmail: 'Tên đăng nhập hoặc email',
   password: 'Mật khẩu',
   signIn: 'Đăng nhập',
@@ -29,6 +30,13 @@ export const vi = {
   email: 'Địa chỉ email',
   phoneNumber: 'Số điện thoại',
   forgotPass: 'Quên mật khẩu',
+
+  // tab bottom
+  'home-tab': 'Trang chủ',
+  'documents-tab': 'Tài liệu',
+  'statistics-tab': 'Thống kê',
+  'setting-tab': 'Cá nhân',
+  'social-tab': 'Bảng tin',
 
   loading: 'Đang tải ...',
   ...language,

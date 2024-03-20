@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@react-native-community/eslint-config": "^3.2.0",
     "@react-native-masked-view/masked-view": "^0.3.1",
+    "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.16",
     "@react-navigation/native-stack": "^6.9.25",
     "@react-navigation/stack": "^6.3.28",

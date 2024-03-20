@@ -8,7 +8,7 @@ const language = {
 const error = {
   'required-error-message': '필수 입력 항목입니다',
   'password-pattern-error-message': '최소 8자, 문자와 숫자를 포함해야 합니다',
-  'password-nomatching-error-message': '일치하지 않습니다',
+  'password-not-matching-error-message': '일치하지 않습니다',
   passwordInvalid: '비밀번호는 최소 8자이며 문자와 숫자를 포함해야 합니다',
   userNameInvalid:
     '사용자 이름은 공백 및 특수 문자 없이 6자에서 20자여야 합니다',

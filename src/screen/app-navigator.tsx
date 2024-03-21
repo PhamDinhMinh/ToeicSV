@@ -1,7 +1,7 @@
 import React from 'react';
-import AuthStack from '@/routes/AuthStack';
-import MainStack from '@/routes/MainStack';
-import MyTabs from '@/routes/MyTabs';
+import AuthStack from '@/routes/auth-stack';
+import MainStack from '@/routes/main-stack';
+import MyTabs from '@/routes/my-tabs';
 
 const AppNavigator = () => {
   const token = false;

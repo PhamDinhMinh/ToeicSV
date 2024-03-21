@@ -2,7 +2,7 @@ import {Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Icon} from '@rneui/themed';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import {useTabBarSize} from '../hooks/useTabBar';
+import {useTabBarSize} from '../hooks/use-tab-tar.hook';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {color} from '@/global-style';
 

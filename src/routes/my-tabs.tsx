@@ -3,10 +3,10 @@ import {
   BottomTabBarProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import SocialMediaScreen from '@/screen/social-media/screens/SocialMediaScreen';
-import SettingStack from './SettingStack';
+import SocialMediaScreen from '@/screen/social-media/screens/social-media.screen';
+import SettingStack from './setting-stack';
 import {useTranslation} from 'react-i18next';
-import TabUi from '@/screen/components/bottom-tab/TabUi';
+import TabUi from '@/screen/components/bottom-tab/tab-ui';
 import {color} from '@/global-style';
 
 export type TMyTabsParamsList = {

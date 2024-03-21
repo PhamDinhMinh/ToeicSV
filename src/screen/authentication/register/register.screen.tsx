@@ -10,14 +10,14 @@ import {
 import React, {useCallback, useEffect} from 'react';
 import {Button} from '@rneui/themed';
 import {StackScreenProps} from '@react-navigation/stack';
-import {TAuthStackParamList} from '@/routes/AuthStack';
+import {TAuthStackParamList} from '@/routes/auth-stack';
 import {useToast} from 'react-native-toast-notifications';
 import {Controller, useForm} from 'react-hook-form';
-import BackButton from '@/screen/components/BackButton';
+import BackButton from '@/screen/components/back-button';
 import FastImage from 'react-native-fast-image';
 import globalStyles, {color} from '@/global-style';
 import {useTranslation} from 'react-i18next';
-import TextInputComponent from '../components/TextInputComponent';
+import TextInputComponent from '../components/text-input.component';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 

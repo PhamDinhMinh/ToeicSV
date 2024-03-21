@@ -7,7 +7,7 @@ import {ThemeProvider} from '@rneui/themed';
 import {theme} from '@/global-style';
 import {ToastProvider} from 'react-native-toast-notifications';
 import {NavigationContainer} from '@react-navigation/native';
-import AppNavigator from '@/screen/AppNavigator';
+import AppNavigator from '@/screen/app-navigator';
 
 const App = () => {
   return (

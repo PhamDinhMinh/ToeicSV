@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import SocialMediaScreen from '@/screen/social-media/screens/SocialMediaScreen';
+import SocialMediaScreen from '@/screen/social-media/screens/social-media.screen';
 
 export type TAuthStackParamList = {
   SocialMediaScreen: undefined;

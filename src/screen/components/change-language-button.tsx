@@ -13,7 +13,7 @@ import React, {useState} from 'react';
 import globalStyles from '@/global-style';
 import {useTranslation} from 'react-i18next';
 import {useLanguageImage} from '@/hooks/useLanguageImage';
-import {useLanguageStore} from '@/stores/languageStore';
+import {useLanguageStore} from '@/stores/language.store';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import {useTheme} from '@rneui/themed';
 

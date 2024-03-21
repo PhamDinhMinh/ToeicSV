@@ -9,14 +9,14 @@ import {
 } from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import React from 'react';
-import {TAuthStackParamList} from '@/routes/AuthStack';
+import {TAuthStackParamList} from '@/routes/auth-stack';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import globalStyles, {color} from '@/global-style';
 import FastImage from 'react-native-fast-image';
 import {Controller, useForm} from 'react-hook-form';
-import TextInputComponent from '../components/TextInputComponent';
+import TextInputComponent from '../components/text-input.component';
 import {Button, useTheme} from '@rneui/themed';
-import ChangLanguageButton from '@/screen/components/ChangeLanguageButton';
+import ChangLanguageButton from '@/screen/components/change-language-button';
 import {useTranslation} from 'react-i18next';
 
 const {height} = Dimensions.get('screen');

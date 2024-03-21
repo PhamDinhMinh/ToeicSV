@@ -3,6 +3,10 @@ declare module 'react-native-androw';
 declare module 'react-native-url-preview';
 declare module 'react-native-splash-screen';
 
+declare module '@env' {
+  export const HOST_SERVER: string;
+}
+
 declare module '*.png' {
   const value: any;
   export = value;

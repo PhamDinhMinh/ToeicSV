@@ -1,11 +1,14 @@
 import React from 'react';
 import AuthStack from '@/routes/auth-stack';
-import MainStack from '@/routes/main-stack';
 import MyTabs from '@/routes/my-tabs';
+import {getToken} from '@/utils/api/token';
+import useAccountStore, {IAccountState} from '@/stores/account.store';
 
 const AppNavigator = () => {
-  const token = false;
-  const userInformation = 123;
+  const token = getToken();
+  const userInformation = useAccountStore(
+    (state: IAccountState) => state.account,
+  );
 
   return !token || !userInformation ? <AuthStack /> : <MyTabs />;
 };

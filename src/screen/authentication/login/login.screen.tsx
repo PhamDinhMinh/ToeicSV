@@ -18,34 +18,28 @@ import TextInputComponent from '../components/text-input.component';
 import {Button, useTheme} from '@rneui/themed';
 import ChangLanguageButton from '@/screen/components/change-language-button';
 import {useTranslation} from 'react-i18next';
+import {yupResolver} from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import {useLoginRequest} from '../hooks/hook';
+import Loading from '@/screen/components/loading';
 
 const {height} = Dimensions.get('screen');
 
 const loginField = [
   {
-    key: 'userNameOrEmailAddress',
-    rules: {
-      required: {
-        value: true,
-        message: 'required-error-message',
-      },
-    },
+    key: 'userNameOrEmail',
     defaultValues: '',
     label: 'userOrEmail',
     placeholder: 'userOrEmail',
+    required: true,
   },
   {
     key: 'password',
-    rules: {
-      required: {
-        value: true,
-        message: 'required-error-message',
-      },
-    },
     defaultValues: '',
     label: 'password',
     placeholder: 'password',
     secureTextEntry: true,
+    required: true,
   },
 ];
 
@@ -55,26 +49,32 @@ const LoginScreen = ({navigation}: props) => {
   const language = useTranslation();
   const {theme} = useTheme();
 
-  const {
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm({
+  const schema = yup.object().shape({
+    userNameOrEmail: yup
+      .string()
+      .required(language.t('required-error-message')),
+    password: yup.string().required(language.t('required-error-message')),
+  });
+
+  const {control, handleSubmit} = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {
-      userNameOrEmailAddress: '',
+      userNameOrEmail: '',
       password: '',
     },
+    resolver: yupResolver(schema),
   });
+
+  const {mutate, status} = useLoginRequest();
 
   const onSubmit = async (data: any) => {
     Keyboard.dismiss();
-    console.log(data, 'kk');
+    mutate(data);
   };
 
   const onError = (error: any) => {
-    console.log(error);
+    console.log(error, 'Lỗi');
   };
 
   return (
@@ -115,14 +115,11 @@ const LoginScreen = ({navigation}: props) => {
                   control={control}
                   //@ts-ignore
                   name={field.key}
-                  rules={field.rules}
-                  render={({field: {value, onChange}}) => {
+                  // rules={field.rules}
+                  render={({field: {value, onChange}, fieldState: {error}}) => {
                     return (
                       <TextInputComponent
-                        error={
-                          //@ts-ignore
-                          errors[field.key]
-                        }
+                        error={language.t(error?.message ?? '')}
                         value={value}
                         onChangeText={onChange}
                         inputStyle={[globalStyles.text17Medium]}
@@ -152,6 +149,7 @@ const LoginScreen = ({navigation}: props) => {
               </Text>
               <Button
                 onPress={handleSubmit(onSubmit, onError)}
+                disabled={status === 'pending'}
                 containerStyle={{marginTop: 20}}
                 buttonStyle={{
                   marginHorizontal: 20,
@@ -187,7 +185,7 @@ const LoginScreen = ({navigation}: props) => {
             </Text>
           </SafeAreaView>
         </SafeAreaView>
-        {/* {status === 'loading' && <Loading />} */}
+        {status === 'pending' && <Loading />}
       </ScrollView>
     </KeyboardAvoidingView>
   );

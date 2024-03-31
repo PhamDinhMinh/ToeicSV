@@ -9,7 +9,8 @@
     "ionicon",
     "newfeed",
     "pressable",
-    "zeroconf"
+    "zeroconf",
+    "zustand"
   ],
   "svg.preview.background": "black",
   "C_Cpp_Runner.msvcBatchPath": "",

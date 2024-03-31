@@ -8,6 +8,7 @@ import SettingStack from './setting-stack';
 import {useTranslation} from 'react-i18next';
 import TabUi from '@/screen/components/bottom-tab/tab-ui';
 import {color} from '@/global-style';
+import DocumentsStack from './documents-stack';
 
 export type TMyTabsParamsList = {
   Home: undefined;
@@ -47,7 +48,7 @@ const MyTabs = () => {
         options={{
           title: language.t('documents-tab'),
         }}
-        component={SettingStack}
+        component={DocumentsStack}
       />
       <Tab.Screen
         name="Statistics"

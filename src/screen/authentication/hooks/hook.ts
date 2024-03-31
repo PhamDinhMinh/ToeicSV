@@ -27,6 +27,10 @@ export const useLoginRequest = () => {
     (state: IAccountState) => state.setAccount,
   );
 
+  const setTokenAuth = useAccountStore(
+    (state: IAccountState) => state.setTokenAuth,
+  );
+
   const query = useMutation({
     mutationFn: (loginParams: any) => AuthService.login(loginParams),
     onError: (err: any) => {
@@ -37,6 +41,7 @@ export const useLoginRequest = () => {
       });
     },
     onSuccess: (data: ILoginResponse) => {
+      setTokenAuth(data?.accessToken);
       setToken(data?.accessToken);
       setAccount(data?.user);
     },

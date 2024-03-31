@@ -27,6 +27,10 @@ export const vi = {
     'Tên người dùng chứa 6 đến 20 ký tự, không chứa dấu cách và kí tự đặc biệt',
   emailInvalid: 'Email không hợp lệ',
   phoneNumberInvalid: 'Số điện thoại không hợp lệ',
+  confirm: 'Xác nhận',
+  delete: 'Xoá',
+  cancel: 'Huỷ',
+  'are-you-logout': 'Bạn có muốn đăng xuất không?',
 
   // tab bottom
   'home-tab': 'Trang chủ',

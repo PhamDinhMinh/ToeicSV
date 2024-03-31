@@ -1,16 +1,29 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import AuthStack from '@/routes/auth-stack';
 import MyTabs from '@/routes/my-tabs';
 import {getToken} from '@/utils/api/token';
 import useAccountStore, {IAccountState} from '@/stores/account.store';
 
 const AppNavigator = () => {
-  const token = getToken();
-  const userInformation = useAccountStore(
-    (state: IAccountState) => state.account,
+  const token = useAccountStore((state: IAccountState) => state.token);
+  const setTokenAuth = useAccountStore(
+    (state: IAccountState) => state.setTokenAuth,
   );
 
-  return !token || !userInformation ? <AuthStack /> : <MyTabs />;
+  const fetchToken = useCallback(async () => {
+    try {
+      const tokenValue = await getToken();
+      setTokenAuth(tokenValue);
+    } catch (error) {
+      console.error('Error fetching token:', error);
+    }
+  }, [setTokenAuth]);
+
+  useEffect(() => {
+    fetchToken();
+  }, [fetchToken]);
+
+  return token ? <MyTabs /> : <AuthStack />;
 };
 
 export default AppNavigator;

@@ -15,6 +15,12 @@ const color = {
   grey_600: '#757575',
   grey_700: '#616161',
   grey_800: '#424242',
+  red_200: '#ff6c68',
+  red_300: '#ff6260',
+  red_400: '#ff5857',
+  red_500: '#ff4d4f',
+  red_600: '#f44247',
+  red_700: '#e9373f',
 };
 
 const globalStyles = StyleSheet.create({

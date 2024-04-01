@@ -11,10 +11,7 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(async config => {
   const tokenString = await getToken();
   if (tokenString) {
-    const token = JSON.parse(tokenString);
-    if (token && token.accessToken) {
-      config.headers.Authorization = `Bearer ${token.accessToken}`;
-    }
+    config.headers.Authorization = `Bearer ${tokenString}`;
   }
   config.paramsSerializer = params => QueryString.stringify(params);
   return config;

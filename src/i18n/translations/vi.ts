@@ -31,6 +31,8 @@ export const vi = {
   delete: 'Xoá',
   cancel: 'Huỷ',
   'are-you-logout': 'Bạn có muốn đăng xuất không?',
+  'update-failed': 'Cập nhật thất bại',
+  'update-success': 'Cập nhật thành công',
 
   // tab bottom
   'home-tab': 'Trang chủ',

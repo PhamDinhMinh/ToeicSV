@@ -25,8 +25,8 @@ axiosClient.interceptors.response.use(
   response => {
     try {
       if (response.status === 200) {
-        if (response && response.data) {
-          return {...response.data, ...response};
+        if (response) {
+          return response;
         }
         throw response;
       } else {

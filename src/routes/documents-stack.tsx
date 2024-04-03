@@ -1,25 +1,46 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import DocumentScreen from '@/screen/documents/document.screen';
+import GrammarScreen from '@/screen/documents/grammars/grammars.screen';
+import ExamTipScreen from '@/screen/documents/exam-tips/exam-tips.screen';
+import VocabularyScreen from '@/screen/documents/vocabulary/vocabulary.screen';
+import {createStackNavigator} from '@react-navigation/stack';
 
 export type TDocumentStackParamList = {
   DocumentScreen: undefined;
+  GrammarScreen: undefined;
+  ExamTipScreen: undefined;
+  VocabularyScreen: undefined;
 };
 
-const Stack = createNativeStackNavigator<TDocumentStackParamList>();
+const Stack = createStackNavigator<TDocumentStackParamList>();
 
 const DocumentsStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="DocumentScreen"
       screenOptions={{
-        headerShown: false,
+        headerBackTitleVisible: false,
+        headerTitleAlign: 'center',
       }}>
       <Stack.Screen
-        name="DocumentScreen"
-        component={DocumentScreen}
+        name="GrammarScreen"
+        component={GrammarScreen}
         options={{
-          title: 'Danh sách dịch vụ nội khu',
+          headerTitle: 'Grammar',
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="ExamTipScreen"
+        component={ExamTipScreen}
+        options={{
+          headerTitle: 'Mẹo làm b',
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="VocabularyScreen"
+        component={VocabularyScreen}
+        options={{
+          headerTitle: 'Vocabulary',
           headerShown: true,
         }}
       />

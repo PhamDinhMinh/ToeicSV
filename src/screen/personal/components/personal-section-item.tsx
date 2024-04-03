@@ -28,6 +28,8 @@ const PersonalSectionItem = ({
     if (item?.function) {
       if (item?.key === 'logout') {
         setIsVisible(true);
+      } else {
+        item?.function();
       }
     } else {
       item.stack

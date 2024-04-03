@@ -1,12 +1,13 @@
 import React, {useCallback, useEffect} from 'react';
 import AuthStack from '@/routes/auth-stack';
-import MyTabs from '@/routes/my-tabs';
+// import MyTabs from '@/routes/my-tabs';
 import {getToken} from '@/utils/api/token';
 import useAccountStore, {IAccountState} from '@/stores/account.store';
 import {useMutation} from '@tanstack/react-query';
 import AuthService from './authentication/login/services/login.services';
 import Toast from 'react-native-toast-message';
 import {IUser} from './authentication/login/services/login.modal';
+import MainStack from '@/routes/main-stack';
 
 const AppNavigator = () => {
   const token = useAccountStore((state: IAccountState) => state.token);
@@ -48,7 +49,7 @@ const AppNavigator = () => {
     fetchToken();
   }, [fetchToken]);
 
-  return token ? <MyTabs /> : <AuthStack />;
+  return token ? <MainStack /> : <AuthStack />;
 };
 
 export default AppNavigator;

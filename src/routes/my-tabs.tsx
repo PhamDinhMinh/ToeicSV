@@ -7,8 +7,7 @@ import SocialMediaScreen from '@/screen/social-media/screens/social-media.screen
 import SettingStack from './setting-stack';
 import {useTranslation} from 'react-i18next';
 import TabUi from '@/screen/components/bottom-tab/tab-ui';
-import {color} from '@/global-style';
-import DocumentsStack from './documents-stack';
+import DocumentScreen from '@/screen/documents/document.screen';
 
 export type TMyTabsParamsList = {
   Home: undefined;
@@ -30,9 +29,6 @@ const MyTabs = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: {
-          display: 'flex',
-        },
       }}
       tabBar={renderTab}
       initialRouteName="Home">
@@ -40,6 +36,7 @@ const MyTabs = () => {
         name="Home"
         options={{
           title: language.t('home-tab'),
+          lazy: false,
         }}
         component={SocialMediaScreen}
       />
@@ -47,13 +44,18 @@ const MyTabs = () => {
         name="Documents"
         options={{
           title: language.t('documents-tab'),
+          lazy: false,
+          tabBarStyle: {
+            display: 'none',
+          },
         }}
-        component={DocumentsStack}
+        component={DocumentScreen}
       />
       <Tab.Screen
         name="Statistics"
         options={{
           title: language.t('statistics-tab'),
+          lazy: false,
         }}
         component={SettingStack}
       />
@@ -61,6 +63,7 @@ const MyTabs = () => {
         name="SocialMedia"
         options={{
           title: language.t('social-tab'),
+          lazy: false,
         }}
         component={SocialMediaScreen}
       />
@@ -68,6 +71,7 @@ const MyTabs = () => {
         name="Settings"
         options={{
           title: language.t('setting-tab'),
+          lazy: false,
         }}
         component={SettingStack}
       />

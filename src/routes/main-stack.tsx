@@ -3,10 +3,14 @@ import {NavigatorScreenParams} from '@react-navigation/native';
 import MyTabs, {TMyTabsParamsList} from './my-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import DocumentsStack, {TDocumentStackParamList} from './documents-stack';
+import SocialMediaStack, {
+  TSocialMediaStackParamList,
+} from './social-media-stack';
 
 export type TMainStackParamList = {
   MyTab: NavigatorScreenParams<TMyTabsParamsList>;
   DocumentsStack: NavigatorScreenParams<TDocumentStackParamList>;
+  SocialMediaStack: NavigatorScreenParams<TSocialMediaStackParamList>;
 };
 
 const Stack = createStackNavigator<TMainStackParamList>();
@@ -20,6 +24,7 @@ const MainStack = () => {
       }}>
       <Stack.Screen name={'MyTab'} component={MyTabs} />
       <Stack.Screen name={'DocumentsStack'} component={DocumentsStack} />
+      <Stack.Screen name={'SocialMediaStack'} component={SocialMediaStack} />
     </Stack.Navigator>
   );
 };

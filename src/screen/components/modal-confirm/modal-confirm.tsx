@@ -89,5 +89,6 @@ const styles = StyleSheet.create({
   },
   buttonConfirm: {
     borderRadius: 8,
+    backgroundColor: color.green_400,
   },
 });

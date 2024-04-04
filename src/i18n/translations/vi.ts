@@ -33,6 +33,7 @@ export const vi = {
   'are-you-logout': 'Bạn có muốn đăng xuất không?',
   'update-failed': 'Cập nhật thất bại',
   'update-success': 'Cập nhật thành công',
+  'what-on-ur-mind': 'Bạn đang nghĩ gì?',
 
   // tab bottom
   'home-tab': 'Trang chủ',

@@ -1,4 +1,4 @@
-import {Alert, Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import globalStyles, {color} from '@/global-style';

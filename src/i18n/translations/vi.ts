@@ -34,6 +34,9 @@ export const vi = {
   'update-failed': 'Cập nhật thất bại',
   'update-success': 'Cập nhật thành công',
   'what-on-ur-mind': 'Bạn đang nghĩ gì?',
+  'exam-tips': 'Mẹo làm bài',
+  'none-grammar': 'Không có bài ngữ pháp nào',
+  'none-exam-tips': 'Không có mẹo làm bài nào',
 
   // tab bottom
   'home-tab': 'Trang chủ',

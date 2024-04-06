@@ -13,15 +13,19 @@ import globalStyles from '@/global-style';
 import ItemGrammar from './components/item-grammar';
 import {StackScreenProps} from '@react-navigation/stack';
 import {TDocumentStackParamList} from '@/routes/documents-stack';
+import {useTranslation} from 'react-i18next';
 
 type props = StackScreenProps<TDocumentStackParamList, 'GrammarScreen'>;
 
 const GrammarScreen = ({navigation}: props) => {
+  const language = useTranslation();
+
   const {
     data: getListGrammar,
     isLoading,
     fetchNextPage,
     hasNextPage,
+    refetch,
   } = useInfiniteQuery({
     queryKey: ['list-grammar'],
     queryFn: () =>
@@ -43,7 +47,9 @@ const GrammarScreen = ({navigation}: props) => {
     initialPageParam: {skipCount: 0, maxResultCount: 10},
   });
 
-  const onRefresh = () => {};
+  const onRefresh = () => {
+    refetch();
+  };
 
   const dataProvider = useMemo(() => {
     return getListGrammar?.pages.map(page => page?.data).flat() ?? [];
@@ -77,7 +83,7 @@ const GrammarScreen = ({navigation}: props) => {
         }
         ListEmptyComponent={
           isLoading ? undefined : (
-            <Text style={styles.text}>Không có bài ngữ pháp nào</Text>
+            <Text style={styles.text}>{language.t('none-grammar')}</Text>
           )
         }
       />

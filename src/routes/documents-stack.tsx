@@ -6,6 +6,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {useTranslation} from 'react-i18next';
 import GrammarDetailScreen from '@/screen/documents/grammars/grammar-detail.screen';
 import {IGrammarResponse} from '@/screen/documents/grammars/services/grammar.model';
+import {IExamTipsResponse} from '@/screen/documents/exam-tips/services/exam-tips.model';
+import ExamTipsDetailScreen from '@/screen/documents/exam-tips/exam-tips.detail';
 
 export type TDocumentStackParamList = {
   DocumentScreen: undefined;
@@ -14,6 +16,9 @@ export type TDocumentStackParamList = {
   VocabularyScreen: undefined;
   GrammarDetailScreen: {
     item: IGrammarResponse;
+  };
+  ExamTipsDetailScreen: {
+    item: IExamTipsResponse;
   };
 };
 
@@ -37,10 +42,24 @@ const DocumentsStack = () => {
         }}
       />
       <Stack.Screen
+        name="GrammarDetailScreen"
+        component={GrammarDetailScreen}
+        options={{
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
         name="ExamTipScreen"
         component={ExamTipScreen}
         options={{
-          headerTitle: 'Mẹo làm b',
+          headerTitle: language.t('exam-tips'),
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="ExamTipsDetailScreen"
+        component={ExamTipsDetailScreen}
+        options={{
           headerShown: true,
         }}
       />
@@ -49,13 +68,6 @@ const DocumentsStack = () => {
         component={VocabularyScreen}
         options={{
           headerTitle: 'Vocabulary',
-          headerShown: true,
-        }}
-      />
-      <Stack.Screen
-        name="GrammarDetailScreen"
-        component={GrammarDetailScreen}
-        options={{
           headerShown: true,
         }}
       />

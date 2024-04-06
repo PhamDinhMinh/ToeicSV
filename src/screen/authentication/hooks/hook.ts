@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import AuthService from '../login/services/login.services';
+import authService from '../login/services/login.services';
 import useAccountStore, {IAccountState} from '@/stores/account.store';
 import {useMutation} from '@tanstack/react-query';
 import {setToken} from '@/utils/api/token';
@@ -32,7 +32,7 @@ export const useLoginRequest = () => {
   );
 
   const query = useMutation({
-    mutationFn: (loginParams: any) => AuthService.login(loginParams),
+    mutationFn: (loginParams: any) => authService.login(loginParams),
     onError: (err: any) => {
       return Toast.show({
         type: 'error',

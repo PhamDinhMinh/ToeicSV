@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import AuthService from '@/screen/authentication/login/services/login.services';
+import authService from '@/screen/authentication/login/services/login.services';
 import {Alert} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
@@ -91,7 +91,7 @@ const useListSetting = () => {
             size: 20,
             function: () => {
               // Alert.alert()
-              AuthService.logout();
+              authService.logout();
             },
           },
         ],

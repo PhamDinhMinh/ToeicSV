@@ -23,5 +23,5 @@ class Auth {
   }
 }
 
-const AuthService = new Auth();
-export default AuthService;
+const authService = new Auth();
+export default authService;

@@ -37,6 +37,8 @@ export const vi = {
   'exam-tips': 'Mẹo làm bài',
   'none-grammar': 'Không có bài ngữ pháp nào',
   'none-exam-tips': 'Không có mẹo làm bài nào',
+  'none-post': 'Không có bài viết nào',
+  edit: 'Chỉnh sửa',
 
   // tab bottom
   'home-tab': 'Trang chủ',

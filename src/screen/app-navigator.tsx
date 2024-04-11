@@ -23,6 +23,7 @@ const AppNavigator = () => {
     mutationFn: () => authService.getUserInfo(),
     onError: (err: any) => {
       authService.logout();
+      console.log('Đã logout rồi nha hehe');
       return Toast.show({
         type: 'error',
         text1: err?.data,

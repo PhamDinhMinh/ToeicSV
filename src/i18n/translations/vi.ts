@@ -84,6 +84,9 @@ export const vi = {
   hurt_emotions: 'đau nhức',
   beTricked_emotions: 'mắc lừa',
   small_emotions: 'nhỏ bé',
+  comment: 'bình luận',
+  writeComment: 'Viết bình luận...',
+  'not-comments': 'Chưa có bình luận nào!',
 
   // tab bottom
   'home-tab': 'Trang chủ',

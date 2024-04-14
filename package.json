@@ -11,8 +11,10 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@bam.tech/react-native-image-resizer": "^3.0.7",
     "@hookform/resolvers": "^3.3.4",
     "@react-native-async-storage/async-storage": "^1.23.1",
+    "@react-native-clipboard/clipboard": "^1.14.0",
     "@react-native-community/eslint-config": "^3.2.0",
     "@react-native-masked-view/masked-view": "^0.3.1",
     "@react-navigation/bottom-tabs": "^6.5.20",
@@ -28,6 +30,7 @@
     "i18n": "^0.15.1",
     "i18n-keys": "^1.0.8",
     "i18next": "^23.10.1",
+    "languagedetect": "^2.0.0",
     "moment": "^2.30.1",
     "moti": "^0.28.1",
     "qs": "^6.12.0",
@@ -52,6 +55,7 @@
     "react-native-walkthrough-tooltip": "^1.6.0",
     "react-query": "^3.39.3",
     "recyclerlistview": "^4.2.0",
+    "translate-google-api": "^1.0.4",
     "yup": "^1.4.0",
     "zustand": "^4.5.2"
   },

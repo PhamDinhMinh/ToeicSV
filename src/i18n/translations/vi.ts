@@ -87,6 +87,16 @@ export const vi = {
   comment: 'bình luận',
   writeComment: 'Viết bình luận...',
   'not-comments': 'Chưa có bình luận nào!',
+  reply: 'Phản hồi',
+  'reaction-icon': 'Bày tỏ cảm xúc về bình luận này',
+  'edit-comment': 'Chỉnh sửa bình luận',
+  'copy-comment': 'Sao chép',
+  'delete-comment': 'Xóa bình luận',
+  'delete-comment-success': 'Xoá bình luận thành công',
+  'copy-success': 'Copy thành công',
+  'are-you-delete-comment': 'Bạn có muốn xóa bài viết không?',
+  'confirm-delete': 'Bạn có chắc chắn muốn xoá không?',
+  'auto-close': 'Tự động đóng trong',
 
   // tab bottom
   'home-tab': 'Trang chủ',

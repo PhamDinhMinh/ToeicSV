@@ -15,7 +15,6 @@ import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {TMyTabsParamsList} from '@/routes/my-tabs';
 import {TMainStackParamList} from '@/routes/main-stack';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {TDocumentStackParamList} from '@/routes/documents-stack';
 
 type TItem = {
   nameIcon: string;

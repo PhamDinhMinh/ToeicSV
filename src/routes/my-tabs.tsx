@@ -38,7 +38,7 @@ const MyTabs = () => {
           title: language.t('home-tab'),
           lazy: false,
         }}
-        component={SocialMediaScreen}
+        component={DocumentScreen}
       />
       <Tab.Screen
         name="Documents"
@@ -64,6 +64,9 @@ const MyTabs = () => {
         options={{
           title: language.t('social-tab'),
           lazy: false,
+          tabBarStyle: {
+            display: 'none',
+          },
         }}
         component={SocialMediaScreen}
       />

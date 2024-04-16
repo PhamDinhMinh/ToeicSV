@@ -30,7 +30,7 @@ const SocialMediaScreen = ({navigation}: props) => {
   } = useInfiniteQuery({
     queryKey: ['list-post'],
     queryFn: () =>
-      socialMediaService.getAll({
+      socialMediaService.getAllPost({
         skipCount: 0,
         maxResultCount: 10,
       }),

@@ -93,10 +93,13 @@ export const vi = {
   'copy-comment': 'Sao chép',
   'delete-comment': 'Xóa bình luận',
   'delete-comment-success': 'Xoá bình luận thành công',
+  'delete-post-success': 'Xoá bài viết thành công',
   'copy-success': 'Copy thành công',
   'are-you-delete-comment': 'Bạn có muốn xóa bài viết không?',
   'confirm-delete': 'Bạn có chắc chắn muốn xoá không?',
+  'confirm-delete-post': 'Bạn có chắc chắn muốn xoá bài viết này không?',
   'auto-close': 'Tự động đóng trong',
+  'speak-content': 'Hãy nói gì về nội dung này...',
 
   // tab bottom
   'home-tab': 'Trang chủ',

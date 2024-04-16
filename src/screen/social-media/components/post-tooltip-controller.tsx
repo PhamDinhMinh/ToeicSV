@@ -12,22 +12,13 @@ import {useTranslation} from 'react-i18next';
 import {IPostResponse} from '../services/social-media.model';
 import globalStyles, {color} from '@/global-style';
 
-type TPostTooltipController = {
-  toggleOpen: () => void;
-  open: any;
-  post: IPostResponse;
-  navigation: any;
+type TItemAction = {
+  handle: () => void;
+  content: string;
 };
-const PostTooltipController = ({
-  toggleOpen = () => {},
-  open,
-  ...props
-}: React.ComponentProps<typeof Tooltip> & TPostTooltipController) => {
-  const onEdit = () => {};
-  const language = useTranslation();
 
-  const onDelete = () => {};
-
+const ItemAction = (props: TItemAction) => {
+  const {content, handle} = props;
   const [backgroundItem, setBackgroundItem] = useState('white');
 
   const handlePressIn = () => {
@@ -37,6 +28,51 @@ const PostTooltipController = ({
   const handlePressOut = () => {
     setBackgroundItem('white');
   };
+
+  return (
+    <Pressable
+      onPress={handle}
+      style={[styles.button, {backgroundColor: backgroundItem}]}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}>
+      <Text style={styles.text}>{content}</Text>
+    </Pressable>
+  );
+};
+
+type TPostTooltipController = {
+  toggleOpen: () => void;
+  open: any;
+  post: IPostResponse;
+  navigation: any;
+  setModalConfirm: any;
+};
+const PostTooltipController = ({
+  toggleOpen = () => {},
+  open,
+  setModalConfirm,
+  post,
+  ...props
+}: React.ComponentProps<typeof Tooltip> & TPostTooltipController) => {
+  const language = useTranslation();
+
+  const onDelete = () => {
+    toggleOpen();
+    setTimeout(() => setModalConfirm(true), 300);
+  };
+
+  const onEdit = () => {};
+
+  const listItemAction = [
+    {
+      content: language.t('edit'),
+      handle: onEdit,
+    },
+    {
+      content: language.t('delete'),
+      handle: onDelete,
+    },
+  ];
 
   return (
     <Tooltip
@@ -52,20 +88,13 @@ const PostTooltipController = ({
       tooltipStyle={styles.tooltip}
       content={
         <View>
-          <Pressable
-            onPress={onEdit}
-            style={[styles.button, {backgroundColor: backgroundItem}]}
-            onPressIn={handlePressIn}
-            onPressOut={handlePressOut}>
-            <Text style={styles.text}>{language.t('edit')}</Text>
-          </Pressable>
-          <Pressable
-            onPress={onDelete}
-            style={[styles.button, {backgroundColor: backgroundItem}]}
-            onPressIn={handlePressIn}
-            onPressOut={handlePressOut}>
-            <Text style={styles.text}>{language.t('delete')}</Text>
-          </Pressable>
+          {listItemAction.map((item, index) => (
+            <ItemAction
+              content={item.content}
+              handle={item.handle}
+              key={index}
+            />
+          ))}
         </View>
       }
       {...props}

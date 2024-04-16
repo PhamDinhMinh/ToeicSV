@@ -7,6 +7,11 @@ import useAccountStore from '@/stores/account.store';
 import useAvatarDefault from '@/stores/avatar.store';
 import globalStyles from '@/global-style';
 import PostTooltipController from './post-tooltip-controller';
+import ActionDeleteModal from './action-delete-modal';
+import {useTranslation} from 'react-i18next';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
+import socialMediaService from '../services/social-media.service';
+import Toast from 'react-native-toast-message';
 
 type THeaderSocialPostItem = {
   post: IPostResponse;
@@ -19,6 +24,10 @@ const HeaderSocialPostItem = (props: THeaderSocialPostItem) => {
   const {post, toggleOptions, visibleOptions, navigation} = props;
   const userInformation = useAccountStore(state => state?.account);
   const avatarDefault = useAvatarDefault(state => state?.avatarDefault);
+  const language = useTranslation();
+  const queryClient = useQueryClient();
+
+  const [modalConfirm, setModalConfirm] = useState<boolean>(false);
 
   const [now, setNow] = useState(moment());
 
@@ -65,6 +74,27 @@ const HeaderSocialPostItem = (props: THeaderSocialPostItem) => {
     [avatarDefault, imageAvatarUrl],
   );
 
+  const {mutate: deletePost, isPending: isPendingDelete} = useMutation({
+    mutationFn: () => socialMediaService.deletePost({id: post?.id}),
+    onSuccess: () => {
+      Toast.show({
+        type: 'success',
+        text1: language.t('delete-post-success'),
+        text1Style: {fontSize: 16, fontWeight: '400'},
+        topOffset: 80,
+      });
+      queryClient.refetchQueries({queryKey: ['list-post']});
+    },
+    onError: (err: any) => {
+      return Toast.show({
+        type: 'error',
+        text1: err?.data,
+        text1Style: {fontSize: 16, fontWeight: '400'},
+        topOffset: 80,
+      });
+    },
+  });
+
   const goToViewPost = useCallback(() => {}, []);
 
   const goToProfile = () => {};
@@ -109,6 +139,7 @@ const HeaderSocialPostItem = (props: THeaderSocialPostItem) => {
             toggleOpen={toggleOptions}
             open={visibleOptions}
             post={post}
+            setModalConfirm={setModalConfirm}
             navigation={navigation}>
             <Icon
               type="ionicon"
@@ -121,6 +152,14 @@ const HeaderSocialPostItem = (props: THeaderSocialPostItem) => {
           </PostTooltipController>
         </View>
       )}
+
+      <ActionDeleteModal
+        modalConfirm={modalConfirm}
+        handle={deletePost}
+        setModalConfirm={setModalConfirm}
+        content={language.t('confirm-delete-post')}
+        isPending={isPendingDelete}
+      />
     </View>
   );
 };
@@ -132,7 +171,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    paddingTop: 5,
+    paddingTop: 10,
     paddingHorizontal: 10,
     // alignItems: 'center',
   },

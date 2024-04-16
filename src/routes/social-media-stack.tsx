@@ -1,22 +1,33 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ListReactScreen from '@/screen/social-media/screens/list-react.screen';
+import SocialCommentPostScreen from '@/screen/social-media/screens/social-comment-post.screen';
+import {createStackNavigator} from '@react-navigation/stack';
 
 export type TSocialMediaStackParamList = {
-  SocialMediaScreen: undefined;
   ListReactScreen: undefined;
+  SocialCommentPostScreen: {
+    postId: number;
+  };
 };
 
-const Stack = createNativeStackNavigator<TSocialMediaStackParamList>();
+const Stack = createStackNavigator<TSocialMediaStackParamList>();
 
 const SocialMediaStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="SocialMediaScreen"
       screenOptions={{
-        headerShown: false,
+        headerBackTitleVisible: false,
+        headerTitleAlign: 'center',
       }}>
       <Stack.Screen name="ListReactScreen" component={ListReactScreen} />
+      <Stack.Screen
+        name="SocialCommentPostScreen"
+        component={SocialCommentPostScreen}
+        options={{
+          headerShown: true,
+          title: 'Bình luận',
+        }}
+      />
     </Stack.Navigator>
   );
 };

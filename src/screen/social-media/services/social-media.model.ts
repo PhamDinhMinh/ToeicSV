@@ -4,7 +4,7 @@ export interface IPostResponse {
   state: number;
   imageUrls: string[];
   emotionId: null | number;
-  backGroundId: null | number;
+  backGroundId: number;
   sharedPostId: number;
   countComment: number;
   countReact: number;
@@ -18,4 +18,22 @@ export interface IPostResponse {
     creationTime: any;
   };
   creationTime: any;
+}
+
+export interface ICommentResponse {
+  id: number;
+  comment: string;
+  parentCommentId: number | null;
+  creatorUserId: number;
+  postId: number;
+  creationTime: any | null;
+  user: {
+    id: number;
+    name: string;
+    coverImageUrl: string;
+    imageUrl: string;
+  };
+  countChildComment: number;
+  countReact: number;
+  userReact: number | null;
 }

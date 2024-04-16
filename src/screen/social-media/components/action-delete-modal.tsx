@@ -47,7 +47,7 @@ const ActionDeleteModal = (props: TActionDeleteModal) => {
       swipeDirection={['up', 'down']}
       backdropColor="#000"
       backdropOpacity={0.25}
-      style={{alignItems: 'center'}}>
+      style={{alignItems: 'center', flex: 1}}>
       <View
         style={{
           position: 'absolute',

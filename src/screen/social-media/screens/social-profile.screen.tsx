@@ -1,14 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const ListReactScreen = () => {
+const SocialProfileScreen = () => {
   return (
     <View>
-      <Text>ListReactScreen</Text>
+      <Text>SocialProfileScreen</Text>
     </View>
   );
 };
 
-export default ListReactScreen;
+export default SocialProfileScreen;
 
 const styles = StyleSheet.create({});

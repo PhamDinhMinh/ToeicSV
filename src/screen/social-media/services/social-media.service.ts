@@ -1,9 +1,14 @@
 import axiosClient from '@/utils/api/axios';
-import {ICommentResponse, IPostResponse} from './social-media.model';
+import {
+  ICommentResponse,
+  IPostResponse,
+  IReactResponse,
+} from './social-media.model';
 
 class SocialMediaService {
   PATH_POST = '/api/services/app/Post';
   PATH_COMMENT = '/api/services/app/PostComment';
+  PATH_REACT = '/api/services/app/PostReact';
 
   getAllPost = async (
     params: any,
@@ -45,8 +50,22 @@ class SocialMediaService {
 
   deleteComment = async (params: any) => {
     const url = this.PATH_COMMENT + '/Delete';
-    const {data: result} = await axiosClient.delete(url, {params: params});
-    return result;
+    const {data: response} = await axiosClient.delete(url, {params: params});
+    return response;
+  };
+
+  getAllReact = async (
+    params: any,
+  ): Promise<{
+    data: IReactResponse[];
+    totalRecords: number;
+  }> => {
+    const url = this.PATH_REACT + '/GetAllReact';
+    const {data: response} = await axiosClient.get(url, {params: params});
+    return {
+      data: response.data,
+      totalRecords: response.totalRecords,
+    };
   };
 }
 

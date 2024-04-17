@@ -37,3 +37,19 @@ export interface ICommentResponse {
   countReact: number;
   userReact: number | null;
 }
+
+export interface IReactResponse {
+  id: number;
+  postId: number;
+  creatorUserId: number;
+  creationTime: any;
+  reactState: number;
+  commentId: number | null;
+  user: {
+    id: number;
+    name: string;
+    coverImageUrl: string;
+    imageUrl: string;
+    creationTime: any;
+  };
+}

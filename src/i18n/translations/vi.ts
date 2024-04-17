@@ -87,6 +87,7 @@ export const vi = {
   comment: 'bình luận',
   writeComment: 'Viết bình luận...',
   'not-comments': 'Chưa có bình luận nào!',
+  'not-reaction': 'Không có tương tác noà!',
   reply: 'Phản hồi',
   'reaction-icon': 'Bày tỏ cảm xúc về bình luận này',
   'edit-comment': 'Chỉnh sửa bình luận',
@@ -100,6 +101,7 @@ export const vi = {
   'confirm-delete-post': 'Bạn có chắc chắn muốn xoá bài viết này không?',
   'auto-close': 'Tự động đóng trong',
   'speak-content': 'Hãy nói gì về nội dung này...',
+  reactors: 'Người đã bày tỏ cảm xúc',
 
   // tab bottom
   'home-tab': 'Trang chủ',

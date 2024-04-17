@@ -108,12 +108,13 @@ const SocialPostItem = (props: TSocialPostItem) => {
           <View style={styles.footer}>
             <View style={styles.footerHeader}>
               <Pressable
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  position: 'relative',
-                  height: 30,
-                }}>
+                onPress={() =>
+                  navigation.navigate('SocialMediaStack', {
+                    screen: 'SocialListLikeScreen',
+                    params: {postId: post.id},
+                  })
+                }
+                style={styles.countReact}>
                 <View
                   style={{
                     paddingRight: 5,
@@ -249,11 +250,7 @@ const SocialPostItem = (props: TSocialPostItem) => {
               </Pressable>
               <TouchableOpacity
                 onPress={goCommentScreen}
-                style={{
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                }}>
+                style={styles.itemFlex}>
                 <Icon
                   style={{marginRight: 5}}
                   color="#65676B"
@@ -270,11 +267,7 @@ const SocialPostItem = (props: TSocialPostItem) => {
               </TouchableOpacity>
               <TouchableOpacity
                 // onPress={toggleShareModal}
-                style={{
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                }}>
+                style={styles.itemFlex}>
                 <Icon
                   style={{marginRight: 5}}
                   color="#65676B"
@@ -363,5 +356,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
     paddingVertical: 5,
+  },
+  countReact: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'relative',
+    height: 30,
+  },
+  itemFlex: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });

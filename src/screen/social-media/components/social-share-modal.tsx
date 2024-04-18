@@ -15,6 +15,7 @@ import {Controller, useForm} from 'react-hook-form';
 import {useTranslation} from 'react-i18next';
 import useAvatarDefault from '@/stores/avatar.store';
 import useAccountStore from '@/stores/account.store';
+import {SafeAreaView} from 'react-native';
 
 type TSocialSharePost = {
   modalShare: boolean;
@@ -52,56 +53,58 @@ const SocialSharePost = (props: TSocialSharePost) => {
       <KeyboardAvoidingView
         style={styles.containerShare}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <View style={styles.headerShare}>
-          <Avatar
-            onPress={goToProfile}
-            rounded
-            size={50}
-            source={{
-              uri: userInformation?.imageUrl ?? avatarDefault,
-            }}
-          />
-          <Text
-            onPress={goToProfile}
-            style={[styles.textName, {marginLeft: 10}]}>
-            {userInformation?.name?.replace(/^\s+/, '')}
-          </Text>
-        </View>
-        <View style={styles.groupTextInput}>
-          <View style={{minHeight: 90, maxHeight: 200}}>
-            <Controller
-              control={control}
-              name="contentShare"
-              render={({field: {value, onChange}}) => (
-                <TextInput
-                  multiline
-                  value={value}
-                  placeholder={language.t('speak-content')}
-                  onChangeText={onChange}
-                  style={styles.textInput}
-                  inputAccessoryViewID="share-input"
-                />
-              )}
+        <SafeAreaView>
+          <View style={styles.headerShare}>
+            <Avatar
+              onPress={goToProfile}
+              rounded
+              size={50}
+              source={{
+                uri: userInformation?.imageUrl ?? avatarDefault,
+              }}
+            />
+            <Text
+              onPress={goToProfile}
+              style={[styles.textName, {marginLeft: 10}]}>
+              {userInformation?.name?.replace(/^\s+/, '')}
+            </Text>
+          </View>
+          <View style={styles.groupTextInput}>
+            <View style={{minHeight: 90, maxHeight: 200}}>
+              <Controller
+                control={control}
+                name="contentShare"
+                render={({field: {value, onChange}}) => (
+                  <TextInput
+                    multiline
+                    value={value}
+                    placeholder={language.t('speak-content')}
+                    onChangeText={onChange}
+                    style={styles.textInput}
+                    inputAccessoryViewID="share-input"
+                  />
+                )}
+              />
+            </View>
+            <Button
+              containerStyle={{
+                borderRadius: 10,
+                overflow: 'hidden',
+                alignSelf: 'flex-end',
+                marginBottom: 20,
+              }}
+              buttonStyle={{
+                borderWidth: 1,
+                borderRadius: 10,
+                paddingHorizontal: 8,
+                paddingVertical: 5,
+              }}
+              type="solid"
+              title={'Chia sẻ ngay'}
+              onPress={handleSubmit(onSubmit)}
             />
           </View>
-          <Button
-            containerStyle={{
-              borderRadius: 10,
-              overflow: 'hidden',
-              alignSelf: 'flex-end',
-              marginBottom: 20,
-            }}
-            buttonStyle={{
-              borderWidth: 1,
-              borderRadius: 10,
-              paddingHorizontal: 8,
-              paddingVertical: 5,
-            }}
-            type="solid"
-            title={'Chia sẻ ngay'}
-            onPress={handleSubmit(onSubmit)}
-          />
-        </View>
+        </SafeAreaView>
       </KeyboardAvoidingView>
     </Modal>
   );

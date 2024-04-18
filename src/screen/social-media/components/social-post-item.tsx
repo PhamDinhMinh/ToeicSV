@@ -267,7 +267,7 @@ const SocialPostItem = (props: TSocialPostItem) => {
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
-                // onPress={toggleShareModal}
+                onPress={toggleModalShare}
                 style={styles.itemFlex}>
                 <Icon
                   style={{marginRight: 5}}

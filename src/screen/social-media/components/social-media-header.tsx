@@ -8,7 +8,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {Avatar, Icon} from '@rneui/themed';
 import globalStyles, {color} from '@/global-style';
 import useAvatarDefault from '@/stores/avatar.store';
@@ -33,6 +33,13 @@ const SocialMediaHeader = ({navigation}: {navigation: any}) => {
   const handleColorPressOut = () => {
     setColorPress('#FFF');
   };
+
+  const goToProfile = useCallback(() => {
+    navigation.navigate('SocialMediaStack', {
+      screen: 'SocialProfileScreen',
+      params: {userId: account?.id},
+    });
+  }, [account?.id, navigation]);
 
   return (
     <View style={styles.container}>
@@ -73,7 +80,7 @@ const SocialMediaHeader = ({navigation}: {navigation: any}) => {
           />
         </View>
         <View style={styles.row}>
-          <View style={{alignSelf: 'flex-start'}}>
+          <Pressable style={{alignSelf: 'flex-start'}} onPress={goToProfile}>
             <Avatar
               source={{
                 uri: account?.imageUrl ?? avatarDefault,
@@ -81,7 +88,7 @@ const SocialMediaHeader = ({navigation}: {navigation: any}) => {
               size={40}
               rounded
             />
-          </View>
+          </Pressable>
           <Pressable
             onPressIn={handleColorPress}
             onPressOut={handleColorPressOut}

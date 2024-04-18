@@ -30,7 +30,7 @@ type props = StackScreenProps<
   'SocialCommentPostScreen'
 >;
 
-const SocialCommentPostScreen = ({route}: props) => {
+const SocialCommentPostScreen = ({route, navigation}: props) => {
   const {postId} = route.params;
   const language = useTranslation();
   const queryClient = useQueryClient();
@@ -90,11 +90,15 @@ const SocialCommentPostScreen = ({route}: props) => {
     ({item, index}: {item: ICommentResponse; index: number}) => {
       return (
         <View style={{width: '100%'}} key={index}>
-          <CommentGroup comment={item} setCommentReplay={replyComment} />
+          <CommentGroup
+            comment={item}
+            setCommentReplay={replyComment}
+            navigation={navigation}
+          />
         </View>
       );
     },
-    [],
+    [navigation],
   );
 
   const {mutate: sendCommentHandle} = useMutation({

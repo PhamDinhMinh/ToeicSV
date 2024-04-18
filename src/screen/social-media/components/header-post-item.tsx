@@ -97,7 +97,12 @@ const HeaderSocialPostItem = (props: THeaderSocialPostItem) => {
 
   const goToViewPost = useCallback(() => {}, []);
 
-  const goToProfile = () => {};
+  const goToProfile = useCallback(() => {
+    navigation.navigate('SocialMediaStack', {
+      screen: 'SocialProfileScreen',
+      params: {userId: post?.user?.id},
+    });
+  }, [navigation, post]);
 
   return (
     <View style={styles.container}>

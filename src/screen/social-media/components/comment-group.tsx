@@ -10,22 +10,33 @@ import CommentItem from './comment-item';
 type TCommentGroup = {
   comment: ICommentResponse;
   setCommentReplay: any;
+  navigation: any;
 };
+
 const CommentGroup = (props: TCommentGroup) => {
-  const {comment, setCommentReplay} = props;
+  const {comment, setCommentReplay, navigation} = props;
   return (
     <View style={{width: '100%'}}>
       <CommentItem
         comment={comment}
         setCommentReplay={setCommentReplay}
         disableReply={false}
+        navigation={navigation}
       />
-      {comment.countChildComment > 0 && <ListChildComment comment={comment} />}
+      {comment.countChildComment > 0 && (
+        <ListChildComment comment={comment} navigation={navigation} />
+      )}
     </View>
   );
 };
 
-const ListChildComment = ({comment}: {comment: ICommentResponse}) => {
+const ListChildComment = ({
+  comment,
+  navigation,
+}: {
+  comment: ICommentResponse;
+  navigation: any;
+}) => {
   const [moreView, setMoreView] = useState(false);
 
   const {data: getAllListChildCommentQuery} = useQuery({
@@ -65,13 +76,18 @@ const ListChildComment = ({comment}: {comment: ICommentResponse}) => {
                     comment={itemComment}
                     disableReply={true}
                     itemFinish={true}
+                    navigation={navigation}
                   />
                 </View>
               );
             }
             return (
               <View style={{marginLeft: 40}} key={index}>
-                <CommentItem comment={itemComment} disableReply={true} />
+                <CommentItem
+                  comment={itemComment}
+                  disableReply={true}
+                  navigation={navigation}
+                />
               </View>
             );
           },

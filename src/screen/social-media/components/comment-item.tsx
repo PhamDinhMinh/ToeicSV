@@ -31,6 +31,7 @@ type TCommentItem = {
   setCommentReplay?: any;
   disableReply: boolean;
   itemFinish?: boolean;
+  navigation: any;
 };
 
 type TReact = {
@@ -40,7 +41,8 @@ type TReact = {
 };
 
 const CommentItem = (props: TCommentItem) => {
-  const {comment, setCommentReplay, disableReply, itemFinish} = props;
+  const {comment, setCommentReplay, disableReply, itemFinish, navigation} =
+    props;
   const userInformation = useAccountStore(state => state?.account);
   const avatarDefault = useAvatarDefault(state => state?.avatarDefault);
   const queryClient = useQueryClient();
@@ -192,7 +194,6 @@ const CommentItem = (props: TCommentItem) => {
   });
 
   const handleConfirmDeleteComment = () => {
-    console.log('hahah');
     setTimeout(() => setModalConfirm(true), 500);
   };
 
@@ -213,6 +214,11 @@ const CommentItem = (props: TCommentItem) => {
             size={40}
             source={{
               uri: comment?.user?.imageUrl ?? avatarDefault,
+            }}
+            onPress={() => {
+              navigation.navigate('SocialProfileScreen', {
+                userId: comment?.user?.id,
+              });
             }}
           />
           {comment?.countChildComment > 0 &&

@@ -70,7 +70,11 @@ const SocialPostItem = (props: TSocialPostItem) => {
     });
   };
 
-  const goProfileScreen = () => {};
+  const goProfileScreen = () => {
+    navigation.navigate('SocialProfileScreen', {
+      userId: post?.user?.id,
+    });
+  };
 
   return (
     <View style={styles.container}>

@@ -40,7 +40,7 @@ const SocialPostItem = (props: TSocialPostItem) => {
   const [visibleOptions, setVisibleOptions] = useState(false);
   const [react, setReact] = useState<any>({
     userReact: post?.userReact ?? null,
-    countReact: post?.countReact ?? 0,
+    countReact: post?.countReact,
     listReact:
       post?.reactStates.sort((a: TReact, b: TReact) => b.count - a.count) ?? [],
   });
@@ -138,10 +138,11 @@ const SocialPostItem = (props: TSocialPostItem) => {
                             itemState.state >= 0
                           ) {
                             if (index >= 3) {
-                              return <View />;
+                              return <View key={index} />;
                             }
                             return (
                               <View
+                                key={index}
                                 style={{
                                   position: 'absolute',
                                   top: 5,
@@ -202,9 +203,9 @@ const SocialPostItem = (props: TSocialPostItem) => {
                     paddingVertical: 5,
                   },
                 ]}>
-                {/* {react.reactState !== null && react.reactState !== -1 ? (
+                {react.userReact !== null && react.userReact !== -1 ? (
                   <View style={{marginRight: 5}}>
-                    {listEmoji[react.reactState ? react.reactState : 0]?.emoji({
+                    {listEmoji[react.userReact ? react.userReact : 0]?.emoji({
                       width: 20,
                       height: 20,
                     })}
@@ -220,8 +221,8 @@ const SocialPostItem = (props: TSocialPostItem) => {
                       type="antdesign"
                     />
                   </View>
-                )} */}
-                {react.userReact === null || react.userReact === -1 ? (
+                )}
+                {react.userReact === null ? (
                   <Text style={[styles.textButton, {color: '#65676B'}]}>
                     Thích
                   </Text>
@@ -232,16 +233,16 @@ const SocialPostItem = (props: TSocialPostItem) => {
                       {
                         color:
                           listEmoji[
-                            react.reactState !== null && react.reactState !== -1
-                              ? react.reactState
+                            react.userReact !== null && react.userReact !== -1
+                              ? react.userReact
                               : 0
                           ]?.color,
                       },
                     ]}>
                     {language.t(
                       listEmoji[
-                        react.reactState !== null && react.reactState !== -1
-                          ? react.reactState
+                        react.userReact !== null && react.userReact !== -1
+                          ? react.userReact
                           : 0
                       ]?.des,
                     )}

@@ -1,6 +1,7 @@
 import axiosClient from '@/utils/api/axios';
 import {
   ICommentResponse,
+  IInputReact,
   IPostResponse,
   IReactResponse,
 } from './social-media.model';
@@ -66,6 +67,11 @@ class SocialMediaService {
       data: response.data,
       totalRecords: response.totalRecords,
     };
+  };
+
+  createOrUpdateReact = async (params: IInputReact) => {
+    const url = this.PATH_REACT + '/CreateOrUpdate';
+    return axiosClient.post(url, params);
   };
 }
 

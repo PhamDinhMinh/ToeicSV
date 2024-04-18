@@ -217,7 +217,6 @@ const CommentItem = (props: TCommentItem) => {
           />
           {comment?.countChildComment > 0 &&
             comment?.parentCommentId === null && (
-              // eslint-disable-next-line react/self-closing-comp
               <View
                 style={{
                   position: 'absolute',
@@ -231,7 +230,8 @@ const CommentItem = (props: TCommentItem) => {
                   borderLeftWidth: 2,
                   borderBottomLeftRadius: 10,
                   zIndex: -1,
-                }}></View>
+                }}
+              />
             )}
           {!itemFinish && comment?.parentCommentId !== null && (
             <>
@@ -248,7 +248,8 @@ const CommentItem = (props: TCommentItem) => {
                   borderLeftWidth: 2,
                   borderBottomLeftRadius: 10,
                   zIndex: -1,
-                }}></View>
+                }}
+              />
               <View
                 style={{
                   position: 'absolute',
@@ -259,7 +260,8 @@ const CommentItem = (props: TCommentItem) => {
                   borderLeftWidth: 2,
                   height: 20,
                   zIndex: -1,
-                }}></View>
+                }}
+              />
             </>
           )}
         </View>

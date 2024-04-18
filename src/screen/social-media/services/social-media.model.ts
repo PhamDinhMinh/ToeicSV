@@ -53,3 +53,11 @@ export interface IReactResponse {
     creationTime: any;
   };
 }
+
+export interface IInputReact {
+  reactState?: number | null;
+  commentId?: number;
+  postId?: number;
+  isCancel?: boolean;
+  creatorUserId: number;
+}

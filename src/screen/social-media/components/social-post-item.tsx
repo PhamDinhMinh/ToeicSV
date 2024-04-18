@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useRef, useState} from 'react';
+import React, {memo, useCallback, useEffect, useRef, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -16,8 +16,12 @@ import {Icon} from '@rneui/base';
 import ContentSocialPostItem from './content-social-post-item';
 import listEmoji from './react/list-emoji';
 import SocialSharePost from './social-share-modal';
+import ModalPopUpEmoji from './react/emoji-modal-popup';
+import {useMutation} from '@tanstack/react-query';
+import socialMediaService from '../services/social-media.service';
 
 const width = Dimensions.get('screen').width;
+const haftHeight = Dimensions.get('screen').height / 2;
 
 type TSocialPostItem = {
   post: IPostResponse;
@@ -44,13 +48,198 @@ const SocialPostItem = (props: TSocialPostItem) => {
     listReact:
       post?.reactStates.sort((a: TReact, b: TReact) => b.count - a.count) ?? [],
   });
-
-  const buttonRef = useRef<any>(null);
+  const [modalPosition, setModalPosition] = useState({top: 0, left: 0});
   const [state, setState] = useState({
     modalShare: false,
-    modalRules: false,
     modalEmoji: false,
   });
+  const [currentEmoji, setCurrentEmoji] = useState<number | null>(null);
+  const [increment, setIncrement] = useState(true);
+
+  const buttonRef = useRef<any>(null);
+
+  useEffect(() => {
+    setReact((old: any) => ({
+      ...old,
+      userReact: post.userReact ?? null,
+      countReact: post.countReact ?? 0,
+      listReact: post.reactStates ?? [],
+    }));
+  }, [post]);
+
+  const {mutate: createOrUpdateReact, isPending} = useMutation({
+    mutationFn: (params: {
+      reactState?: number | null;
+      isCancel: boolean;
+      create?: boolean;
+    }) => {
+      type TPayload = {
+        reactState?: number | null;
+        commentId?: number;
+        postId?: number;
+        isCancel?: boolean;
+        creatorUserId: number;
+      };
+      const payload: TPayload = {
+        postId: post.id,
+        reactState: params.reactState,
+        isCancel: params.isCancel,
+        creatorUserId: post?.user?.id,
+      };
+      return socialMediaService.createOrUpdateReact(payload);
+    },
+    onSuccess: (_, params) => {
+      if (params.isCancel) {
+        if (react.listReact) {
+          let booleanState = react?.listReact?.find(
+            (itemArray: TReact) => itemArray?.state === react.userReact,
+          );
+          if (booleanState) {
+            booleanState.count = Math.max(0, booleanState.count - 1);
+            if (booleanState.count === 0) {
+              setReact({
+                userReact: params.reactState,
+                countReact: react.countReact - 1,
+                listReact: react?.listReact
+                  .sort((a: TReact, b: TReact) => b.count - a.count)
+                  .filter((element: TReact) => element !== booleanState),
+              });
+            } else {
+              setReact({
+                userReact: params.reactState,
+                countReact: react.countReact - 1,
+                listReact: react?.listReact.sort(
+                  (a: TReact, b: TReact) => b.count - a.count,
+                ),
+              });
+            }
+          }
+        }
+      } else {
+        if (params.create) {
+          let stateFind = react?.listReact?.find(
+            (itemArray: TReact) => itemArray?.state === params.reactState,
+          );
+          if (stateFind) {
+            stateFind.count = Math.max(0, stateFind.count + 1);
+            setReact({
+              userReact: params.reactState,
+              countReact: react.countReact + 1,
+              listReact: react?.listReact.sort(
+                (a: TReact, b: TReact) => b.count - a.count,
+              ),
+            });
+          } else {
+            setReact({
+              userReact: params.reactState,
+              countReact: react.countReact + 1,
+              listReact: [
+                ...react.listReact,
+                {count: 1, state: params.reactState},
+              ]?.sort((a: TReact, b: TReact) => b.count - a.count),
+            });
+          }
+        } else {
+          let stateFind = react?.listReact?.find(
+            (itemArray: TReact) => itemArray?.state === params.reactState,
+          );
+          if (stateFind) {
+            let oldState = react?.listReact?.find(
+              (itemArray: TReact) => itemArray?.state === react.userReact,
+            );
+            stateFind.count += 1;
+            oldState.count -= 1;
+            if (oldState.count === 0) {
+              setReact({
+                userReact: params.reactState,
+                countReact: react.countReact,
+                listReact: react?.listReact
+                  .sort((a: TReact, b: TReact) => b.count - a.count)
+                  .filter((element: TReact) => element !== oldState),
+              });
+            } else {
+              setReact({
+                userReact: params.reactState,
+                countReact: react.countReact,
+                listReact: react?.listReact.sort(
+                  (a: TReact, b: TReact) => b.count - a.count,
+                ),
+              });
+            }
+          } else {
+            let oldState = react?.listReact?.find(
+              (itemArray: TReact) => itemArray?.state === react.userReact,
+            );
+            oldState.count -= 1;
+            if (oldState.count === 0) {
+              setReact({
+                userReact: params.reactState,
+                countReact: react.countReact,
+                listReact: [
+                  ...react.listReact,
+                  {count: 1, state: params.reactState},
+                ]
+                  .sort((a: TReact, b: TReact) => b.count - a.count)
+                  .filter((element: TReact) => element !== oldState),
+              });
+            } else {
+              setReact({
+                userReact: params.reactState,
+                countReact: react.countReact,
+                listReact: [
+                  ...react.listReact,
+                  {count: 1, state: params.reactState},
+                ].sort((a: TReact, b: TReact) => b.count - a.count),
+              });
+            }
+          }
+        }
+      }
+    },
+  });
+
+  const handlePressIn = () => {
+    buttonRef.current.measure(
+      (
+        x: number,
+        y: number,
+        _: number,
+        height: number,
+        pageX: number,
+        pageY: number,
+      ) => {
+        setModalPosition({top: -haftHeight + pageY + height / 2, left: pageX});
+        handleOpenEmoji();
+      },
+    );
+    setIncrement(false);
+  };
+
+  const handlePressOut = () => {
+    if (increment) {
+      handleCloseEmoji();
+      if (
+        (react.userReact || react.userReact === 0) &&
+        react.userReact !== -1
+      ) {
+        createOrUpdateReact({reactState: null, isCancel: true});
+      } else {
+        createOrUpdateReact({reactState: 0, isCancel: false, create: true});
+      }
+    }
+    setIncrement(true);
+  };
+
+  const handleChooseIcon = (index: number) => {
+    setReact({...react, isLoading: true});
+    if (react.userReact !== null) {
+      createOrUpdateReact({reactState: index, create: false, isCancel: false});
+    } else {
+      createOrUpdateReact({reactState: index, create: true, isCancel: false});
+    }
+    setCurrentEmoji(index);
+    handleCloseEmoji();
+  };
 
   const toggleModalShare = () => {
     setState(prevState => ({
@@ -59,22 +248,36 @@ const SocialPostItem = (props: TSocialPostItem) => {
     }));
   };
 
+  const handleOpenEmoji = useCallback(() => {
+    setState(prevState => ({
+      ...prevState,
+      modalEmoji: true,
+    }));
+  }, []);
+
+  const handleCloseEmoji = useCallback(() => {
+    setState(prevState => ({
+      ...prevState,
+      modalEmoji: false,
+    }));
+  }, []);
+
   const toggleOptions = useCallback(() => {
     setVisibleOptions(!visibleOptions);
   }, [visibleOptions]);
 
-  const goCommentScreen = () => {
+  const goCommentScreen = useCallback(() => {
     navigation.navigate('SocialMediaStack', {
       screen: 'SocialCommentPostScreen',
       params: {postId: post.id},
     });
-  };
+  }, [navigation, post.id]);
 
-  const goProfileScreen = () => {
+  const goProfileScreen = useCallback(() => {
     navigation.navigate('SocialProfileScreen', {
       userId: post?.user?.id,
     });
-  };
+  }, [navigation, post?.user?.id]);
 
   return (
     <View style={styles.container}>
@@ -194,19 +397,12 @@ const SocialPostItem = (props: TSocialPostItem) => {
                 alignItems: 'center',
               }}>
               <Pressable
-                // onLongPress={handlePressIn}
-                // onPressOut={handlePressOut}
+                disabled={isPending}
+                onLongPress={handlePressIn}
+                onPressOut={handlePressOut}
                 ref={buttonRef}
                 delayLongPress={600}
-                style={[
-                  {
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    paddingRight: 10,
-                    paddingVertical: 5,
-                  },
-                ]}>
+                style={styles.reactVisible}>
                 {react.userReact !== null && react.userReact !== -1 ? (
                   <View style={{marginRight: 5}}>
                     {listEmoji[react.userReact ? react.userReact : 0]?.emoji({
@@ -287,18 +483,18 @@ const SocialPostItem = (props: TSocialPostItem) => {
                   {language.t('share')}
                 </Text>
               </TouchableOpacity>
-              {/* Chỗ này hiện các icon */}
-              {/* {visibleEmoji && (
+
+              {state.modalEmoji && (
                 <ModalPopUpEmoji
-                  visibleEmoji={visibleEmoji}
-                  handleModalClose={handleModalClose}
+                  visibleEmoji={state.modalEmoji}
+                  handleModalClose={handleCloseEmoji}
                   modalPositionTop={modalPosition.top}
                   modalPositionLeft={modalPosition.left}
                   handleChooseIcon={handleChooseIcon}
                   currentEmoji={currentEmoji}
                   marginBottom={90}
                 />
-              )} */}
+              )}
             </View>
           </View>
         </View>
@@ -372,5 +568,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  reactVisible: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingRight: 10,
+    paddingVertical: 5,
   },
 });

@@ -1,6 +1,7 @@
 import axiosClient from '@/utils/api/axios';
 import {
   ICommentResponse,
+  IInformationUser,
   IInputReact,
   IPostResponse,
   IReactResponse,
@@ -18,6 +19,22 @@ class SocialMediaService {
     totalRecords: number;
   }> => {
     const url = this.PATH_POST + '/GetAll';
+    const {data: response} = await axiosClient.get(url, {params});
+    return {
+      data: response.data,
+      totalRecords: response.totalRecords,
+    };
+  };
+
+  getAllPostUser = async (params: {
+    userId: number;
+    skipCount?: number;
+    maxResultCount?: number;
+  }): Promise<{
+    data: IPostResponse[];
+    totalRecords: number;
+  }> => {
+    const url = this.PATH_POST + '/GetListPostUser';
     const {data: response} = await axiosClient.get(url, {params});
     return {
       data: response.data,
@@ -72,6 +89,17 @@ class SocialMediaService {
   createOrUpdateReact = async (params: IInputReact) => {
     const url = this.PATH_REACT + '/CreateOrUpdate';
     return axiosClient.post(url, params);
+  };
+
+  getUserInformation = async (params: {
+    id: number;
+  }): Promise<{data: IInformationUser; totalPosts: number}> => {
+    const url = this.PATH_POST + '/GetUserWallPost';
+    const {data: result} = await axiosClient.get(url, {params: params});
+    return {
+      totalPosts: result?.data.totalPosts,
+      data: result?.data?.user,
+    };
   };
 }
 

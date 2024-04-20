@@ -14,6 +14,7 @@
     "@bam.tech/react-native-image-resizer": "^3.0.7",
     "@hookform/resolvers": "^3.3.4",
     "@react-native-async-storage/async-storage": "^1.23.1",
+    "@react-native-camera-roll/camera-roll": "^7.5.2",
     "@react-native-clipboard/clipboard": "^1.14.0",
     "@react-native-community/eslint-config": "^3.2.0",
     "@react-native-masked-view/masked-view": "^0.3.1",
@@ -42,6 +43,7 @@
     "react-native-fast-image": "^8.6.3",
     "react-native-gesture-handler": "^2.15.0",
     "react-native-image-crop-picker": "^0.40.2",
+    "react-native-image-pan-zoom": "^2.1.12",
     "react-native-modal": "^13.0.1",
     "react-native-reanimated": "^3.6.1",
     "react-native-reanimated-carousel": "^3.5.1",
@@ -56,6 +58,7 @@
     "react-query": "^3.39.3",
     "react-use": "^17.5.0",
     "recyclerlistview": "^4.2.0",
+    "rn-fetch-blob": "^0.12.0",
     "translate-google-api": "^1.0.4",
     "yup": "^1.4.0",
     "zustand": "^4.5.2"

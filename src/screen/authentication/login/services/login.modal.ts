@@ -9,7 +9,7 @@ export interface IUser {
   dateOfBirth?: any;
   gender?: string;
   imageUrl?: string;
-  coverAvatarUrl?: string;
+  coverImageUrl?: string;
 }
 
 export interface ILoginResponse {

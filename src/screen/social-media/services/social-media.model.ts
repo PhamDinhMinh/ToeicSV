@@ -61,3 +61,17 @@ export interface IInputReact {
   isCancel?: boolean;
   creatorUserId: number;
 }
+
+export interface IInformationUser {
+  id: number;
+  userName: string;
+  role: string;
+  gender: string;
+  imageUrl: string | null;
+  coverImageUrl: string | null;
+  emailAddress: string;
+  name: string;
+  phoneNumber: string;
+  dateOfBirth: any;
+  creationTime: any;
+}

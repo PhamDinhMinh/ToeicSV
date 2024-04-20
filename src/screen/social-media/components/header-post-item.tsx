@@ -84,6 +84,9 @@ const HeaderSocialPostItem = (props: THeaderSocialPostItem) => {
         topOffset: 80,
       });
       queryClient.refetchQueries({queryKey: ['list-post']});
+      queryClient.refetchQueries({
+        queryKey: ['list-post-user', post?.user?.id],
+      });
     },
     onError: (err: any) => {
       return Toast.show({

@@ -58,25 +58,23 @@ const SocialMediaHeader = ({navigation}: {navigation: any}) => {
             name="search"
             type="ionicon"
             color={color.grey_700}
-            containerStyle={{
-              marginLeft: 'auto',
-              backgroundColor: '#F1F2F8',
-              padding: 5,
-              aspectRatio: 1,
-              borderRadius: 20,
-            }}
+            containerStyle={[
+              styles.iconHeader,
+              {
+                marginLeft: 'auto',
+              },
+            ]}
           />
           <Icon
             name="notifications"
             type="ionicon"
             color={color.grey_700}
-            containerStyle={{
-              marginLeft: 10,
-              backgroundColor: '#F1F2F8',
-              padding: 5,
-              aspectRatio: 1,
-              borderRadius: 20,
-            }}
+            containerStyle={[
+              styles.iconHeader,
+              {
+                marginLeft: 10,
+              },
+            ]}
           />
         </View>
         <View style={styles.row}>
@@ -142,6 +140,13 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+
+  iconHeader: {
+    backgroundColor: '#F1F2F8',
+    padding: 5,
+    aspectRatio: 1,
+    borderRadius: 20,
   },
 
   text: {

@@ -102,6 +102,8 @@ export const vi = {
   'auto-close': 'Tự động đóng trong',
   'speak-content': 'Hãy nói gì về nội dung này...',
   reactors: 'Người đã bày tỏ cảm xúc',
+  viewMore: 'Xem thêm',
+  'detail-post': 'Chi tiết bài viết',
 
   // tab bottom
   'home-tab': 'Trang chủ',

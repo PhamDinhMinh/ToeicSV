@@ -20,6 +20,7 @@ import ModalPopUpEmoji from './react/emoji-modal-popup';
 import {useMutation} from '@tanstack/react-query';
 import socialMediaService from '../services/social-media.service';
 import ImagesGridGallery from './grid-view-image/image-grid-gallery';
+import ImagesGridView from './grid-view-image/image-grid-view';
 
 const width = Dimensions.get('screen').width;
 const haftHeight = Dimensions.get('screen').height / 2;
@@ -300,11 +301,15 @@ const SocialPostItem = (props: TSocialPostItem) => {
 
           {post?.imageUrls?.length > 0 ? (
             <View>
-              <ImagesGridGallery
-                postId={post.id}
-                images={post?.imageUrls}
-                navigation={navigation}
-              />
+              {isViewPost ? (
+                <ImagesGridView images={post?.imageUrls} />
+              ) : (
+                <ImagesGridGallery
+                  postId={post.id}
+                  images={post?.imageUrls}
+                  navigation={navigation}
+                />
+              )}
             </View>
           ) : null}
 
@@ -454,11 +459,7 @@ const SocialPostItem = (props: TSocialPostItem) => {
                   name="chatbox-outline"
                   type="ionicon"
                 />
-                <Text
-                  style={[
-                    styles.textButton,
-                    {color: '#65676B', textTransform: 'capitalize'},
-                  ]}>
+                <Text style={[styles.textButton, {color: '#65676B'}]}>
                   {language.t('comment')}
                 </Text>
               </TouchableOpacity>
@@ -471,11 +472,7 @@ const SocialPostItem = (props: TSocialPostItem) => {
                   name="arrow-redo-outline"
                   type="ionicon"
                 />
-                <Text
-                  style={[
-                    styles.textButton,
-                    {color: '#65676B', textTransform: 'capitalize'},
-                  ]}>
+                <Text style={[styles.textButton, {color: '#65676B'}]}>
                   {language.t('share')}
                 </Text>
               </TouchableOpacity>

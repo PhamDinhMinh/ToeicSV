@@ -98,8 +98,6 @@ const HeaderSocialPostItem = (props: THeaderSocialPostItem) => {
     },
   });
 
-  const goToViewPost = useCallback(() => {}, []);
-
   const goToProfile = useCallback(() => {
     navigation.navigate('SocialMediaStack', {
       screen: 'SocialProfileScreen',
@@ -107,11 +105,18 @@ const HeaderSocialPostItem = (props: THeaderSocialPostItem) => {
     });
   }, [navigation, post]);
 
+  const goToPostDetail = useCallback(() => {
+    navigation.navigate('SocialMediaStack', {
+      screen: 'PostDetailScreen',
+      params: {postId: post?.id},
+    });
+  }, [navigation, post?.id]);
+
   return (
     <View style={styles.container}>
       <Pressable
         style={[styles.groupInfo, {width: '80%'}]}
-        onPress={goToViewPost}>
+        onPress={goToPostDetail}>
         <Avatar
           onPress={goToProfile}
           rounded

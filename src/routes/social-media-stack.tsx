@@ -4,6 +4,7 @@ import SocialCommentPostScreen from '@/screen/social-media/screens/social-commen
 import {createStackNavigator} from '@react-navigation/stack';
 import {useTranslation} from 'react-i18next';
 import SocialProfileScreen from '@/screen/social-media/screens/social-profile.screen';
+import PostDetailScreen from '@/screen/social-media/screens/post-detail.screen';
 
 export type TSocialMediaStackParamList = {
   SocialListLikeScreen: {
@@ -15,6 +16,9 @@ export type TSocialMediaStackParamList = {
   };
   SocialProfileScreen: {
     userId: number;
+  };
+  PostDetailScreen: {
+    postId: number;
   };
 };
 
@@ -42,7 +46,7 @@ const SocialMediaStack = () => {
         component={SocialCommentPostScreen}
         options={{
           headerShown: true,
-          title: language.t('comment').toUpperCase(),
+          title: language.t('comment'),
         }}
       />
       <Stack.Screen
@@ -50,6 +54,14 @@ const SocialMediaStack = () => {
         component={SocialProfileScreen}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="PostDetailScreen"
+        component={PostDetailScreen}
+        options={{
+          headerShown: true,
+          title: language.t('Chi tiết bài viết'),
         }}
       />
     </Stack.Navigator>

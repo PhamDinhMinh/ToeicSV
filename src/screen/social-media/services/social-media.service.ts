@@ -42,6 +42,18 @@ class SocialMediaService {
     };
   };
 
+  getPostById = async (params: {
+    id: number;
+  }): Promise<{
+    data: IPostResponse;
+  }> => {
+    const url = this.PATH_POST + '/GetPostById';
+    const {data: response} = await axiosClient.get(url, {params});
+    return {
+      data: response.data,
+    };
+  };
+
   deletePost = async (params: any) => {
     const url = this.PATH_POST + '/Delete';
     return axiosClient.delete(url, {params: params});

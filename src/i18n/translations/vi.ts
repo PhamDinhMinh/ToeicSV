@@ -84,7 +84,8 @@ export const vi = {
   hurt_emotions: 'đau nhức',
   beTricked_emotions: 'mắc lừa',
   small_emotions: 'nhỏ bé',
-  comment: 'bình luận',
+  comment: 'Bình luận',
+  share: 'Chia sẻ',
   writeComment: 'Viết bình luận...',
   'not-comments': 'Chưa có bình luận nào!',
   'not-reaction': 'Không có tương tác noà!',
@@ -104,6 +105,7 @@ export const vi = {
   reactors: 'Người đã bày tỏ cảm xúc',
   viewMore: 'Xem thêm',
   'detail-post': 'Chi tiết bài viết',
+  'write-comment-me': 'Viết bình luận của bạn',
 
   // tab bottom
   'home-tab': 'Trang chủ',

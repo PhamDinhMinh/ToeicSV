@@ -19,6 +19,7 @@ import SocialSharePost from './social-share-modal';
 import ModalPopUpEmoji from './react/emoji-modal-popup';
 import {useMutation} from '@tanstack/react-query';
 import socialMediaService from '../services/social-media.service';
+import ImagesGridGallery from './grid-view-image/image-grid-gallery';
 
 const width = Dimensions.get('screen').width;
 const haftHeight = Dimensions.get('screen').height / 2;
@@ -297,20 +298,15 @@ const SocialPostItem = (props: TSocialPostItem) => {
             post.backGroundId !== undefined &&
             post.imageUrls?.length === 0 && <BackGroundPost post={post} />}
 
-          {/* {item.imageUrls?.length > 0 || item.videoUrls?.length > 0 ? (
-            isViewPost ? (
-              <ImagesGridView images={item.imageUrls} videos={item.videoUrls} />
-            ) : (
-              <View>
-                <ImagesGridGallery
-                  isVisible={isVisible}
-                  postId={item.id}
-                  fileUrls={fileUrls}
-                  goToView={goToViewPost}
-                />
-              </View>
-            )
-          ) : null} */}
+          {post?.imageUrls?.length > 0 ? (
+            <View>
+              <ImagesGridGallery
+                postId={post.id}
+                images={post?.imageUrls}
+                navigation={navigation}
+              />
+            </View>
+          ) : null}
 
           <View style={styles.footer}>
             <View style={styles.footerHeader}>

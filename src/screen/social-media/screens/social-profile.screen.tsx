@@ -1,4 +1,13 @@
-import {FlatList, RefreshControl, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  Platform,
+  Pressable,
+  RefreshControl,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React, {useCallback, useMemo} from 'react';
 import {useTranslation} from 'react-i18next';
 import globalStyles, {color} from '@/global-style';
@@ -9,6 +18,8 @@ import {StackScreenProps} from '@react-navigation/stack';
 import HeaderProfile from '../components/header-profile';
 import {IPostResponse} from '../services/social-media.model';
 import SocialPostItem from '../components/social-post-item';
+import {Icon} from '@rneui/base';
+import {SafeAreaView} from 'react-native';
 
 type props = StackScreenProps<
   TSocialMediaStackParamList,
@@ -61,8 +72,8 @@ const SocialProfileScreen = ({route, navigation}: props) => {
   };
 
   const headerProfile = useCallback(() => {
-    return <HeaderProfile userId={userId} navigation={navigation} />;
-  }, [navigation, userId]);
+    return <HeaderProfile userId={userId} />;
+  }, [userId]);
 
   const renderItem = useCallback(
     ({item, index}: {item: IPostResponse; index: number}) => {
@@ -76,7 +87,16 @@ const SocialProfileScreen = ({route, navigation}: props) => {
   );
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <Pressable style={styles.viewBack} onPress={() => navigation.goBack()}>
+        <Icon
+          name="arrow-back"
+          type="ionicon"
+          color="white"
+          size={24}
+          style={styles.iconBack}
+        />
+      </Pressable>
       <FlatList
         maxToRenderPerBatch={20}
         data={dataProvider}
@@ -95,7 +115,7 @@ const SocialProfileScreen = ({route, navigation}: props) => {
           )
         }
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -105,7 +125,16 @@ const styles = StyleSheet.create({
   container: {
     position: 'relative',
   },
-
+  viewBack: {
+    padding: 2,
+    backgroundColor: '#E0E0E0',
+    borderRadius: 200,
+    position: 'absolute',
+    zIndex: 20,
+    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 70,
+    left: 10,
+  },
+  iconBack: {},
   text: {
     ...globalStyles.text17Medium,
     color: color.grey_500,

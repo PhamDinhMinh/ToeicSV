@@ -5,30 +5,20 @@ import {
   Text,
   View,
   Pressable,
-  ActivityIndicator,
-  Alert,
 } from 'react-native';
-import React, {useState, useContext, useMemo} from 'react';
+import React, {useState, useMemo, useCallback} from 'react';
 import globalStyles, {color} from '@/global-style';
 import FastImage from 'react-native-fast-image';
-import {Button, Icon} from '@rneui/themed';
-import {useTranslation} from 'react-i18next';
-import {useQuery, useQueryClient} from '@tanstack/react-query';
+import {Icon} from '@rneui/themed';
+import {useQuery} from '@tanstack/react-query';
 import socialMediaService from '../services/social-media.service';
 import useAccountStore from '@/stores/account.store';
 import useAvatarDefault from '@/stores/avatar.store';
+import ImageViewerDetail from '@/screen/components/image-view/image-viewer';
 
 const {width} = Dimensions.get('window');
 
-const HeaderProfile = ({
-  userId,
-  navigation,
-}: {
-  userId: number;
-  navigation: any;
-}) => {
-  const language = useTranslation();
-  const queryClient = useQueryClient();
+const HeaderProfile = ({userId}: {userId: number}) => {
   const userInformation = useAccountStore(state => state?.account);
   const avatarDefault = useAvatarDefault(state => state?.avatarDefault);
 
@@ -42,11 +32,21 @@ const HeaderProfile = ({
     enabled: !!userId,
   });
 
-  const [isVisibleModal, setVisibleModal] = useState(false);
+  const [coverAvatar, setCoverAvatar] = useState(true);
   const [visible, setVisible] = useState({
     isVisible: false,
     index: 0,
   });
+
+  const toggleOverlay = useCallback(
+    (index: number) => {
+      setVisible({
+        isVisible: !visible.isVisible,
+        index: index,
+      });
+    },
+    [visible.isVisible],
+  );
 
   const uriAvatar = useMemo(() => {
     return dataUser?.data?.id === userInformation?.id
@@ -72,48 +72,21 @@ const HeaderProfile = ({
     userInformation?.id,
   ]);
 
-  console.log(userInformation);
-
-  const handleChose = () => {
-    setVisibleModal(true);
-  };
-
-  //   const closeModal = () => {
-  //     setVisibleModal(false);
-  //   };
-
-  //   const handleCloseModalAction = () => {
-  //     setModalAction(false);
-  //   };
-
-  //   const {uploadUserImage} = useUpdateUserInfo();
-
-  //   const changeAvatar = (image: TPickedImage) => {
-  //     uploadUserImage({
-  //       ...image,
-  //       type: 'imageUrl',
-  //     });
-  //   };
-
-  //   const toggleOverlay = () => {
-  //     if (!setFileUrls || !toggleWallOverlay) {
-  //       setVisible({isVisible: !visible.isVisible, index: 0});
-  //     } else {
-  //       setFileUrls([{url: listPath}]);
-  //       toggleWallOverlay(0);
-  //     }
-  //   };
-
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{position: 'relative'}}>
+      <Pressable
+        style={{position: 'relative'}}
+        onPress={() => {
+          toggleOverlay(0);
+          setCoverAvatar(true);
+        }}>
         <FastImage
           source={{
             uri: uriCoverAvatar,
           }}
           style={styles.coverImage}
         />
-      </View>
+      </Pressable>
       <View
         style={{
           paddingHorizontal: 30,
@@ -121,12 +94,11 @@ const HeaderProfile = ({
           marginBottom: 16,
         }}>
         <Pressable
-          style={{
-            borderWidth: 0.5,
-            borderRadius: 50,
-            width: 101,
-            borderColor: color.grey_200,
-          }}>
+          onPress={() => {
+            toggleOverlay(0);
+            setCoverAvatar(false);
+          }}
+          style={styles.viewAvatar}>
           <FastImage
             source={{
               uri: uriAvatar,
@@ -135,7 +107,7 @@ const HeaderProfile = ({
           />
         </Pressable>
         {userInformation?.id === dataUser?.data?.id && (
-          <Pressable style={styles.iconCamera} onPress={handleChose}>
+          <Pressable style={styles.iconCamera}>
             <Icon name="camera" type="fontisto" color="#555" size={18} />
           </Pressable>
         )}
@@ -151,21 +123,11 @@ const HeaderProfile = ({
           {dataUser?.data?.name?.replace(/^\s+/, '')}
         </Text>
       </View>
-      {/* {!setFileUrls && (
-        <MediaPlayer
-          fileUrls={[{url: uriAvatar}]}
-          visible={visible}
-          toggleOverlay={toggleOverlay}
-        />
-      )} */}
-
-      {/* Hiện modal ở đây */}
-      {/* <ChooseImage
-        isVisible={isVisibleModal}
-        titleModal="Chọn ảnh"
-        closeModal={closeModal}
-        handleAction={changeAvatar}
-      /> */}
+      <ImageViewerDetail
+        visible={visible}
+        toggleOverlay={toggleOverlay}
+        imageUrls={coverAvatar ? [uriCoverAvatar] : [uriAvatar]}
+      />
     </SafeAreaView>
   );
 };
@@ -176,6 +138,12 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 0,
     backgroundColor: 'white',
+  },
+  viewAvatar: {
+    borderWidth: 0.5,
+    borderRadius: 50,
+    width: 101,
+    borderColor: color.grey_200,
   },
   avatar: {
     width: 100,

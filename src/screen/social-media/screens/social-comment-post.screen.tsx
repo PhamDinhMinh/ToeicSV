@@ -14,7 +14,6 @@ import {
   RefreshControl,
   StyleSheet,
   View,
-  Dimensions,
   FlatList,
 } from 'react-native';
 import globalStyles, {color} from '@/global-style';
@@ -22,8 +21,6 @@ import socialMediaService from '../services/social-media.service';
 import {ICommentResponse} from '../services/social-media.model';
 import CommentInput from '../components/comment-input';
 import CommentGroup from '../components/comment-group';
-
-const {width} = Dimensions.get('screen');
 
 type props = StackScreenProps<
   TSocialMediaStackParamList,

@@ -101,7 +101,7 @@ const ContentSocialPostItem = (props: TContentSocialPostItem) => {
             onTextLayout={onTextLayout}>
             {post.contentPost}
           </Text>
-          =
+
           <Text style={styles.textButton} onPress={toggleCollapsed}>
             {textView.fullText < 5
               ? ''

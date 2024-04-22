@@ -4,9 +4,9 @@ import AuthStack from '@/routes/auth-stack';
 import {getToken} from '@/utils/api/token';
 import useAccountStore, {IAccountState} from '@/stores/account.store';
 import {useMutation} from '@tanstack/react-query';
-import authService from './authentication/login/services/login.services';
+import authService from './authentication/services/auth.services';
 import Toast from 'react-native-toast-message';
-import {IUser} from './authentication/login/services/login.modal';
+import {IUser} from './authentication/services/auth.modal';
 import MainStack from '@/routes/main-stack';
 
 const AppNavigator = () => {

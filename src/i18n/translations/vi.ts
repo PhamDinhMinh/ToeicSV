@@ -13,7 +13,7 @@ export const vi = {
   promptNoAccount: 'Bạn chưa có tài khoản',
   signUpNow: 'Đăng ký ngay',
   signUp: 'Đăng ký',
-  fullName: 'Họ tên',
+  name: 'Họ và tên',
   userName: 'Tên đăng nhập',
   email: 'Địa chỉ email',
   phoneNumber: 'Số điện thoại',

@@ -1,4 +1,9 @@
-import {ILoginPayload, ILoginResponse, IUser} from './login.modal';
+import {
+  ILoginPayload,
+  ILoginResponse,
+  IRegisterPayload,
+  IUser,
+} from './auth.modal';
 import {removeToken} from '@/utils/api/token';
 import axiosClient from '@/utils/api/axios';
 
@@ -17,6 +22,12 @@ class Auth {
 
     return response.data;
   }
+
+  register = async (data: IRegisterPayload): Promise<any> => {
+    const url = this.endpoint + '/Register';
+    const response = await axiosClient.post(url, data);
+    return response.data;
+  };
 
   async logout(): Promise<void> {
     await removeToken();

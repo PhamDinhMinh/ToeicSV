@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import authService from '@/screen/authentication/login/services/login.services';
+import authService from '@/screen/authentication/services/auth.services';
 import {Alert} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 

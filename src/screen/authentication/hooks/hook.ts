@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react';
-import authService from '../login/services/login.services';
+import authService from '../services/auth.services';
 import useAccountStore, {IAccountState} from '@/stores/account.store';
 import {useMutation} from '@tanstack/react-query';
 import {setToken} from '@/utils/api/token';
-import {ILoginResponse} from '../login/services/login.modal';
+import {ILoginResponse} from '../services/auth.modal';
 import Toast from 'react-native-toast-message';
 
 export function useDebounce<T>(value: T, delay: number) {

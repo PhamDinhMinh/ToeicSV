@@ -11,7 +11,6 @@ import React, {useCallback, useEffect} from 'react';
 import {Button} from '@rneui/themed';
 import {StackScreenProps} from '@react-navigation/stack';
 import {TAuthStackParamList} from '@/routes/auth-stack';
-import {useToast} from 'react-native-toast-notifications';
 import {Controller, useForm} from 'react-hook-form';
 import BackButton from '@/screen/components/back-button';
 import FastImage from 'react-native-fast-image';
@@ -20,17 +19,21 @@ import {useTranslation} from 'react-i18next';
 import TextInputComponent from '../components/text-input.component';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import {useMutation} from '@tanstack/react-query';
+import authService from '../services/auth.services';
+import {useLoginRequest} from '../hooks/hook';
+import Toast from 'react-native-toast-message';
+import Loading from '@/screen/components/loading';
 
 const {width} = Dimensions.get('screen');
 
 type props = StackScreenProps<TAuthStackParamList, 'RegisterScreen'>;
 
 const RegisterScreen = ({navigation}: props) => {
-  const toast = useToast();
   const language = useTranslation();
 
   const schema = yup.object().shape({
-    fullName: yup.string().required(language.t('required-error-message')),
+    name: yup.string().required(language.t('required-error-message')),
     emailAddress: yup
       .string()
       .email(language.t('emailInvalid'))
@@ -63,10 +66,10 @@ const RegisterScreen = ({navigation}: props) => {
     secureTextEntry?: boolean;
   }[] = [
     {
-      field: 'fullName',
-      label: 'fullName',
+      field: 'name',
+      label: 'name',
       type: 'text',
-      placeholder: 'fullName',
+      placeholder: 'name',
       autoCapitalize: 'words',
       required: true,
     },
@@ -91,6 +94,7 @@ const RegisterScreen = ({navigation}: props) => {
       label: 'phoneNumber',
       type: 'text',
       placeholder: 'phoneNumber',
+      keyboardType: 'phone-pad',
     },
     {
       field: 'password',
@@ -110,7 +114,7 @@ const RegisterScreen = ({navigation}: props) => {
     mode: 'onBlur',
     reValidateMode: 'onChange',
     defaultValues: {
-      fullName: '',
+      name: '',
       userName: '',
       phoneNumber: '',
       emailAddress: '',
@@ -119,7 +123,33 @@ const RegisterScreen = ({navigation}: props) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: any) => {};
+  const {mutate: loginRequest} = useLoginRequest();
+
+  const {mutate: register, status: statusRegister} = useMutation({
+    mutationFn: (params: any) => authService.register(params),
+    onSuccess: (_, params) => {
+      Toast.show({
+        type: 'success',
+        text1: 'Đăng ký thành công!',
+        topOffset: 80,
+      });
+      loginRequest({
+        password: params.password,
+        userNameOrEmail: params.userName,
+      });
+    },
+    onError: (error: any) => {
+      Toast.show({
+        type: 'error',
+        text1: error?.data,
+        topOffset: 80,
+      });
+    },
+  });
+
+  const onSubmit = (data: any) => {
+    register(data);
+  };
 
   const renderBackButton = useCallback(
     () => <BackButton {...{navigation}} />,
@@ -147,8 +177,7 @@ const RegisterScreen = ({navigation}: props) => {
           flex: 1,
           paddingBottom: 10,
         }}>
-        <SafeAreaView
-          style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
+        <SafeAreaView style={{alignItems: 'center', flex: 1}}>
           <FastImage
             style={{width: 180, height: 180}}
             source={require('@/assets/images/logo.png')}
@@ -197,7 +226,7 @@ const RegisterScreen = ({navigation}: props) => {
                   />
                 ))}
               <Button
-                // disabled={status === 'loading'}
+                disabled={statusRegister === 'pending'}
                 onPress={handleSubmit(onSubmit)}
                 containerStyle={{marginTop: 20}}
                 buttonStyle={{
@@ -205,12 +234,12 @@ const RegisterScreen = ({navigation}: props) => {
                   borderRadius: 20,
                   backgroundColor: color.green_300,
                 }}>
-                {language.t('signIn')}
+                {language.t('signUp')}
               </Button>
             </View>
           </View>
         </SafeAreaView>
-        {/* {status === 'loading' && <Loading />} */}
+        {statusRegister === 'pending' && <Loading />}
       </ScrollView>
     </KeyboardAvoidingView>
   );

@@ -22,3 +22,11 @@ export interface ILoginPayload {
   userNameOrEmail: string;
   password: string;
 }
+
+export interface IRegisterPayload {
+  userName: string;
+  password: string;
+  emailAddress: string;
+  name: string;
+  phoneNumber?: string;
+}

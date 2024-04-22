@@ -1,4 +1,4 @@
-import {IUser} from '@/screen/authentication/login/services/login.modal';
+import {IUser} from '@/screen/authentication/services/auth.modal';
 import {create} from 'zustand';
 
 export interface IAccountState {

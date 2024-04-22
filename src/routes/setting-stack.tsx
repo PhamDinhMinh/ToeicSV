@@ -1,24 +1,35 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import PersonalScreen from '@/screen/personal/screens/personal.screen';
-import SettingScreen from '@/screen/personal/screens/setting.screen';
+import PersonalScreen from '@/screen/setting/screens/personal.screen';
+import {createStackNavigator} from '@react-navigation/stack';
+import ChangePasswordScreen from '@/screen/setting/screens/change-password.screen';
+import {useTranslation} from 'react-i18next';
 
 export type TSettingStackParamList = {
   SettingScreen: undefined;
   PersonalScreen: undefined;
+  ChangePasswordScreen: undefined;
 };
 
-const Stack = createNativeStackNavigator<TSettingStackParamList>();
+const Stack = createStackNavigator<TSettingStackParamList>();
 
 const SettingStack = () => {
+  const language = useTranslation();
+
   return (
     <Stack.Navigator
-      initialRouteName="SettingScreen"
       screenOptions={{
-        headerShown: false,
+        headerBackTitleVisible: false,
+        headerTitleAlign: 'center',
       }}>
-      <Stack.Screen name="SettingScreen" component={SettingScreen} />
       <Stack.Screen name="PersonalScreen" component={PersonalScreen} />
+      <Stack.Screen
+        name="ChangePasswordScreen"
+        component={ChangePasswordScreen}
+        options={{
+          title: language.t('changePass'),
+          headerShown: true,
+        }}
+      />
     </Stack.Navigator>
   );
 };

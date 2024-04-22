@@ -21,7 +21,7 @@ const useListSetting = () => {
             nameIcon: 'shield-half-outline',
             typeIcon: 'ionicon',
             size: 20,
-            route: 'ChangePassword',
+            route: 'ChangePasswordScreen',
           },
           {
             title: 'Ngôn ngữ',

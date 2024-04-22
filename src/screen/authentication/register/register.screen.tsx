@@ -40,7 +40,7 @@ const RegisterScreen = ({navigation}: props) => {
       .required(language.t('required-error-message')),
     password: yup
       .string()
-      .matches(/^(?=.*[A-Za-z])(?=.*\d).{8,}$/, language.t('passwordInvalid'))
+      .matches(/^(?=.*[A-Za-z]).{8,}$/, language.t('passwordInvalid'))
       .min(8)
       .required(language.t('required-error-message')),
     userName: yup
@@ -106,11 +106,7 @@ const RegisterScreen = ({navigation}: props) => {
     },
   ];
 
-  const {
-    control,
-    formState: {errors},
-    handleSubmit,
-  } = useForm({
+  const {control, handleSubmit} = useForm({
     mode: 'onBlur',
     reValidateMode: 'onChange',
     defaultValues: {
@@ -132,6 +128,8 @@ const RegisterScreen = ({navigation}: props) => {
         type: 'success',
         text1: 'Đăng ký thành công!',
         topOffset: 80,
+        visibilityTime: 500,
+        text1Style: {fontSize: 16, fontWeight: '400'},
       });
       loginRequest({
         password: params.password,
@@ -143,6 +141,7 @@ const RegisterScreen = ({navigation}: props) => {
         type: 'error',
         text1: error?.data,
         topOffset: 80,
+        text1Style: {fontSize: 16, fontWeight: '400'},
       });
     },
   });

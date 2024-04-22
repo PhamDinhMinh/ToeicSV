@@ -36,7 +36,7 @@ const PersonalSectionItem = ({
         ? navigation.navigate(item.stack, {
             screen: item.route,
           })
-        : navigation.navigate('PersonalStack', {
+        : navigation.navigate('SettingStack', {
             screen: item.route,
           });
     }

@@ -10,7 +10,10 @@ import {
 } from 'react-native';
 import React, {useCallback} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
-import {TSettingStackParamList} from '@/routes/setting-stack';
+import {CompositeScreenProps} from '@react-navigation/native';
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import {TMyTabsParamsList} from '@/routes/my-tabs';
+import {TMainStackParamList} from '@/routes/main-stack';
 import useListSetting from '../hooks/list-setting.hook';
 import {Avatar} from '@rneui/themed';
 import useAvatarDefault from '@/stores/avatar.store';
@@ -19,7 +22,10 @@ import globalStyles from '@/global-style';
 import PersonalSectionLabel from '../components/personal-section-label';
 import PersonalSectionItem from '../components/personal-section-item';
 
-type props = StackScreenProps<TSettingStackParamList, 'SettingScreen'>;
+type props = CompositeScreenProps<
+  BottomTabScreenProps<TMyTabsParamsList, 'Settings'>,
+  StackScreenProps<TMainStackParamList, 'MyTab'>
+>;
 
 const SettingScreen = ({navigation}: props) => {
   const avatarDefault = useAvatarDefault((state: any) => state?.avatarDefault);

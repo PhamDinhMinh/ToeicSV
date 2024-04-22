@@ -8,6 +8,7 @@ import SettingStack from './setting-stack';
 import {useTranslation} from 'react-i18next';
 import TabUi from '@/screen/components/bottom-tab/tab-ui';
 import DocumentScreen from '@/screen/documents/document.screen';
+import SettingScreen from '@/screen/setting/screens/setting.screen';
 
 export type TMyTabsParamsList = {
   Home: undefined;
@@ -75,8 +76,11 @@ const MyTabs = () => {
         options={{
           title: language.t('setting-tab'),
           lazy: false,
+          tabBarStyle: {
+            display: 'none',
+          },
         }}
-        component={SettingStack}
+        component={SettingScreen}
       />
     </Tab.Navigator>
   );

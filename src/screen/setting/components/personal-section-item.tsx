@@ -48,7 +48,10 @@ const PersonalSectionItem = ({
   };
 
   return (
-    <Pressable onPress={onItemPress} style={styles.container}>
+    <Pressable
+      onPress={onItemPress}
+      style={styles.container}
+      disabled={item?.key === 'language'}>
       <View style={styles.iconContainer}>
         <Icon
           type={item.typeIcon}

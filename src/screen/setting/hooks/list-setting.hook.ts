@@ -81,7 +81,6 @@ const useListSetting = () => {
             nameIcon: 'trash',
             typeIcon: 'ionicon',
             size: 20,
-            route: 'InformationScreen',
           },
           {
             key: 'logout',

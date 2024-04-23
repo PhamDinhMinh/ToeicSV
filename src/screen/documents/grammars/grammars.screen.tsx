@@ -6,18 +6,31 @@ import {
   SafeAreaView,
 } from 'react-native';
 import React, {useCallback, useMemo} from 'react';
-import {ETypeGrammar, IGrammarResponse} from './services/grammar.model';
+import {IGrammarResponse} from './services/grammar.model';
 import grammarService from './services/grammar.service';
 import {useInfiniteQuery} from '@tanstack/react-query';
 import globalStyles from '@/global-style';
 import ItemGrammar from './components/item-grammar';
-import {StackScreenProps} from '@react-navigation/stack';
+import {StackNavigationProp} from '@react-navigation/stack';
 import {TDocumentStackParamList} from '@/routes/documents-stack';
 import {useTranslation} from 'react-i18next';
+import {CompositeNavigationProp} from '@react-navigation/native';
+import {MaterialTopTabNavigationProp} from '@react-navigation/material-top-tabs';
+import {TGrammarTabParamList} from '@/routes/tab/grammar.tab';
 
-type props = StackScreenProps<TDocumentStackParamList, 'GrammarScreen'>;
+type props = {
+  navigation: CompositeNavigationProp<
+    MaterialTopTabNavigationProp<
+      TGrammarTabParamList,
+      'GrammarAdvanceScreen' | 'GrammarBasicScreen'
+    >,
+    StackNavigationProp<TDocumentStackParamList, 'GrammarTab'>
+  >;
+  route: any;
+};
 
-const GrammarScreen = ({navigation}: props) => {
+const GrammarScreen = ({navigation, route}: props) => {
+  const {type} = route.params;
   const language = useTranslation();
 
   const {
@@ -27,10 +40,10 @@ const GrammarScreen = ({navigation}: props) => {
     hasNextPage,
     refetch,
   } = useInfiniteQuery({
-    queryKey: ['list-grammar'],
+    queryKey: ['list-grammar', type],
     queryFn: () =>
       grammarService.getAll({
-        type: ETypeGrammar.Basic,
+        type: type,
         skipCount: 0,
         maxResultCount: 10,
       }),

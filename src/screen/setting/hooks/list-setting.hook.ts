@@ -1,6 +1,6 @@
 import {useMemo} from 'react';
 import authService from '@/screen/authentication/services/auth.services';
-import {Alert} from 'react-native';
+import {Alert, Share} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
 const useListSetting = () => {
@@ -74,12 +74,37 @@ const useListSetting = () => {
             nameIcon: 'share',
             typeIcon: 'entypo',
             size: 20,
-            route: 'InformationScreen',
+            function: async () => {
+              try {
+                const result = await Share.share({
+                  title: 'App link',
+                  message:
+                    'Please install this app and stay safe , AppLink :https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en',
+                  url: 'https://play.google.com/store/apps/details?id=nic.goi.aarogyasetu&hl=en',
+                });
+                if (result.action === Share.sharedAction) {
+                  if (result.activityType) {
+                    // shared with activity type of result.activityType
+                  } else {
+                    // shared
+                  }
+                } else if (result.action === Share.dismissedAction) {
+                  // dismissed
+                }
+              } catch (error) {
+                Alert.alert('Có lỗi xảy ra, vui lòng thử lại');
+              }
+            },
           },
           {
             title: 'Xoá tài khoản',
             nameIcon: 'trash',
             typeIcon: 'ionicon',
+            function: () => {
+              Alert.alert(
+                'Tính năng xoá tài khoản đang được hoàn thiện. Hãy quay lại sau',
+              );
+            },
             size: 20,
           },
           {

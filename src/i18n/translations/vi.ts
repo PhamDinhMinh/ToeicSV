@@ -110,6 +110,8 @@ export const vi = {
   viewMore: 'Xem thêm',
   'detail-post': 'Chi tiết bài viết',
   'write-comment-me': 'Viết bình luận của bạn',
+  basic: 'Cơ bản',
+  advance: 'Nâng cao',
 
   // tab bottom
   'home-tab': 'Trang chủ',

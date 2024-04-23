@@ -1,5 +1,4 @@
 import React from 'react';
-import GrammarScreen from '@/screen/documents/grammars/grammars.screen';
 import ExamTipScreen from '@/screen/documents/exam-tips/exam-tips.screen';
 import VocabularyScreen from '@/screen/documents/vocabulary/vocabulary.screen';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -8,10 +7,11 @@ import GrammarDetailScreen from '@/screen/documents/grammars/grammar-detail.scre
 import {IGrammarResponse} from '@/screen/documents/grammars/services/grammar.model';
 import {IExamTipsResponse} from '@/screen/documents/exam-tips/services/exam-tips.model';
 import ExamTipsDetailScreen from '@/screen/documents/exam-tips/exam-tips.detail';
+import GrammarTab from './tab/grammar.tab';
 
 export type TDocumentStackParamList = {
   DocumentScreen: undefined;
-  GrammarScreen: undefined;
+  GrammarTab: undefined;
   ExamTipScreen: undefined;
   VocabularyScreen: undefined;
   GrammarDetailScreen: {
@@ -34,13 +34,21 @@ const DocumentsStack = () => {
         headerTitleAlign: 'center',
       }}>
       <Stack.Screen
+        name="GrammarTab"
+        component={GrammarTab}
+        options={{
+          headerTitle: language.t('Ngữ pháp'),
+          headerShown: true,
+        }}
+      />
+      {/* <Stack.Screen
         name="GrammarScreen"
         component={GrammarScreen}
         options={{
           headerTitle: language.t('Ngữ pháp'),
           headerShown: true,
         }}
-      />
+      /> */}
       <Stack.Screen
         name="GrammarDetailScreen"
         component={GrammarDetailScreen}

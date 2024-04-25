@@ -112,6 +112,7 @@ export const vi = {
   'write-comment-me': 'Viết bình luận của bạn',
   basic: 'Cơ bản',
   advance: 'Nâng cao',
+  changeAvatar: 'Thay đổi ảnh đại diện',
 
   // tab bottom
   'home-tab': 'Trang chủ',

@@ -21,7 +21,13 @@ const SettingStack = () => {
         headerBackTitleVisible: false,
         headerTitleAlign: 'center',
       }}>
-      <Stack.Screen name="PersonalScreen" component={PersonalScreen} />
+      <Stack.Screen
+        name="PersonalScreen"
+        component={PersonalScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name="ChangePasswordScreen"
         component={ChangePasswordScreen}

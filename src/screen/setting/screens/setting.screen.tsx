@@ -39,10 +39,16 @@ const SettingScreen = ({navigation}: props) => {
     [navigation],
   );
 
+  const goToPersonalScreen = useCallback(() => {
+    navigation.navigate('SettingStack', {
+      screen: 'PersonalScreen',
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
-        <Pressable style={styles.headerInfo}>
+        <Pressable style={styles.headerInfo} onPress={goToPersonalScreen}>
           <Avatar
             source={{
               uri: account?.imageUrl ?? avatarDefault,

@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet, Text, View, Pressable} from 'react-native';
-import React, {useState, useContext, useMemo, useCallback} from 'react';
+import React, {useState, useCallback} from 'react';
 import FastImage from 'react-native-fast-image';
 import useAvatarDefault from '@/stores/avatar.store';
 import useAccountStore from '@/stores/account.store';
@@ -143,6 +143,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: -30,
-    paddingBottom: 20,
   },
 });

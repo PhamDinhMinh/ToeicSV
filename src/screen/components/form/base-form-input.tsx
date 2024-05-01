@@ -1,8 +1,9 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {Platform, StyleSheet, TextInput} from 'react-native';
 import React from 'react';
 import {FieldErrorsImpl} from 'react-hook-form';
 import SelectionInput from './select-input';
 import DateInput from './date-time-input';
+import globalStyles, {color} from '@/global-style';
 
 type TBaseFormInput = {
   placeholder?: string;
@@ -14,10 +15,11 @@ type TBaseFormInput = {
   error?: FieldErrorsImpl;
   onBlur?: any;
   options?: any[];
+  editable?: boolean;
 };
 
 const BaseFormInput = (props: TBaseFormInput) => {
-  const {type, error, onChange, value, onBlur, options} = props;
+  const {type, onChange, value, onBlur, options, editable} = props;
 
   switch (type) {
     case 'text':
@@ -27,6 +29,8 @@ const BaseFormInput = (props: TBaseFormInput) => {
           onBlur={onBlur}
           onChangeText={onChange}
           value={value}
+          style={styles.baseInput}
+          editable={editable}
         />
       );
     case 'select':
@@ -41,4 +45,13 @@ const BaseFormInput = (props: TBaseFormInput) => {
 
 export default BaseFormInput;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  baseInput: {
+    ...globalStyles.text16Regular,
+    paddingVertical: Platform.OS === 'android' ? 5 : 10,
+    borderColor: color.green_300,
+    borderRadius: 10,
+    borderWidth: 1,
+    paddingLeft: 10,
+  },
+});

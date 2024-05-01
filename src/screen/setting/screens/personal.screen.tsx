@@ -30,10 +30,10 @@ const PersonalScreen = ({navigation}: props) => {
           color={'white'}
           containerStyle={styles.iconGoBack}
         />
-        <ScrollView contentContainerStyle={{paddingBottom: 100}}>
+        <ScrollView contentContainerStyle={{paddingBottom: 40}}>
           <UserInformationHeader />
           <ScrollView style={styles.viewEdit}>
-            <FormUpdateInformation />
+            <FormUpdateInformation navigation={navigation} />
           </ScrollView>
         </ScrollView>
       </SafeAreaView>
@@ -58,8 +58,5 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 100,
   },
-  viewEdit: {
-    borderColor: 'red',
-    borderWidth: 2,
-  },
+  viewEdit: {},
 });

@@ -100,9 +100,10 @@ export default DateInput;
 const styles = StyleSheet.create({
   textInput: {
     paddingVertical: Platform.OS === 'android' ? 5 : 10,
-    marginLeft: 40,
-    borderBottomColor: '#F1F2F8',
-    borderBottomWidth: 1,
+    borderColor: color.green_300,
+    borderRadius: 10,
+    borderWidth: 1,
+    paddingLeft: 10,
   },
   text: {
     ...globalStyles.text16Medium,

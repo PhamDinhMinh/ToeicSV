@@ -89,6 +89,7 @@ export const vi = {
   beTricked_emotions: 'mắc lừa',
   small_emotions: 'nhỏ bé',
   comment: 'Bình luận',
+  gender: 'Giới tính',
   share: 'Chia sẻ',
   writeComment: 'Viết bình luận...',
   'not-comments': 'Chưa có bình luận nào!',

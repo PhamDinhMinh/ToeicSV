@@ -390,6 +390,8 @@ PODS:
   - react-native-cameraroll (7.5.2):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
+  - react-native-date-picker (5.0.2):
+    - React-Core
   - react-native-image-resizer (3.0.7):
     - React-Core
   - react-native-pager-view (6.3.0):
@@ -603,6 +605,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - "react-native-cameraroll (from `../node_modules/@react-native-camera-roll/camera-roll`)"
+  - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - "react-native-image-resizer (from `../node_modules/@bam.tech/react-native-image-resizer`)"
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-render-html (from `../node_modules/react-native-render-html`)
@@ -704,6 +707,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-cameraroll:
     :path: "../node_modules/@react-native-camera-roll/camera-roll"
+  react-native-date-picker:
+    :path: "../node_modules/react-native-date-picker"
   react-native-image-resizer:
     :path: "../node_modules/@bam.tech/react-native-image-resizer"
   react-native-pager-view:
@@ -807,6 +812,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 8baadae51f01d867c3921213a25ab78ab4fbcd91
   React-logger: 8edc785c47c8686c7962199a307015e2ce9a0e4f
   react-native-cameraroll: fa10f3d95408fc81c1058759233d4b0923520875
+  react-native-date-picker: 90687f1dbd374ff0265dca99d949998364c22fa9
   react-native-image-resizer: 681f7607418b97c084ba2d0999b153b103040d8a
   react-native-pager-view: 40d9ec4a63ed74f8aa2f1e1bba7c1e0b4080d8a6
   react-native-render-html: 984dfe2294163d04bf5fe25d7c9f122e60e05ebe

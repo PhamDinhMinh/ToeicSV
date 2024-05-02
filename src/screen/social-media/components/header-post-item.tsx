@@ -12,6 +12,8 @@ import {useTranslation} from 'react-i18next';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import socialMediaService from '../services/social-media.service';
 import Toast from 'react-native-toast-message';
+import FastImage from 'react-native-fast-image';
+import FeelEmotions from './feeling-emotions/feeling-emotions';
 
 type THeaderSocialPostItem = {
   post: IPostResponse;
@@ -133,15 +135,32 @@ const HeaderSocialPostItem = (props: THeaderSocialPostItem) => {
               flexWrap: 'wrap',
               alignItems: 'center',
             }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}>
-              <Text onPress={goToProfile} style={[styles.textName]}>
-                {post?.user?.name?.replace(/^\s+/, '')}
+            <Text onPress={goToProfile} style={[styles.textName]}>
+              {post?.user?.name?.replace(/^\s+/, '')}
+            </Text>
+            {post.emotionId !== null && (
+              <Text style={styles.textDesEmoji}>{language.t('progress')}</Text>
+            )}
+            {post.emotionId !== null && (
+              <FastImage
+                source={{
+                  uri:
+                    post.emotionId !== null &&
+                    FeelEmotions[post.emotionId]?.icon
+                      ? FeelEmotions[post.emotionId]?.icon
+                      : '',
+                }}
+                style={{width: 24, height: 24}}
+              />
+            )}
+            {post.emotionId !== null && (
+              <Text style={styles.textDesEmoji}>{language.t('feel')}</Text>
+            )}
+            {post.emotionId !== null && (
+              <Text style={styles.textDesEmoji}>
+                {language.t(FeelEmotions[post.emotionId]?.des)}{' '}
               </Text>
-            </View>
+            )}
           </View>
           <Text style={[styles.textContent]}>{timestamp}</Text>
         </View>

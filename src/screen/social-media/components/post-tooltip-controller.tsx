@@ -52,6 +52,7 @@ const PostTooltipController = ({
   open,
   setModalConfirm,
   post,
+  navigation,
   ...props
 }: React.ComponentProps<typeof Tooltip> & TPostTooltipController) => {
   const language = useTranslation();
@@ -61,7 +62,15 @@ const PostTooltipController = ({
     setTimeout(() => setModalConfirm(true), 300);
   };
 
-  const onEdit = () => {};
+  const onEdit = () => {
+    toggleOpen();
+    navigation.navigate('SocialMediaStack', {
+      screen: 'SocialCUPostScreen',
+      params: {
+        post: post,
+      },
+    });
+  };
 
   const listItemAction = [
     {

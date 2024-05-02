@@ -1,6 +1,6 @@
 import React, {useId, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {StyleSheet, TextInput, View, Text, Keyboard} from 'react-native';
+import {StyleSheet, View, Text, Keyboard} from 'react-native';
 import globalStyles, {color} from '@/global-style';
 import BaseFormInput from '@/screen/components/form/base-form-input';
 import useAccountStore from '@/stores/account.store';
@@ -9,7 +9,6 @@ import {useTranslation} from 'react-i18next';
 import {useMutation} from '@tanstack/react-query';
 import settingService from '../services/setting.services';
 import Toast from 'react-native-toast-message';
-import {IUser} from '@/screen/authentication/services/auth.modal';
 
 type TFormFields = {
   name: string;
@@ -65,7 +64,7 @@ const FormUpdateInformation = ({navigation}: any) => {
       navigation.goBack();
       Toast.show({
         type: 'success',
-        text1: 'Chỉnh sửa thành công!',
+        text1: language.t('edit-success'),
         topOffset: 80,
         visibilityTime: 800,
         text1Style: {fontSize: 16, fontWeight: '400'},
@@ -94,7 +93,7 @@ const FormUpdateInformation = ({navigation}: any) => {
   const {
     control,
     handleSubmit,
-    formState: {errors, isDirty},
+    formState: {isDirty},
   } = useForm({
     defaultValues: {
       name: account?.name,
@@ -141,7 +140,6 @@ const FormUpdateInformation = ({navigation}: any) => {
       ))}
       <Button
         onPress={editing ? handleSubmit(onSubmit) : () => setEditing(true)}
-        // disabled={status === 'pending'}
         disabled={(editing ? !isDirty : false) || status === 'pending'}
         containerStyle={{marginTop: 20}}
         buttonStyle={{

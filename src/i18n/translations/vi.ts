@@ -114,6 +114,7 @@ export const vi = {
   basic: 'Cơ bản',
   advance: 'Nâng cao',
   'edit-success': 'Chỉnh sửa thành công',
+  'create-success': 'Tạo thành công',
   changeAvatar: 'Thay đổi ảnh đại diện',
   save: 'Lưu',
   'send-post': 'Đăng bài',

@@ -41,6 +41,13 @@ const SocialMediaHeader = ({navigation}: {navigation: any}) => {
     });
   }, [account?.id, navigation]);
 
+  const goToCUPost = useCallback(() => {
+    navigation.navigate('SocialMediaStack', {
+      screen: 'SocialCUPostScreen',
+      params: {},
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
@@ -90,12 +97,11 @@ const SocialMediaHeader = ({navigation}: {navigation: any}) => {
           <Pressable
             onPressIn={handleColorPress}
             onPressOut={handleColorPressOut}
+            onPress={goToCUPost}
             style={[styles.inputContainer, {backgroundColor: colorPress}]}>
             <Text style={[styles.input]}>{language.t('what-on-ur-mind')}</Text>
           </Pressable>
-          <TouchableOpacity
-          // onPress={goToCUPost}
-          >
+          <TouchableOpacity>
             <Icon color={'#00A400'} name="image" type="ionicon" />
           </TouchableOpacity>
         </View>

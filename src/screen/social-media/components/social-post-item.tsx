@@ -385,7 +385,7 @@ const SocialPostItem = (props: TSocialPostItem) => {
 
               <Pressable onPress={goCommentScreen}>
                 <Text style={styles.textButton}>
-                  {post.countComment} {language.t('comment')}
+                  {post.countComment} {language.t('comment').toLowerCase()}
                 </Text>
               </Pressable>
             </View>

@@ -54,6 +54,16 @@ class SocialMediaService {
     };
   };
 
+  createPost = async (params: any): Promise<any> => {
+    const url = this.PATH_POST + '/Create';
+    return axiosClient.post(url, params);
+  };
+
+  updatePost = (params: any) => {
+    const url = this.PATH_POST + '/Update';
+    return axiosClient.put(url, params);
+  };
+
   deletePost = async (params: any) => {
     const url = this.PATH_POST + '/Delete';
     return axiosClient.delete(url, {params: params});

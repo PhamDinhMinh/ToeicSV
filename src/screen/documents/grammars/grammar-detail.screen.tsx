@@ -13,14 +13,12 @@ import {Icon} from '@rneui/themed';
 import grammarService from './services/grammar.service';
 import Toast from 'react-native-toast-message';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {useTranslation} from 'react-i18next';
 
 type props = StackScreenProps<TDocumentStackParamList, 'GrammarDetailScreen'>;
 
 const GrammarDetailScreen = ({route, navigation}: props) => {
   const {item} = route.params;
   const {width} = useWindowDimensions();
-  const language = useTranslation();
   const [watched, setWatched] = useState(item?.isWatched);
 
   const queryClient = useQueryClient();
@@ -37,11 +35,6 @@ const GrammarDetailScreen = ({route, navigation}: props) => {
     onSuccess: () => {
       queryClient.refetchQueries({
         queryKey: ['list-grammar'],
-      });
-      Toast.show({
-        type: 'success',
-        text1: language.t('update-success'),
-        topOffset: 80,
       });
     },
   });

@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import Modal from 'react-native-modal';
 import {Button} from '@rneui/themed';
 import globalStyles, {color} from '@/global-style';
@@ -72,7 +72,7 @@ const ChooseImage = (props: TChoseImage) => {
   );
 };
 
-export default ChooseImage;
+export default memo(ChooseImage);
 
 const styles = StyleSheet.create({
   modalContent: {

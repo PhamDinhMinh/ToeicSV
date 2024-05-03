@@ -10,11 +10,16 @@ import React, {useState, useMemo, useCallback} from 'react';
 import globalStyles, {color} from '@/global-style';
 import FastImage from 'react-native-fast-image';
 import {Icon} from '@rneui/themed';
-import {useQuery} from '@tanstack/react-query';
+import {useMutation, useQuery} from '@tanstack/react-query';
 import socialMediaService from '../services/social-media.service';
 import useAccountStore from '@/stores/account.store';
 import useAvatarDefault from '@/stores/avatar.store';
 import ImageViewerDetail from '@/screen/components/image-view/image-viewer';
+import ChooseImage from '@/screen/components/camera/modal-action-chose-image';
+import useUpdateUserInfo from '@/hooks/use-update-image-user';
+import uploadService from '@/utils/api/image-file';
+import {TPickedImage} from '@/utils/images/image';
+import Loading from '@/screen/components/loading/loading';
 
 const {width} = Dimensions.get('window');
 
@@ -32,6 +37,7 @@ const HeaderProfile = ({userId}: {userId: number}) => {
     enabled: !!userId,
   });
 
+  const [isChangeAvatar, setIsChangeAvatar] = useState(false);
   const [coverAvatar, setCoverAvatar] = useState(true);
   const [visible, setVisible] = useState({
     isVisible: false,
@@ -72,6 +78,19 @@ const HeaderProfile = ({userId}: {userId: number}) => {
     userInformation?.id,
   ]);
 
+  const closeModal = useCallback(() => {
+    setIsChangeAvatar(false);
+  }, []);
+
+  const {updateAvatar} = useUpdateUserInfo();
+
+  const {mutate: changeAvatar, status: statusAvatar} = useMutation({
+    mutationFn: (avatar: TPickedImage) => uploadService.uploadImages([avatar]),
+    onSuccess: ({data}) => {
+      updateAvatar(data[0]);
+    },
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <Pressable
@@ -107,7 +126,9 @@ const HeaderProfile = ({userId}: {userId: number}) => {
           />
         </Pressable>
         {userInformation?.id === dataUser?.data?.id && (
-          <Pressable style={styles.iconCamera}>
+          <Pressable
+            style={styles.iconCamera}
+            onPress={() => setIsChangeAvatar(true)}>
             <Icon name="camera" type="fontisto" color="#555" size={18} />
           </Pressable>
         )}
@@ -128,6 +149,15 @@ const HeaderProfile = ({userId}: {userId: number}) => {
         toggleOverlay={toggleOverlay}
         imageUrls={coverAvatar ? [uriCoverAvatar] : [uriAvatar]}
       />
+      {isChangeAvatar && (
+        <ChooseImage
+          isVisible={isChangeAvatar}
+          titleModal="Chọn ảnh"
+          closeModal={closeModal}
+          handleAction={changeAvatar}
+        />
+      )}
+      {statusAvatar === 'pending' && <Loading />}
     </SafeAreaView>
   );
 };

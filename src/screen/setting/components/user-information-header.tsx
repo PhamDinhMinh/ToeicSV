@@ -128,19 +128,23 @@ const UserInformationHeader = () => {
         }
       />
 
-      <ChooseImage
-        isVisible={state.isVisibleAvatar}
-        titleModal="Chọn ảnh"
-        closeModal={closeModal}
-        handleAction={changeAvatar}
-      />
+      {state.isVisibleAvatar && (
+        <ChooseImage
+          isVisible={state.isVisibleAvatar}
+          titleModal="Chọn ảnh"
+          closeModal={closeModal}
+          handleAction={changeAvatar}
+        />
+      )}
 
-      <ChooseImage
-        isVisible={state.isVisibleCoverAvatar}
-        titleModal="Chọn ảnh bìa"
-        closeModal={closeModal}
-        handleAction={handleCoverAvatar}
-      />
+      {state.isVisibleCoverAvatar && (
+        <ChooseImage
+          isVisible={state.isVisibleCoverAvatar}
+          titleModal="Chọn ảnh bìa"
+          closeModal={closeModal}
+          handleAction={handleCoverAvatar}
+        />
+      )}
 
       {(statusAvatar === 'pending' || statusCoverAvatar === 'pending') && (
         <Loading />

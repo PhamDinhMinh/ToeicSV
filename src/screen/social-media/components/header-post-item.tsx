@@ -7,7 +7,7 @@ import useAccountStore from '@/stores/account.store';
 import useAvatarDefault from '@/stores/avatar.store';
 import globalStyles from '@/global-style';
 import PostTooltipController from './post-tooltip-controller';
-import ActionDeleteModal from '@/screen/components/action-delete-modal';
+import ActionDeleteModal from '@/screen/components/modal-confirm/action-delete-modal';
 import {useTranslation} from 'react-i18next';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import socialMediaService from '../services/social-media.service';

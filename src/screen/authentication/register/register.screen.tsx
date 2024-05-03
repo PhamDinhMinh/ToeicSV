@@ -12,7 +12,7 @@ import {Button} from '@rneui/themed';
 import {StackScreenProps} from '@react-navigation/stack';
 import {TAuthStackParamList} from '@/routes/auth-stack';
 import {Controller, useForm} from 'react-hook-form';
-import BackButton from '@/screen/components/back-button';
+import BackButton from '@/screen/components/button/back-button';
 import FastImage from 'react-native-fast-image';
 import globalStyles, {color} from '@/global-style';
 import {useTranslation} from 'react-i18next';
@@ -23,7 +23,7 @@ import {useMutation} from '@tanstack/react-query';
 import authService from '../services/auth.services';
 import {useLoginRequest} from '../hooks/hook';
 import Toast from 'react-native-toast-message';
-import Loading from '@/screen/components/loading';
+import Loading from '@/screen/components/loading/loading';
 
 const {width} = Dimensions.get('screen');
 

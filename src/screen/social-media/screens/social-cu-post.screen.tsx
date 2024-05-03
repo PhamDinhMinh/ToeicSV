@@ -27,7 +27,7 @@ import {Controller, useForm} from 'react-hook-form';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import socialMediaService from '../services/social-media.service';
 import Toast from 'react-native-toast-message';
-import Loading from '@/screen/components/loading';
+import Loading from '@/screen/components/loading/loading';
 
 const {width} = Dimensions.get('screen');
 

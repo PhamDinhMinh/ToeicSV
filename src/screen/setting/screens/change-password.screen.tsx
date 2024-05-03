@@ -16,7 +16,7 @@ import {SafeAreaView} from 'react-native';
 import {useMutation} from '@tanstack/react-query';
 import settingService from '../services/setting.services';
 import Toast from 'react-native-toast-message';
-import Loading from '@/screen/components/loading';
+import Loading from '@/screen/components/loading/loading';
 
 const ChangePasswordScreen = ({
   navigation,

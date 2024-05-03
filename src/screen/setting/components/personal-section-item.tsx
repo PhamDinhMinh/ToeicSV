@@ -5,7 +5,7 @@ import globalStyles, {color} from '@/global-style';
 import {Icon} from '@rneui/base';
 import useAccountStore, {IAccountState} from '@/stores/account.store';
 import ModalConfirm from '@/screen/components/modal-confirm/modal-confirm';
-import ChangLanguageButton from '@/screen/components/change-language-button';
+import ChangLanguageButton from '@/screen/components/button/change-language-button';
 // import {ETenantTypeConfig} from '@/slices/mobileConfigSlice';
 // import {languageKeys} from '@/commons/language/i18next';
 

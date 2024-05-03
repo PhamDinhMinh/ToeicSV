@@ -16,12 +16,12 @@ import FastImage from 'react-native-fast-image';
 import {Controller, useForm} from 'react-hook-form';
 import TextInputComponent from '../components/text-input.component';
 import {Button, useTheme} from '@rneui/themed';
-import ChangLanguageButton from '@/screen/components/change-language-button';
+import ChangLanguageButton from '@/screen/components/button/change-language-button';
 import {useTranslation} from 'react-i18next';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {useLoginRequest} from '../hooks/hook';
-import Loading from '@/screen/components/loading';
+import Loading from '@/screen/components/loading/loading';
 
 const {height} = Dimensions.get('screen');
 

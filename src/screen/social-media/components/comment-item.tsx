@@ -19,7 +19,7 @@ import listEmoji from './react/list-emoji';
 import Modal from 'react-native-modal';
 import ItemActionComment from './item-action-comment';
 import ModalPopUpEmoji from './react/emoji-modal-popup';
-import ActionDeleteModal from '@/screen/components/action-delete-modal';
+import ActionDeleteModal from '@/screen/components/modal-confirm/action-delete-modal';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import socialMediaService from '../services/social-media.service';
 import Toast from 'react-native-toast-message';

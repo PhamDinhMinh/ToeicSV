@@ -8,6 +8,16 @@ class SettingService {
     return axiosClient.put(url, params);
   }
 
+  async updateAvatarUser(params: any) {
+    const url = this.PATH_USER + '/UpdateAvatar';
+    return axiosClient.put(url, params);
+  }
+
+  async updateCoverAvatarUser(params: any) {
+    const url = this.PATH_USER + '/UpdateCoverAvatar';
+    return axiosClient.put(url, params);
+  }
+
   changePassword = async (params: any): Promise<any> => {
     const url = this.PATH_USER + '/ChangePassword';
     return axiosClient.post(url, params);

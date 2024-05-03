@@ -7,6 +7,7 @@ import globalStyles, {color} from '@/global-style';
 import {Icon} from '@rneui/themed';
 import {useTranslation} from 'react-i18next';
 import ImageViewerDetail from '@/screen/components/image-view/image-viewer';
+import ChooseImage from '@/screen/components/camera/modal-action-chose-image';
 
 const {width} = Dimensions.get('window');
 
@@ -26,12 +27,20 @@ const UserInformationHeader = () => {
     isVisibleCoverAvatar: false,
   });
 
+  const changeAvatar = (image: any) => {};
+
+  const handleCoverAvatar = async (params: any) => {};
+
   const handleChoseAvatar = () => {
     setState(old => ({...old, isVisibleAvatar: true}));
   };
 
   const handleChoseCoverAvatar = () => {
     setState(old => ({...old, isVisibleCoverAvatar: true}));
+  };
+
+  const closeModal = () => {
+    setState({isVisibleCoverAvatar: false, isVisibleAvatar: false});
   };
 
   const toggleOverlay = useCallback(() => {
@@ -58,8 +67,9 @@ const UserInformationHeader = () => {
         </Pressable>
         <Pressable
           onPress={handleChoseCoverAvatar}
-          style={{position: 'absolute', bottom: 10, right: 16}}>
+          style={{position: 'absolute', bottom: 10, right: 16, zIndex: 1}}>
           <Icon
+            onPress={handleChoseCoverAvatar}
             name="camera"
             type="ionicon"
             color={color.grey_800}
@@ -98,6 +108,20 @@ const UserInformationHeader = () => {
             ? [account?.coverImageUrl ?? avatarDefault]
             : [account?.imageUrl ?? avatarDefault]
         }
+      />
+
+      <ChooseImage
+        isVisible={state.isVisibleAvatar}
+        titleModal="Chọn ảnh"
+        closeModal={closeModal}
+        handleAction={changeAvatar}
+      />
+
+      <ChooseImage
+        isVisible={state.isVisibleCoverAvatar}
+        titleModal="Chọn ảnh bìa"
+        closeModal={closeModal}
+        handleAction={handleCoverAvatar}
       />
     </View>
   );

@@ -9,6 +9,7 @@ import {useTranslation} from 'react-i18next';
 import TabUi from '@/screen/components/bottom-tab/tab-ui';
 import DocumentScreen from '@/screen/documents/document.screen';
 import SettingScreen from '@/screen/setting/screens/setting.screen';
+import HomeScreen from '@/screen/home/screens/home.screen';
 
 export type TMyTabsParamsList = {
   Home: undefined;
@@ -38,8 +39,11 @@ const MyTabs = () => {
         options={{
           title: language.t('home-tab'),
           lazy: false,
+          tabBarStyle: {
+            display: 'none',
+          },
         }}
-        component={DocumentScreen}
+        component={HomeScreen}
       />
       <Tab.Screen
         name="Documents"

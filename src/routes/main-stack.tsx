@@ -7,9 +7,11 @@ import SocialMediaStack, {
   TSocialMediaStackParamList,
 } from './social-media-stack';
 import SettingStack, {TSettingStackParamList} from './setting-stack';
+import HomeStack, {THomeStackParamList} from './home-stack';
 
 export type TMainStackParamList = {
   MyTab: NavigatorScreenParams<TMyTabsParamsList>;
+  HomeStack: NavigatorScreenParams<THomeStackParamList>;
   DocumentsStack: NavigatorScreenParams<TDocumentStackParamList>;
   SocialMediaStack: NavigatorScreenParams<TSocialMediaStackParamList>;
   SettingStack: NavigatorScreenParams<TSettingStackParamList>;
@@ -25,6 +27,7 @@ const MainStack = () => {
         headerShown: false,
       }}>
       <Stack.Screen name={'MyTab'} component={MyTabs} />
+      <Stack.Screen name={'HomeStack'} component={HomeStack} />
       <Stack.Screen name={'DocumentsStack'} component={DocumentsStack} />
       <Stack.Screen name={'SocialMediaStack'} component={SocialMediaStack} />
       <Stack.Screen name={'SettingStack'} component={SettingStack} />

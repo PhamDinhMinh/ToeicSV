@@ -1,19 +1,29 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import HomeScreen from '@/screen/home/screens/home.screen';
 
-export type THomeStackParamsList = {};
+export type THomeStackParamList = {
+  HomeScreen: undefined;
+};
 
-const Stack = createStackNavigator<THomeStackParamsList>();
+const Stack = createStackNavigator<THomeStackParamList>();
 
 const HomeStack = () => {
   return (
-    <View>
-      <Text>MainStack</Text>
-    </View>
+    <Stack.Navigator
+      screenOptions={{
+        headerBackTitleVisible: false,
+        headerTitleAlign: 'center',
+      }}>
+      <Stack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
   );
 };
 
 export default HomeStack;
-
-const styles = StyleSheet.create({});

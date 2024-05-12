@@ -128,6 +128,10 @@ export const vi = {
   progress: ' - Đang ',
   feel: ' cảm thấy ',
   feeling: 'Cảm xúc',
+  listening: 'Nghe hiểu',
+  reading: 'Đọc hiểu',
+  'full-test': 'Thi thử cả đề',
+  question: 'Câu hỏi',
 
   // tab bottom
   'home-tab': 'Trang chủ',

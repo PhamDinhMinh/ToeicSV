@@ -1,9 +1,12 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import HomeScreen from '@/screen/home/screens/home.screen';
+import PartDetailScreen from '@/screen/home/screens/part-detail.screen';
+import {IItemPart} from '@/screen/home/screens/home.screen';
 
 export type THomeStackParamList = {
-  HomeScreen: undefined;
+  PartDetailScreen: {
+    item: IItemPart;
+  };
 };
 
 const Stack = createStackNavigator<THomeStackParamList>();
@@ -16,10 +19,11 @@ const HomeStack = () => {
         headerTitleAlign: 'center',
       }}>
       <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="PartDetailScreen"
+        component={PartDetailScreen}
         options={{
-          headerShown: false,
+          headerShown: true,
+          title: '',
         }}
       />
     </Stack.Navigator>

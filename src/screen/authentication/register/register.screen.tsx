@@ -231,7 +231,7 @@ const RegisterScreen = ({navigation}: props) => {
                 buttonStyle={{
                   marginHorizontal: 20,
                   borderRadius: 20,
-                  backgroundColor: color.green_300,
+                  backgroundColor: color.green_base_300,
                 }}>
                 {language.t('signUp')}
               </Button>

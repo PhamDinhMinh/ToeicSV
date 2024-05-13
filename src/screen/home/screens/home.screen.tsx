@@ -63,6 +63,12 @@ const HomeScreen = ({navigation}: props) => {
     {
       content: 'Hỏi & đáp',
       value: 2,
+      description:
+        'In this part of the test, you will hear a question or statement spoken in English, followed by three responses, also spoken in English. The question or statement and the responses ' +
+        'will be spoken just one time. They will not be printed in your test book, so you must listen carefully. You are to choose the best response to each question or statement',
+      transcription:
+        'Trong phần này của đề thi, ban sẽ nghe 1 câu hỏi hoặc 1 câu phát biểu bằng tiếng Anh, theo sau đó là 3 câu phản hồi, cũng được nói bằng tiếng anh. Câu hỏi hay câu phát biểu ' +
+        'và các câu phản hồi sẽ chỉ được nói 1 lần. Chúng tôi sẽ không được in lên đề thi, nên bạn cần nghe thật cẩn thận. Bạn cần chọn câu phản hồi đúng nhất với mỗi câu hỏi hoặc câu phát biểu.',
     },
     {
       content: 'Đoạn hội thoại',
@@ -78,6 +84,11 @@ const HomeScreen = ({navigation}: props) => {
     {
       content: 'Điền vào câu',
       value: 5,
+      description:
+        'A word or pharse is missing in each of the sentences below. Four answer choices are given below each sentence. Select the best answer to complete the sentence. ' +
+        'Then mark the letter (A), (B), (C) or (D) on your answer sheet.',
+      transcription:
+        'Một từ hoặc cụm từ bị thiếu trong mỗi câu nói dưới đây. Bốn lựa chọn trả lời được đưa ra dưới mỗi câu hỏi. Hãy chọn đáp án đúng nhất để hoàn thành câu. Sau đó đánh dấu đáp án (A), (B), (C) hoặc (D) vào phần bài làm của bạn.',
     },
     {
       content: 'Điền vào đoạn',
@@ -133,7 +144,7 @@ const HomeScreen = ({navigation}: props) => {
               {imageBanners.map((_, index) => {
                 return (
                   <PaginationItem
-                    backgroundColor={color.green_500}
+                    backgroundColor={color.green_base_500}
                     animValue={progressValue}
                     index={index}
                     key={index}

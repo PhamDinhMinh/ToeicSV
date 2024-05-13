@@ -10,7 +10,7 @@ const PersonalSectionLabel = ({label}: {label: string | undefined}) => {
   }
 
   return (
-    <Text style={[styles.text, {color: color.green_500}]}>
+    <Text style={[styles.text, {color: color.green_base_500}]}>
       {language.t(label)}
     </Text>
   );

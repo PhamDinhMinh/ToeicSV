@@ -69,7 +69,7 @@ const ExamTipsDetailScreen = ({route, navigation}: props) => {
               return (
                 <PaginationItem
                   containerStyle={{top: -5}}
-                  backgroundColor={color.green_500}
+                  backgroundColor={color.green_base_500}
                   animValue={progressValue}
                   index={index}
                   key={index}

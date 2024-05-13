@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   baseInput: {
     ...globalStyles.text16Regular,
     paddingVertical: Platform.OS === 'android' ? 5 : 10,
-    borderColor: color.green_300,
+    borderColor: color.green_base_300,
     borderRadius: 10,
     borderWidth: 1,
     paddingLeft: 10,

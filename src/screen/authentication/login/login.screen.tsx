@@ -142,7 +142,7 @@ const LoginScreen = ({navigation}: props) => {
               <Text
                 // onPress={() => navigation.navigate('ForgotPassword')}
                 style={[
-                  {textAlign: 'right', color: color.green_700},
+                  {textAlign: 'right', color: color.green_base_700},
                   globalStyles.text16Regular,
                 ]}>
                 {language.t('forgotPass')}?
@@ -154,7 +154,7 @@ const LoginScreen = ({navigation}: props) => {
                 buttonStyle={{
                   marginHorizontal: 20,
                   borderRadius: 20,
-                  backgroundColor: color.green_300,
+                  backgroundColor: color.green_base_300,
                 }}
                 title={language.t('signIn')}
               />
@@ -179,7 +179,7 @@ const LoginScreen = ({navigation}: props) => {
               {language.t('promptNoAccount')}{' '}
               <Text
                 onPress={() => navigation.navigate('RegisterScreen')}
-                style={{color: color.green_700}}>
+                style={{color: color.green_base_700}}>
                 {language.t('signUpNow')}
               </Text>
             </Text>

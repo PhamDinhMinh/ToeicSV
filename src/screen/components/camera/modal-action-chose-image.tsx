@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 10,
-    backgroundColor: color.green_400,
+    backgroundColor: color.green_base_400,
     paddingHorizontal: 20,
   },
 });

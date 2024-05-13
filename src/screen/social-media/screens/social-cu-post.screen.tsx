@@ -178,7 +178,7 @@ const SocialCUPostScreen = ({navigation, route}: props) => {
         containerStyle={styles.buttonContainer}
         buttonStyle={styles.button}
         linearGradientProps={{
-          colors: [color.green_300, color.green_500],
+          colors: [color.green_base_300, color.green_base_500],
           start: {x: 0, y: 0},
           end: {x: 1, y: 0},
         }}

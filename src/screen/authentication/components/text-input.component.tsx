@@ -62,7 +62,7 @@ const TextInputComponent = ({
             backgroundColor: color.grey_200,
             borderRadius: 15,
             flexDirection: 'row',
-            borderColor: color.green_300,
+            borderColor: color.green_base_300,
             borderWidth: 1,
             paddingVertical: Platform.OS === 'ios' ? 10 : 0,
           },
@@ -88,7 +88,7 @@ const TextInputComponent = ({
           placeholder={placeholder}
           style={[
             {
-              color: color.green_500,
+              color: color.green_base_500,
               paddingVertical: Platform.OS === 'android' ? 5 : 0,
               paddingLeft: '5%',
               paddingRight: secureTextEntry ? '15%' : '5%',
@@ -100,7 +100,7 @@ const TextInputComponent = ({
         {secureTextEntry && (
           <Icon
             onPress={() => setIsSecurity(!isSecurity)}
-            color={color.green_300}
+            color={color.green_base_300}
             name={isSecurity ? 'eye-off' : 'eye'}
             type="ionicon"
             containerStyle={{

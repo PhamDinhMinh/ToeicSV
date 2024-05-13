@@ -18,7 +18,12 @@ const TabUi = (props: TTabUi) => {
     switch (tab) {
       case 'Home': {
         return isFocused ? (
-          <Icon type="ionicon" name="home" color={color.green_500} size={26} />
+          <Icon
+            type="ionicon"
+            name="home"
+            color={color.green_base_500}
+            size={26}
+          />
         ) : (
           <Icon
             type="ionicon"
@@ -33,7 +38,7 @@ const TabUi = (props: TTabUi) => {
           <Icon
             type="ionicon"
             name="document-text"
-            color={color.green_500}
+            color={color.green_base_500}
             size={26}
           />
         ) : (
@@ -50,7 +55,7 @@ const TabUi = (props: TTabUi) => {
           <Icon
             type="ionicon"
             name="bar-chart"
-            color={color.green_500}
+            color={color.green_base_500}
             size={26}
           />
         ) : (
@@ -67,7 +72,7 @@ const TabUi = (props: TTabUi) => {
           <Icon
             type="ionicon"
             name="share-social"
-            color={color.green_500}
+            color={color.green_base_500}
             size={26}
           />
         ) : (
@@ -84,7 +89,7 @@ const TabUi = (props: TTabUi) => {
           <Icon
             type="ionicon"
             name="settings"
-            color={color.green_500}
+            color={color.green_base_500}
             size={26}
           />
         ) : (
@@ -170,7 +175,7 @@ const TabUi = (props: TTabUi) => {
                   style={{
                     fontWeight: '500',
                     fontSize: 13,
-                    color: isFocused ? color.green_500 : color.grey_700,
+                    color: isFocused ? color.green_base_500 : color.grey_700,
                     textAlign: 'center',
                     marginTop: 5,
                   }}>

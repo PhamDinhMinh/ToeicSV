@@ -39,7 +39,7 @@ const ItemGrammar = (props: TItemGrammar) => {
         <Icon
           name="checkmark-circle-sharp"
           type="ionicon"
-          color={color.green_400}
+          color={color.green_base_400}
         />
       )}
     </Pressable>

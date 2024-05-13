@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     color: color.red_500,
   },
   button: {
-    backgroundColor: color.green_400,
+    backgroundColor: color.green_base_400,
     borderRadius: 20,
     marginBottom: 10,
     paddingHorizontal: 40,

@@ -145,7 +145,9 @@ const FormUpdateInformation = ({navigation}: any) => {
         buttonStyle={{
           marginHorizontal: 20,
           borderRadius: 16,
-          backgroundColor: !editing ? color.green_300 : color.green_300,
+          backgroundColor: !editing
+            ? color.green_base_300
+            : color.green_base_300,
         }}
         title={editing ? 'Lưu' : 'Chỉnh sửa'}
       />

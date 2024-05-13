@@ -81,7 +81,7 @@ const ModalSelect = (props: TModalSelect) => {
             buttonStyle={[
               styles.button,
               {
-                backgroundColor: color.green_300,
+                backgroundColor: color.green_base_300,
               },
             ]}
             onPress={() => {
@@ -100,7 +100,7 @@ export default DateInput;
 const styles = StyleSheet.create({
   textInput: {
     paddingVertical: Platform.OS === 'android' ? 5 : 10,
-    borderColor: color.green_300,
+    borderColor: color.green_base_300,
     borderRadius: 10,
     borderWidth: 1,
     paddingLeft: 10,

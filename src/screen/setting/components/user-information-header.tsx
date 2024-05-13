@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   },
   text: {
     ...globalStyles.text16Regular,
-    color: color.green_500,
+    color: color.green_base_500,
   },
   contentContainer: {
     paddingHorizontal: 16,

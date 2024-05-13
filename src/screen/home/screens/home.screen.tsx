@@ -73,10 +73,22 @@ const HomeScreen = ({navigation}: props) => {
     {
       content: 'Đoạn hội thoại',
       value: 3,
+      description:
+        'You will hear some conversations between two or more people. You will be asked to answer three questions about what the speakers say in each conversation. Select the best response to each question ' +
+        'and mark the letter (A), (B), (C), or (D) on your answer sheet. The conversations will not be printed in your test book and will be spoken only one time.',
+      transcription:
+        'Bạn sẽ nghe thấy một số cuộc trò chuyện giữa hai hoặc nhiều người. Bạn sẽ được yêu cầu trả lời ba câu hỏi về những gì diễn giả nói trong mỗi cuộc trò chuyện. Chọn câu trả lời đúng nhất cho mỗi câu hỏi ' +
+        'và đánh dấu chữ cái (A), (B), (C) hoặc (D) trên phiếu trả lời của bạn. Câu này sẽ không được in trong phần hội thoại trong tập kiểm tra của bạn và sẽ chỉ được nói một lần.',
     },
     {
       content: 'Đoạn nói chuyện ngắn',
       value: 4,
+      description:
+        'You will hear some talks given by a single speaker. You will be asked to answer three questions about what the speaker says in each talk. Select the best response to each question and mark the letter ' +
+        '(A), (B), (C), or (D) on your answer sheet. The talks will not be printed in your test book and will be spoken only one time.',
+      transcription:
+        'Bạn sẽ nghe một số bài nói do một diễn giả trình bày. Bạn sẽ được yêu cầu trả lời ba câu hỏi về những gì diễn giả nói trong mỗi bài nói. Chọn câu trả lời đúng nhất cho mỗi câu hỏi và đánh dấu chữ cái ' +
+        '(A), (B), (C) hoặc (D) trên phiếu trả lời của bạn. Các bài nói sẽ không được in trong tập kiểm tra của bạn và sẽ chỉ được nói một lần.',
     },
   ];
 
@@ -85,7 +97,7 @@ const HomeScreen = ({navigation}: props) => {
       content: 'Điền vào câu',
       value: 5,
       description:
-        'A word or pharse is missing in each of the sentences below. Four answer choices are given below each sentence. Select the best answer to complete the sentence. ' +
+        'A word or parse is missing in each of the sentences below. Four answer choices are given below each sentence. Select the best answer to complete the sentence. ' +
         'Then mark the letter (A), (B), (C) or (D) on your answer sheet.',
       transcription:
         'Một từ hoặc cụm từ bị thiếu trong mỗi câu nói dưới đây. Bốn lựa chọn trả lời được đưa ra dưới mỗi câu hỏi. Hãy chọn đáp án đúng nhất để hoàn thành câu. Sau đó đánh dấu đáp án (A), (B), (C) hoặc (D) vào phần bài làm của bạn.',
@@ -93,10 +105,20 @@ const HomeScreen = ({navigation}: props) => {
     {
       content: 'Điền vào đoạn',
       value: 6,
+      description:
+        'A word or phrase is missing in each of the sentences below. Four answer choices are given below each sentence. Select the best answer to complete the sentence. Then mark the letter (A), (B), (C), or (D) on your answer sheet.',
+      transcription:
+        'Một từ hoặc cụm từ bị thiếu trong mỗi câu nói dưới đây. Bốn lựa chọn trả lời được đưa ra dưới mỗi câu hỏi. Hãy chọn đáp án đúng nhất để hoàn thành câu. Sau đó đánh dấu đáp án (A), (B), (C) hoặc (D) vào phần bài làm của bạn.',
     },
     {
       content: 'Đọc hiểu đoạn văn',
       value: 7,
+      description:
+        'In this part you will read a selection of texts, such as magazine and newspaper articles, e-mails, and instant messages. Each text or set of texts is followed by several questions. Select the best answer for each question ' +
+        'and mark the letter (A), (B), (C), or (D) on your answer sheet.',
+      transcription:
+        'Trong phần này bạn sẽ đọc một số văn bản chọn lọc, chẳng hạn như các bài báo và tạp chí, e-mail và tin nhắn tức thời. Mỗi văn bản hoặc tập hợp văn bản được theo sau bởi một số câu hỏi. Chọn câu trả lời đúng nhất ' +
+        'cho mỗi câu hỏi và đánh dấu chữ cái (A), (B), (C) hoặc (D) trên phiếu trả lời của bạn.',
     },
   ];
 

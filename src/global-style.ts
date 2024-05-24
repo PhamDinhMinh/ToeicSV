@@ -28,6 +28,22 @@ const color = {
   red_500: '#ff4d4f',
   red_600: '#f44247',
   red_700: '#e9373f',
+  yello_200: '#feeab3',
+  yello_300: '#fde39a',
+  yello_400: '#fddc81',
+  yello_500: '#fdd567',
+  yello_600: '#fcce4e',
+  yello_700: '#fcc735',
+  yello_800: '#fcc01c',
+  yello_900: '#fcba03',
+  orange_200: '#ffd699',
+  orange_300: '#ffc166',
+  orange_400: '#ffad33',
+  orange_500: '#ff9800',
+  orange_600: '#cc7a00',
+  orange_700: '#995b00',
+  orange_800: '#663d00',
+  orange_900: '#331E00',
 };
 
 const globalStyles = StyleSheet.create({

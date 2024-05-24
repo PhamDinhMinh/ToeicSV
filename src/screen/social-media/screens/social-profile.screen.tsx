@@ -38,23 +38,19 @@ const SocialProfileScreen = ({route, navigation}: props) => {
     refetch,
   } = useInfiniteQuery({
     queryKey: ['list-post-user', userId],
-    queryFn: () =>
-      socialMediaService.getAllPostUser({
-        userId: userId,
-        skipCount: 0,
-        maxResultCount: 10,
-      }),
-    getNextPageParam: (lastPage, allPages) => {
-      const skipCount = allPages.length * 10;
-      return (allPages.length - 1) * 10 + lastPage?.data?.length <
+    queryFn: ({pageParam}) => socialMediaService.getAllPostUser(pageParam),
+    getNextPageParam: (lastPage, allPages, lastPageParams) => {
+      const skipCount = allPages.length * lastPageParams.maxResultCount;
+      return (allPages.length - 1) * lastPageParams.maxResultCount +
+        lastPage.data.length !==
         lastPage.totalRecords
         ? {
+            ...lastPageParams,
             skipCount: skipCount,
-            maxResultCount: 10,
           }
         : undefined;
     },
-    initialPageParam: {skipCount: 0, maxResultCount: 10},
+    initialPageParam: {skipCount: 0, maxResultCount: 10, userId},
   });
 
   const onRefresh = () => {

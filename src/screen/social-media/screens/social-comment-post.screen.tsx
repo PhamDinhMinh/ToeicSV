@@ -44,20 +44,15 @@ const SocialCommentPostScreen = ({route, navigation}: props) => {
     refetch,
   } = useInfiniteQuery({
     queryKey: ['list-post-comment', postId],
-    queryFn: () =>
-      socialMediaService.getAllComment({
-        skipCount: 0,
-        maxResultCount: 10,
-        postId: postId,
-      }),
-    getNextPageParam: (lastPage, allPages) => {
-      const skipCount = allPages.length * 10;
-      return (allPages.length - 1) * 10 + lastPage?.data?.length <
+    queryFn: ({pageParam}) => socialMediaService.getAllComment(pageParam),
+    getNextPageParam: (lastPage, allPages, lastPageParams) => {
+      const skipCount = allPages.length * lastPageParams.maxResultCount;
+      return (allPages.length - 1) * lastPageParams.maxResultCount +
+        lastPage.data.length !==
         lastPage.totalRecords
         ? {
+            ...lastPageParams,
             skipCount: skipCount,
-            maxResultCount: 10,
-            postId: postId,
           }
         : undefined;
     },

@@ -88,18 +88,43 @@ const ExamTipsDetailScreen = ({route, navigation}: props) => {
 export default ExamTipsDetailScreen;
 
 export const PaginationItem = (props: any) => {
-  const {animValue, index, length, backgroundColor, containerStyle} = props;
-  const w = 100 / length;
+  const {
+    animValue,
+    index,
+    length,
+    backgroundColor,
+    containerStyle,
+    widthMax,
+    fullWidth,
+  } = props;
+  const w = widthMax ?? 100 / length;
 
   const animStyle = useAnimatedStyle(() => {
     let inputRange = [index - 1, index, index + 1];
-    let outputRange = [-w, 0, w];
+    let outputRange = fullWidth
+      ? [0, w * (index + 1), w * (index + 2)]
+      : [-w, 0, w];
 
     if (index === 0 && animValue?.value > length - 1) {
       inputRange = [length - 1, length, length + 1];
-      outputRange = [-w, 0, w];
+      outputRange = fullWidth ? [0, w, w * 2] : [-w, 0, w];
     }
 
+    if (fullWidth) {
+      return {
+        transform: [
+          {
+            translateX: 0,
+          },
+        ],
+        width: interpolate(
+          animValue?.value,
+          inputRange,
+          outputRange,
+          Extrapolate.CLAMP,
+        ),
+      };
+    }
     return {
       transform: [
         {

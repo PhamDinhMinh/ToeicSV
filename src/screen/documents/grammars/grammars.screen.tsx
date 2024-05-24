@@ -5,7 +5,7 @@ import {
   Text,
   SafeAreaView,
 } from 'react-native';
-import React, {useCallback, useMemo} from 'react';
+import React, {useCallback, useId, useMemo} from 'react';
 import {IGrammarResponse} from './services/grammar.model';
 import grammarService from './services/grammar.service';
 import {useInfiniteQuery} from '@tanstack/react-query';
@@ -31,6 +31,7 @@ type props = {
 
 const GrammarScreen = ({navigation, route}: props) => {
   const {type} = route.params;
+  const uid = useId();
   const language = useTranslation();
 
   const {
@@ -41,23 +42,19 @@ const GrammarScreen = ({navigation, route}: props) => {
     refetch,
   } = useInfiniteQuery({
     queryKey: ['list-grammar', type],
-    queryFn: () =>
-      grammarService.getAll({
-        type: type,
-        skipCount: 0,
-        maxResultCount: 10,
-      }),
-    getNextPageParam: (lastPage, allPages) => {
-      const skipCount = allPages.length * 10;
-      return (allPages.length - 1) * 10 + lastPage?.data?.length <
+    queryFn: ({pageParam}) => grammarService.getAll(pageParam),
+    getNextPageParam: (lastPage, allPages, lastPageParams) => {
+      const skipCount = allPages.length * lastPageParams.maxResultCount;
+      return (allPages.length - 1) * lastPageParams.maxResultCount +
+        lastPage.data.length !==
         lastPage.totalRecords
         ? {
+            ...lastPageParams,
             skipCount: skipCount,
-            maxResultCount: 10,
           }
         : undefined;
     },
-    initialPageParam: {skipCount: 0, maxResultCount: 10},
+    initialPageParam: {skipCount: 0, maxResultCount: 10, type},
   });
 
   const onRefresh = () => {
@@ -76,9 +73,16 @@ const GrammarScreen = ({navigation, route}: props) => {
 
   const renderItem = useCallback(
     ({item, index}: {item: IGrammarResponse; index: number}) => {
-      return <ItemGrammar item={item} index={index} navigation={navigation} />;
+      return (
+        <ItemGrammar
+          item={item}
+          index={index}
+          navigation={navigation}
+          key={index + uid + 'grammar'}
+        />
+      );
     },
-    [navigation],
+    [navigation, uid],
   );
 
   return (

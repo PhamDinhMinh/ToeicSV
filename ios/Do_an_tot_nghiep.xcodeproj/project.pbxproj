@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* Do_an_tot_nghiepTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* Do_an_tot_nghiepTests.m */; };
-		0DF0BE1FA93A8D4638062707 /* libPods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FC3332BADD31963931DF58 /* libPods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -31,7 +30,8 @@
 		3C02D5662BA008BC003B302C /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C02D5532BA008BC003B302C /* SimpleLineIcons.ttf */; };
 		3C02D5672BA008BC003B302C /* FontAwesome6_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C02D5542BA008BC003B302C /* FontAwesome6_Brands.ttf */; };
 		3C02D5682BA008BC003B302C /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C02D5552BA008BC003B302C /* MaterialIcons.ttf */; };
-		483703199B33EE05174FDCDA /* libPods-Do_an_tot_nghiep.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51641FB22BD0CE779475ADE /* libPods-Do_an_tot_nghiep.a */; };
+		3FC873BA6A4C3772AC462196 /* libPods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F019429727FBE88B06CD0945 /* libPods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.a */; };
+		5FD7637DEBC651B029FD033D /* libPods-Do_an_tot_nghiep.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7471BF8EC24FCF38E7F86C03 /* libPods-Do_an_tot_nghiep.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +49,6 @@
 		00E356EE1AD99517003FC87E /* Do_an_tot_nghiepTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Do_an_tot_nghiepTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* Do_an_tot_nghiepTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Do_an_tot_nghiepTests.m; sourceTree = "<group>"; };
-		06FC3332BADD31963931DF58 /* libPods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* Do_an_tot_nghiep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Do_an_tot_nghiep.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Do_an_tot_nghiep/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Do_an_tot_nghiep/AppDelegate.mm; sourceTree = "<group>"; };
@@ -75,13 +74,14 @@
 		3C02D5532BA008BC003B302C /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		3C02D5542BA008BC003B302C /* FontAwesome6_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome6_Brands.ttf; sourceTree = "<group>"; };
 		3C02D5552BA008BC003B302C /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
-		4D07A8D81364DBE25A2CE7C3 /* Pods-Do_an_tot_nghiep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Do_an_tot_nghiep.debug.xcconfig"; path = "Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep.debug.xcconfig"; sourceTree = "<group>"; };
-		69DFCB6FFF5C05B4DB900B4F /* Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.debug.xcconfig"; path = "Target Support Files/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7471BF8EC24FCF38E7F86C03 /* libPods-Do_an_tot_nghiep.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Do_an_tot_nghiep.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		753C53AE916005C461D3A6C8 /* Pods-Do_an_tot_nghiep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Do_an_tot_nghiep.debug.xcconfig"; path = "Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep.debug.xcconfig"; sourceTree = "<group>"; };
+		815E7B3933CD2B47F2A7FD5A /* Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.release.xcconfig"; path = "Target Support Files/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.release.xcconfig"; sourceTree = "<group>"; };
+		817CAE4FC08B33CE9F0F8ECD /* Pods-Do_an_tot_nghiep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Do_an_tot_nghiep.release.xcconfig"; path = "Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Do_an_tot_nghiep/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		979F4BC9FF5450AC730AAFC0 /* Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.release.xcconfig"; path = "Target Support Files/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.release.xcconfig"; sourceTree = "<group>"; };
-		C51641FB22BD0CE779475ADE /* libPods-Do_an_tot_nghiep.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Do_an_tot_nghiep.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CFC1B5BE9763BDDE832822EF /* Pods-Do_an_tot_nghiep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Do_an_tot_nghiep.release.xcconfig"; path = "Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep.release.xcconfig"; sourceTree = "<group>"; };
+		9F3F2F119AFBBEE00340AED8 /* Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.debug.xcconfig"; path = "Target Support Files/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F019429727FBE88B06CD0945 /* libPods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0DF0BE1FA93A8D4638062707 /* libPods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.a in Frameworks */,
+				3FC873BA6A4C3772AC462196 /* libPods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,7 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				483703199B33EE05174FDCDA /* libPods-Do_an_tot_nghiep.a in Frameworks */,
+				5FD7637DEBC651B029FD033D /* libPods-Do_an_tot_nghiep.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,8 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				C51641FB22BD0CE779475ADE /* libPods-Do_an_tot_nghiep.a */,
-				06FC3332BADD31963931DF58 /* libPods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.a */,
+				7471BF8EC24FCF38E7F86C03 /* libPods-Do_an_tot_nghiep.a */,
+				F019429727FBE88B06CD0945 /* libPods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -206,10 +206,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4D07A8D81364DBE25A2CE7C3 /* Pods-Do_an_tot_nghiep.debug.xcconfig */,
-				CFC1B5BE9763BDDE832822EF /* Pods-Do_an_tot_nghiep.release.xcconfig */,
-				69DFCB6FFF5C05B4DB900B4F /* Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.debug.xcconfig */,
-				979F4BC9FF5450AC730AAFC0 /* Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.release.xcconfig */,
+				753C53AE916005C461D3A6C8 /* Pods-Do_an_tot_nghiep.debug.xcconfig */,
+				817CAE4FC08B33CE9F0F8ECD /* Pods-Do_an_tot_nghiep.release.xcconfig */,
+				9F3F2F119AFBBEE00340AED8 /* Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.debug.xcconfig */,
+				815E7B3933CD2B47F2A7FD5A /* Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -221,12 +221,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "Do_an_tot_nghiepTests" */;
 			buildPhases = (
-				3F48E03BF124A0B818EF4F18 /* [CP] Check Pods Manifest.lock */,
+				568221A43FE57CCD14D35500 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				D8F3F1FB6D39E1EECC402672 /* [CP] Embed Pods Frameworks */,
-				FA62709E38356E4F7627B219 /* [CP] Copy Pods Resources */,
+				251EB1933A70808BFEDB10AA /* [CP] Embed Pods Frameworks */,
+				5C1089EAE27AF2CEE15F3B6E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -242,14 +242,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Do_an_tot_nghiep" */;
 			buildPhases = (
-				DDB0E7C8776041058EDF354B /* [CP] Check Pods Manifest.lock */,
+				3E9ABE77FFAFD9F6BBCEA8D3 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				DAB5C746DC65008B308F90C8 /* [CP] Embed Pods Frameworks */,
-				830D0637C6F8E2A7A3DCDCD5 /* [CP] Copy Pods Resources */,
+				CEAD805C8E27F83745EB28BB /* [CP] Embed Pods Frameworks */,
+				CC2F5E44419D1C4CF7934955 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -351,46 +351,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		3F48E03BF124A0B818EF4F18 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		830D0637C6F8E2A7A3DCDCD5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D8F3F1FB6D39E1EECC402672 /* [CP] Embed Pods Frameworks */ = {
+		251EB1933A70808BFEDB10AA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -407,24 +368,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DAB5C746DC65008B308F90C8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DDB0E7C8776041058EDF354B /* [CP] Check Pods Manifest.lock */ = {
+		3E9ABE77FFAFD9F6BBCEA8D3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -446,7 +390,29 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FA62709E38356E4F7627B219 /* [CP] Copy Pods Resources */ = {
+		568221A43FE57CCD14D35500 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C1089EAE27AF2CEE15F3B6E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -461,6 +427,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests/Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CC2F5E44419D1C4CF7934955 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CEAD805C8E27F83745EB28BB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Do_an_tot_nghiep/Pods-Do_an_tot_nghiep-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -515,7 +515,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69DFCB6FFF5C05B4DB900B4F /* Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.debug.xcconfig */;
+			baseConfigurationReference = 9F3F2F119AFBBEE00340AED8 /* Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -542,7 +542,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 979F4BC9FF5450AC730AAFC0 /* Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.release.xcconfig */;
+			baseConfigurationReference = 815E7B3933CD2B47F2A7FD5A /* Pods-Do_an_tot_nghiep-Do_an_tot_nghiepTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -566,7 +566,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D07A8D81364DBE25A2CE7C3 /* Pods-Do_an_tot_nghiep.debug.xcconfig */;
+			baseConfigurationReference = 753C53AE916005C461D3A6C8 /* Pods-Do_an_tot_nghiep.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -593,7 +593,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CFC1B5BE9763BDDE832822EF /* Pods-Do_an_tot_nghiep.release.xcconfig */;
+			baseConfigurationReference = 817CAE4FC08B33CE9F0F8ECD /* Pods-Do_an_tot_nghiep.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

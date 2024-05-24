@@ -403,6 +403,12 @@ PODS:
     - React-Core
   - react-native-safe-area-context (4.9.0):
     - React-Core
+  - react-native-slider (4.5.2):
+    - RCT-Folly (= 2021.07.22.00)
+    - React-Core
+  - react-native-track-player (4.1.1):
+    - React-Core
+    - SwiftAudioEx (= 1.1.0)
   - React-NativeModulesApple (0.72.7):
     - hermes-engine
     - React-callinvoker
@@ -555,6 +561,7 @@ PODS:
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
   - SocketRocket (0.6.1)
+  - SwiftAudioEx (1.1.0)
   - TOCropViewController (2.6.1)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -613,6 +620,8 @@ DEPENDENCIES:
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-render-html (from `../node_modules/react-native-render-html`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
+  - react-native-track-player (from `../node_modules/react-native-track-player`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -661,6 +670,7 @@ SPEC REPOS:
     - SDWebImage
     - SDWebImageWebPCoder
     - SocketRocket
+    - SwiftAudioEx
     - TOCropViewController
     - YogaKit
 
@@ -722,6 +732,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-render-html"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-slider:
+    :path: "../node_modules/@react-native-community/slider"
+  react-native-track-player:
+    :path: "../node_modules/react-native-track-player"
   React-NativeModulesApple:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios"
   React-perflogger:
@@ -823,6 +837,8 @@ SPEC CHECKSUMS:
   react-native-pager-view: 40d9ec4a63ed74f8aa2f1e1bba7c1e0b4080d8a6
   react-native-render-html: 984dfe2294163d04bf5fe25d7c9f122e60e05ebe
   react-native-safe-area-context: b97eb6f9e3b7f437806c2ce5983f479f8eb5de4b
+  react-native-slider: 593253eb5fbc6ea519290e812bd477fc6abafd5a
+  react-native-track-player: 82ef1756ffeea61140fea17519ecd6d64ec3cf3e
   React-NativeModulesApple: b6868ee904013a7923128892ee4a032498a1024a
   React-perflogger: 31ea61077185eb1428baf60c0db6e2886f141a5a
   React-RCTActionSheet: 392090a3abc8992eb269ef0eaa561750588fc39d
@@ -854,6 +870,7 @@ SPEC CHECKSUMS:
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
+  SwiftAudioEx: f6aa653770f3a0d3851edaf8d834a30aee4a7646
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   Yoga: 4c3aa327e4a6a23eeacd71f61c81df1bcdf677d5
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a

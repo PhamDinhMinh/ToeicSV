@@ -38,7 +38,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
   const progressValue = useSharedValue(0);
   const [pageIndex, setPageIndex] = useState(1);
   const [state, setState] = useState({
-    previous: 0,
+    endReach: false,
     visibleModal: false,
   });
   const [indexView, setIndexView] = useState(0);
@@ -205,7 +205,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
     viewableItems: ViewToken[];
     changed: ViewToken[];
   }) => {
-    console.log(info.viewableItems[0]?.index, 'hhh');
+    console.log(info.viewableItems?.length, 'hehe');
     setIndexView(info.viewableItems[0]?.index as number);
     progressValue.value = info.viewableItems[0]?.index as number;
     setPageIndex((info.viewableItems[0]?.index as number) + 1);
@@ -237,6 +237,24 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
         return width / (maxResultCount ?? 6);
     }
   }, [maxResultCount, partId]);
+
+  const handleEndReached = ({distanceFromEnd}: any) => {
+    if (distanceFromEnd >= 0) {
+      setState(prev => ({...prev, endReach: true}));
+    }
+  };
+
+  const handleScroll = useCallback(
+    (event: any) => {
+      const {contentOffset, layoutMeasurement, contentSize} = event.nativeEvent;
+      const isScrolledToEnd =
+        layoutMeasurement.width + contentOffset.x > contentSize.width;
+      if (state.endReach && isScrolledToEnd) {
+        setState(prev => ({...prev, visibleModal: true}));
+      }
+    },
+    [state.endReach],
+  );
 
   return (
     <SafeAreaView>
@@ -283,7 +301,8 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
         style={{padding: 0, margin: 0}}
         contentContainerStyle={{padding: 0, margin: 0}}
         viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
-        onEndReachedThreshold={70}
+        onEndReached={handleEndReached}
+        onScroll={handleScroll}
       />
 
       {state.visibleModal && (

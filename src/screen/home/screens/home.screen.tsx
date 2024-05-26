@@ -1,8 +1,10 @@
 import {
   Dimensions,
+  Platform,
   Pressable,
   SafeAreaView,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -28,6 +30,7 @@ export type IItemPart = {
   value: number;
   description?: string;
   transcription?: string;
+  maxResultCount?: number;
 };
 
 type props = CompositeScreenProps<
@@ -44,7 +47,7 @@ const HomeScreen = ({navigation}: props) => {
     'https://images.ctfassets.net/unrdeg6se4ke/5WkAb12Zu1xXj2L1OwQ9eU/86c22cd763a0b4a8d1ba7a97a211f44a/toeic-danh-gia-trinh-do-giao-tiep-tieng-anh-trong-moi-truong-quoc-te.jpg?&fm=avif&w=1220&h=630',
     'https://bizweb.dktcdn.net/100/242/347/files/anh-the-thi-toeic-1-jpeg.jpg?v=1686276810389',
     'https://maythongdich.com/upload/app-luyen-thi-toeic/Ung-dung-Toeic-Mastery.jpg',
-    'https://scontent-hkg1-2.xx.fbcdn.net/v/t39.30808-6/210160387_2334647943339185_7305603079375741705_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeG9lPIpT4ZbDNTjfxxctj-t_jIyzq3FN4L-MjLOrcU3guXulGhWHFMb9Ifl9xD42HHt8CbwKMYnJRWxIkfIzdzB&_nc_ohc=uHrH7vgKa9UQ7kNvgEcgEU-&_nc_ht=scontent-hkg1-2.xx&oh=00_AYDmho-xPQPuMGt7EzNjNnwkSxj3AGhUMeNgC3e7Bo4hqg&oe=66469487',
+    'https://media.kenhtuyensinh.vn/images/cms/2018/10/tong-hop-cac-hinh-thuc-luyen-thi-toeic-online-1.jpg',
   ];
 
   const listeningPart = [
@@ -59,6 +62,7 @@ const HomeScreen = ({navigation}: props) => {
         'Với mỗi câu hỏi, bạn sẽ được xem 1 bức tranh và nghe 4 câu mô tả ngắn. Mỗi câu sẽ chỉ được nói 1 lần. Chúng sẽ không được in trên đề ' +
         'thi nên bạn cần nghe thật cẩn thận để hiểu những điều người nói. Khi bạn nghe 4 câu mô tả, hãy nhìn vào bức tranh và chọn câu mô tả đúng nhất những gì bạn thấy ở trong ' +
         'bức tranh. Chọn đáp án đúng nhất A, B, C, D',
+      maxResultCount: 6,
     },
     {
       content: 'Hỏi & đáp',
@@ -69,6 +73,7 @@ const HomeScreen = ({navigation}: props) => {
       transcription:
         'Trong phần này của đề thi, ban sẽ nghe 1 câu hỏi hoặc 1 câu phát biểu bằng tiếng Anh, theo sau đó là 3 câu phản hồi, cũng được nói bằng tiếng anh. Câu hỏi hay câu phát biểu ' +
         'và các câu phản hồi sẽ chỉ được nói 1 lần. Chúng tôi sẽ không được in lên đề thi, nên bạn cần nghe thật cẩn thận. Bạn cần chọn câu phản hồi đúng nhất với mỗi câu hỏi hoặc câu phát biểu.',
+      maxResultCount: 25,
     },
     {
       content: 'Đoạn hội thoại',
@@ -79,6 +84,7 @@ const HomeScreen = ({navigation}: props) => {
       transcription:
         'Bạn sẽ nghe thấy một số cuộc trò chuyện giữa hai hoặc nhiều người. Bạn sẽ được yêu cầu trả lời ba câu hỏi về những gì diễn giả nói trong mỗi cuộc trò chuyện. Chọn câu trả lời đúng nhất cho mỗi câu hỏi ' +
         'và đánh dấu chữ cái (A), (B), (C) hoặc (D) trên phiếu trả lời của bạn. Câu này sẽ không được in trong phần hội thoại trong tập kiểm tra của bạn và sẽ chỉ được nói một lần.',
+      maxResultCount: 39,
     },
     {
       content: 'Đoạn nói chuyện ngắn',
@@ -89,6 +95,7 @@ const HomeScreen = ({navigation}: props) => {
       transcription:
         'Bạn sẽ nghe một số bài nói do một diễn giả trình bày. Bạn sẽ được yêu cầu trả lời ba câu hỏi về những gì diễn giả nói trong mỗi bài nói. Chọn câu trả lời đúng nhất cho mỗi câu hỏi và đánh dấu chữ cái ' +
         '(A), (B), (C) hoặc (D) trên phiếu trả lời của bạn. Các bài nói sẽ không được in trong tập kiểm tra của bạn và sẽ chỉ được nói một lần.',
+      maxResultCount: 30,
     },
   ];
 
@@ -101,6 +108,7 @@ const HomeScreen = ({navigation}: props) => {
         'Then mark the letter (A), (B), (C) or (D) on your answer sheet.',
       transcription:
         'Một từ hoặc cụm từ bị thiếu trong mỗi câu nói dưới đây. Bốn lựa chọn trả lời được đưa ra dưới mỗi câu hỏi. Hãy chọn đáp án đúng nhất để hoàn thành câu. Sau đó đánh dấu đáp án (A), (B), (C) hoặc (D) vào phần bài làm của bạn.',
+      maxResultCount: 30,
     },
     {
       content: 'Điền vào đoạn',
@@ -109,6 +117,7 @@ const HomeScreen = ({navigation}: props) => {
         'A word or phrase is missing in each of the sentences below. Four answer choices are given below each sentence. Select the best answer to complete the sentence. Then mark the letter (A), (B), (C), or (D) on your answer sheet.',
       transcription:
         'Một từ hoặc cụm từ bị thiếu trong mỗi câu nói dưới đây. Bốn lựa chọn trả lời được đưa ra dưới mỗi câu hỏi. Hãy chọn đáp án đúng nhất để hoàn thành câu. Sau đó đánh dấu đáp án (A), (B), (C) hoặc (D) vào phần bài làm của bạn.',
+      maxResultCount: 16,
     },
     {
       content: 'Đọc hiểu đoạn văn',
@@ -119,6 +128,7 @@ const HomeScreen = ({navigation}: props) => {
       transcription:
         'Trong phần này bạn sẽ đọc một số văn bản chọn lọc, chẳng hạn như các bài báo và tạp chí, e-mail và tin nhắn tức thời. Mỗi văn bản hoặc tập hợp văn bản được theo sau bởi một số câu hỏi. Chọn câu trả lời đúng nhất ' +
         'cho mỗi câu hỏi và đánh dấu chữ cái (A), (B), (C) hoặc (D) trên phiếu trả lời của bạn.',
+      maxResultCount: 54,
     },
   ];
 
@@ -217,6 +227,9 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight ?? 0 : 0,
+    marginTop: Platform.OS === 'android' ? 10 : 0,
+    backgroundColor: '#FFFFFFA2',
   },
   header: {
     justifyContent: 'center',

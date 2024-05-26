@@ -1,12 +1,21 @@
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
+import {
+  Dimensions,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {THomeStackParamList} from '@/routes/home-stack';
 import FastImage from 'react-native-fast-image';
 import {usePartImage} from '@/hooks/use-icon-part';
-import globalStyles from '@/global-style';
-import {ScrollView} from 'react-native-gesture-handler';
+import globalStyles, {color} from '@/global-style';
 import {useTranslation} from 'react-i18next';
+import {Button, Switch} from '@rneui/themed';
 
 const {width} = Dimensions.get('screen');
 
@@ -16,6 +25,14 @@ const PartDetailScreen = ({route, navigation}: props) => {
   const {item} = route.params;
 
   const language = useTranslation();
+  const [checked, setChecked] = useState(false);
+
+  const goToTest = useCallback(() => {
+    navigation.navigate('QuestionDetailScreen', {
+      partId: item?.value,
+      maxResultCount: item?.maxResultCount,
+    });
+  }, [item?.maxResultCount, item?.value, navigation]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -24,7 +41,7 @@ const PartDetailScreen = ({route, navigation}: props) => {
   }, [item.content, navigation]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.viewImage}>
           <FastImage
@@ -47,8 +64,34 @@ const PartDetailScreen = ({route, navigation}: props) => {
           <Text style={styles.textDescription}>{item.transcription}</Text>
         </ScrollView>
       </View>
-      <View style={styles.footer}></View>
-    </View>
+      <View style={styles.footer}>
+        <View style={styles.headerFooter}>
+          <View style={[styles.itemFooter, {marginRight: 30}]}>
+            <Text>Số câu hỏi: </Text>
+            <Text>{item?.maxResultCount}</Text>
+          </View>
+          <View style={styles.itemFooter}>
+            <Text>Kiểm tra</Text>
+            <Switch
+              value={checked}
+              onValueChange={value => setChecked(value)}
+              color={color.green_base_500}
+              style={{transform: [{scaleX: 0.6}, {scaleY: 0.6}]}}
+            />
+          </View>
+        </View>
+        <Button
+          onPress={goToTest}
+          containerStyle={{marginVertical: 10}}
+          buttonStyle={{
+            marginHorizontal: 20,
+            borderRadius: 20,
+            backgroundColor: color.green_base_300,
+          }}
+          title="Bắt đầu ngay"
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -57,6 +100,7 @@ export default PartDetailScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFFA2',
   },
   header: {
     backgroundColor: 'white',
@@ -114,5 +158,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 18,
   },
-  footer: {},
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    marginBottom: Platform.OS === 'android' ? StatusBar.currentHeight : 50,
+  },
+  headerFooter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: width,
+  },
+  itemFooter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  switchStyle: {
+    fontSize: 16,
+    height: 10,
+  },
 });

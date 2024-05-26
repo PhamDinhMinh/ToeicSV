@@ -17,3 +17,20 @@ export interface IAnswers {
   isBoolean: boolean;
   transcription: null | string;
 }
+
+export interface IResponseQuestionGroup {
+  id: number;
+  audioUrl: string;
+  imageUrl: string[];
+  content: null | string;
+  partId: number;
+  transcription: string;
+  questions: {
+    id: number;
+    content: string;
+    numberSTT: number;
+    type: number[];
+    transcription: string;
+    answers: IAnswers[];
+  }[];
+}

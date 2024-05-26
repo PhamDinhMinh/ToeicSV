@@ -1,5 +1,5 @@
 import axiosClient from '@/utils/api/axios';
-import {IResponseQuestion} from './home.model';
+import {IResponseQuestion, IResponseQuestionGroup} from './home.model';
 
 class HomeService {
   QUESTION = 'api/services/app/Question';
@@ -7,7 +7,7 @@ class HomeService {
   getQuestionUser = async (
     params: any,
   ): Promise<{
-    data: IResponseQuestion[];
+    data: IResponseQuestion[] | IResponseQuestionGroup[];
     totalRecords: number;
   }> => {
     const url = this.QUESTION + '/GetQuestionUser';

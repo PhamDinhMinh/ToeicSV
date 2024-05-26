@@ -18,11 +18,15 @@ import globalStyles, {color} from '@/global-style';
 import {useForm} from 'react-hook-form';
 import {useQuery} from '@tanstack/react-query';
 import homeService from '../services/home.services';
-import {IResponseQuestion} from '../services/home.model';
+import {
+  IResponseQuestion,
+  IResponseQuestionGroup,
+} from '../services/home.model';
 import {Button, Icon} from '@rneui/themed';
 import ModalAction from '@/screen/components/modal-confirm/modal-action';
 import Part1Question from '../components/part-1-question';
 import Part2Question from '../components/part-2-question';
+import Part3Question from '../components/part-3-question';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -69,6 +73,24 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
     [navigation],
   );
 
+  const titleRender = useCallback(() => {
+    switch (partId) {
+      case EPart.Part1:
+      case EPart.Part2:
+      case EPart.Part5:
+        return 'Câu ' + pageIndex;
+      case EPart.Part3:
+      case EPart.Part4:
+        return 'Câu ' + (pageIndex * 3 - 2) + ' - ' + pageIndex * 3;
+      case EPart.Part6:
+        return 'Câu ' + (pageIndex * 4 - 3) + ' - ' + pageIndex * 4;
+      case EPart.Part7:
+        return 'Câu ' + pageIndex;
+      default:
+        return 'Câu ' + pageIndex;
+    }
+  }, [pageIndex, partId]);
+
   const onSubmit = (data: any) => {
     console.log(data, 'hehe');
   };
@@ -76,11 +98,17 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
   useEffect(() => {
     navigation.setOptions({
       headerTitleAlign: 'left',
-      title: 'Câu ' + pageIndex,
+      title: titleRender(),
       headerLeft: renderBackButton,
       headerStyle: {},
     });
-  }, [navigation, pageIndex, progressValue.value, renderBackButton]);
+  }, [
+    navigation,
+    pageIndex,
+    progressValue.value,
+    renderBackButton,
+    titleRender,
+  ]);
 
   const {data: getQuestionUser} = useQuery({
     queryKey: ['getQuestionUser', partId, maxResultCount],
@@ -93,52 +121,81 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
   });
 
   const renderItem = useCallback(
-    ({item, index}: {item: IResponseQuestion; index: number}) => {
-      switch (partId) {
-        case EPart.Part1:
-          return (
-            <View style={{width: width}} key={index + 'part1' + uid}>
-              {(indexView === index ||
-                indexView + 1 === index ||
-                indexView - 1 === index) && (
-                <Part1Question
+    ({
+      item,
+      index,
+    }: {
+      item: IResponseQuestion | IResponseQuestionGroup;
+      index: number;
+    }) => {
+      if ('idGroupQuestion' in item) {
+        switch (partId) {
+          case EPart.Part1:
+            return (
+              <View style={{width: width}} key={index + 'part1' + uid}>
+                {(indexView === index ||
+                  indexView + 1 === index ||
+                  indexView - 1 === index) && (
+                  <Part1Question
+                    question={item}
+                    setValue={setValue}
+                    getValues={getValues}
+                    indexView={indexView}
+                    notActive={indexView !== index}
+                  />
+                )}
+              </View>
+            );
+          case EPart.Part2:
+            return (
+              <View style={{width: width}} key={index + 'part2' + uid}>
+                {(indexView === index ||
+                  indexView + 1 === index ||
+                  indexView - 1 === index) && (
+                  <Part2Question
+                    question={item}
+                    setValue={setValue}
+                    getValues={getValues}
+                    indexView={indexView}
+                    notActive={indexView !== index}
+                  />
+                )}
+              </View>
+            );
+          case EPart.Part5:
+            return (
+              <View style={{width: width}} key={index + 'part5' + uid}>
+                <Part5Question
                   question={item}
                   setValue={setValue}
                   getValues={getValues}
-                  indexView={indexView}
-                  notActive={indexView !== index}
                 />
-              )}
-            </View>
-          );
-        case EPart.Part2:
-          return (
-            <View style={{width: width}} key={index + 'part2' + uid}>
-              {(indexView === index ||
-                indexView + 1 === index ||
-                indexView - 1 === index) && (
-                <Part2Question
-                  question={item}
-                  setValue={setValue}
-                  getValues={getValues}
-                  indexView={indexView}
-                  notActive={indexView !== index}
-                />
-              )}
-            </View>
-          );
-        case EPart.Part5:
-          return (
-            <View style={{width: width}} key={index + 'part5' + uid}>
-              <Part5Question
-                question={item}
-                setValue={setValue}
-                getValues={getValues}
-              />
-            </View>
-          );
-        default:
-          return <></>;
+              </View>
+            );
+          default:
+            return <></>;
+        }
+      } else {
+        switch (partId) {
+          case EPart.Part3:
+            return (
+              <View style={{width: width}} key={index + 'part1' + uid}>
+                {(indexView === index ||
+                  indexView + 1 === index ||
+                  indexView - 1 === index) && (
+                  <Part3Question
+                    question={item}
+                    setValue={setValue}
+                    getValues={getValues}
+                    indexView={indexView}
+                    notActive={indexView !== index}
+                  />
+                )}
+              </View>
+            );
+          default:
+            return <></>;
+        }
       }
     },
     [getValues, indexView, partId, setValue, uid],
@@ -163,6 +220,24 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
     },
   ]);
 
+  const widthPagination = useCallback(() => {
+    switch (partId) {
+      case EPart.Part1:
+      case EPart.Part2:
+      case EPart.Part5:
+        return width / (maxResultCount ?? 6);
+      case EPart.Part3:
+      case EPart.Part4:
+        return width / ((maxResultCount && maxResultCount / 3) ?? 6);
+      case EPart.Part6:
+        return width / ((maxResultCount && maxResultCount / 4) ?? 6);
+      case EPart.Part7:
+        return width / ((maxResultCount && 15) ?? 6);
+      default:
+        return width / (maxResultCount ?? 6);
+    }
+  }, [maxResultCount, partId]);
+
   return (
     <SafeAreaView>
       {!!progressValue && (
@@ -182,7 +257,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
                     index={index}
                     key={index}
                     length={getQuestionUser?.data?.length}
-                    widthMax={width / (maxResultCount ?? 6)}
+                    widthMax={widthPagination()}
                     fullWidth
                     // {...paginationProps}
                   />

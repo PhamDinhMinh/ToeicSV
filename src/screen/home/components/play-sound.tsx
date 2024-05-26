@@ -4,11 +4,14 @@ import TrackPlayer, {Capability, useProgress} from 'react-native-track-player';
 import globalStyles from '@/global-style';
 import {Icon} from '@rneui/themed';
 import Slider from '@react-native-community/slider';
-import {IResponseQuestion} from '../services/home.model';
+import {
+  IResponseQuestion,
+  IResponseQuestionGroup,
+} from '../services/home.model';
 
 type TPlaySound = {
   indexView?: number;
-  question: IResponseQuestion;
+  question: IResponseQuestion | IResponseQuestionGroup;
   paused?: boolean;
 };
 

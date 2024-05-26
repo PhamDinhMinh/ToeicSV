@@ -1,4 +1,4 @@
-import {EPart} from '@/screen/enum/part';
+import {EPart} from '@/enum/part';
 import {useMemo} from 'react';
 
 export const useTextPart = (value: number) => {

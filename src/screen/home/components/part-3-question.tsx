@@ -20,7 +20,7 @@ const Part3Question = (props: TPart3Question) => {
     backgroundSelect: 'white',
     colorText: 'black',
   });
-  const currentAnswers = getValues('answersSubmit');
+  const currentAnswers = getValues('resultOfUser');
 
   const onSubmitOneQuestion = (idAnswers: number) => {
     const questionIndex = currentAnswers.findIndex(
@@ -37,7 +37,7 @@ const Part3Question = (props: TPart3Question) => {
         {idQuestion: question.id, idAnswers: idAnswers},
       ];
     }
-    setValue('answersSubmit', updatedAnswers);
+    setValue('resultOfUser', updatedAnswers);
   };
 
   return (

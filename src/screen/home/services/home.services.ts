@@ -1,8 +1,13 @@
 import axiosClient from '@/utils/api/axios';
-import {IResponseQuestion, IResponseQuestionGroup} from './home.model';
+import {
+  IResponseQuestion,
+  IResponseQuestionGroup,
+  ISubmitQuestionInput,
+} from './home.model';
 
 class HomeService {
   QUESTION = 'api/services/app/Question';
+  RESULT = '/api/services/app/Result';
 
   getQuestionUser = async (
     params: any,
@@ -16,6 +21,12 @@ class HomeService {
       data: response.data,
       totalRecords: response.totalRecords,
     };
+  };
+
+  submitQuestion = async (params: ISubmitQuestionInput) => {
+    const url = this.RESULT + '/SubmitQuestion';
+    const {data: response} = await axiosClient.post(url, params);
+    return response;
   };
 }
 

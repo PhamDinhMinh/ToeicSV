@@ -34,3 +34,13 @@ export interface IResponseQuestionGroup {
     answers: IAnswers[];
   }[];
 }
+
+export interface ISubmitQuestionInput {
+  resultOfUser: {
+    idQuestion: number;
+    idAnswer: number;
+  }[];
+  timeStart?: any;
+  timeEnd?: any;
+  idExam?: number;
+}

@@ -8,7 +8,7 @@ type TItemAnswer = {
   index: number;
   selected?: any;
   setSelected?: any;
-  onSubmitOneQuestion: (idAnswers: number) => void;
+  onSubmitOneQuestion: (idAnswers: number | null) => void;
   listening?: boolean;
 };
 
@@ -46,7 +46,7 @@ const ItemAnswer = (props: TItemAnswer) => {
         </Text>
       </Pressable>
       <Text style={styles.textContentAnswer}>
-        {listening ? String.fromCharCode(65 + index) : answer?.content}
+        {!listening ? String.fromCharCode(65 + index) : answer?.content}
       </Text>
     </Pressable>
   );

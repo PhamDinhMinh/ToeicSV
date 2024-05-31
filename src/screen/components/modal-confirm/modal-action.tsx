@@ -48,7 +48,7 @@ const ModalAction = (props: TModalConfirm) => {
         <View style={styles.groupButton}>
           <Button
             title={textSubmit}
-            buttonStyle={styles.buttonConfirm}
+            buttonStyle={[styles.buttonConfirm, {marginRight: 16}]}
             titleStyle={{fontSize: 15}}
             onPress={() => onSubmit()}
             disabled={disable}

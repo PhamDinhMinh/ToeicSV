@@ -1,5 +1,5 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useId, useMemo, useState} from 'react';
 import {IResponseQuestion} from '../services/home.model';
 import globalStyles, {color} from '@/global-style';
 import FastImage from 'react-native-fast-image';
@@ -17,31 +17,40 @@ type TPart1Question = {
 
 const Part1Question = (props: TPart1Question) => {
   const {question, setValue, getValues, indexView, notActive} = props;
+  const uid = useId();
   const [aspectRatio, setAspectRatio] = useState<number | undefined>(undefined);
-  const [selected, setSelected] = useState({
-    index: 0,
-    backgroundSelect: 'white',
-    colorText: 'black',
-  });
-  const currentAnswers = getValues('answersSubmit');
+  const currentAnswers = getValues('resultOfUser');
+  const questionIndex = useMemo(
+    () =>
+      currentAnswers.findIndex((item: any) => item.idQuestion === question.id),
+    [currentAnswers, question.id],
+  );
 
-  const onSubmitOneQuestion = (idAnswers: number) => {
-    const questionIndex = currentAnswers.findIndex(
-      (item: any) => item.idQuestion === question.id,
-    );
-    let updatedAnswers;
-    if (questionIndex > -1) {
-      updatedAnswers = currentAnswers.map((item: any, index: number) =>
-        index === questionIndex ? {...item, idAnswers: idAnswers} : item,
-      );
-    } else {
-      updatedAnswers = [
-        ...currentAnswers,
-        {idQuestion: question.id, idAnswers: idAnswers},
-      ];
-    }
-    setValue('answersSubmit', updatedAnswers);
-  };
+  const [selected, setSelected] = useState({
+    index: currentAnswers[questionIndex]?.idAnswers ?? 0,
+    backgroundSelect: currentAnswers[questionIndex]?.idAnswers
+      ? color.orange_500
+      : 'white',
+    colorText: currentAnswers[questionIndex]?.idAnswers ? 'white' : 'black',
+  });
+
+  const onSubmitOneQuestion = useCallback(
+    (idAnswers: number | null) => {
+      let updatedAnswers;
+      if (questionIndex > -1) {
+        updatedAnswers = currentAnswers.map((item: any, index: number) =>
+          index === questionIndex ? {...item, idAnswers: idAnswers} : item,
+        );
+      } else {
+        updatedAnswers = [
+          ...currentAnswers,
+          {idQuestion: question.id, idAnswers: idAnswers},
+        ];
+      }
+      setValue('resultOfUser', updatedAnswers);
+    },
+    [currentAnswers, question.id, questionIndex, setValue],
+  );
 
   useEffect(() => {
     getCachedNetworkImageSize({
@@ -51,6 +60,12 @@ const Part1Question = (props: TPart1Question) => {
       },
     });
   }, [question?.imageUrl]);
+
+  useEffect(() => {
+    if (questionIndex === -1 && !notActive) {
+      onSubmitOneQuestion(null);
+    }
+  }, [notActive, onSubmitOneQuestion, question.id, questionIndex]);
 
   return (
     <ScrollView style={styles.container}>
@@ -71,6 +86,7 @@ const Part1Question = (props: TPart1Question) => {
         <View style={styles.content}>
           {question?.answers.map((item, index) => (
             <ItemAnswer
+              key={index + uid + 'Answer'}
               answer={item}
               selected={selected}
               setSelected={setSelected}

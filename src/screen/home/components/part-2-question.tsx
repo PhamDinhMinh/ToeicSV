@@ -1,5 +1,5 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useId, useMemo, useState} from 'react';
 import {IResponseQuestion} from '../services/home.model';
 import globalStyles, {color} from '@/global-style';
 import ItemAnswer from './item-answer';
@@ -15,30 +15,45 @@ type TPart2Question = {
 
 const Part2Question = (props: TPart2Question) => {
   const {question, setValue, getValues, indexView, notActive} = props;
-  const [selected, setSelected] = useState({
-    index: 0,
-    backgroundSelect: 'white',
-    colorText: 'black',
-  });
-  const currentAnswers = getValues('answersSubmit');
+  const uid = useId();
+  const currentAnswers = getValues('resultOfUser');
+  const questionIndex = useMemo(
+    () =>
+      currentAnswers.findIndex((item: any) => item.idQuestion === question.id),
+    [currentAnswers, question.id],
+  );
 
-  const onSubmitOneQuestion = (idAnswers: number) => {
-    const questionIndex = currentAnswers.findIndex(
-      (item: any) => item.idQuestion === question.id,
-    );
-    let updatedAnswers;
-    if (questionIndex > -1) {
-      updatedAnswers = currentAnswers.map((item: any, index: number) =>
-        index === questionIndex ? {...item, idAnswers: idAnswers} : item,
-      );
-    } else {
-      updatedAnswers = [
-        ...currentAnswers,
-        {idQuestion: question.id, idAnswers: idAnswers},
-      ];
+  const [selected, setSelected] = useState({
+    index: currentAnswers[questionIndex]?.idAnswers ?? 0,
+    backgroundSelect: currentAnswers[questionIndex]?.idAnswers
+      ? color.orange_500
+      : 'white',
+    colorText: currentAnswers[questionIndex]?.idAnswers ? 'white' : 'black',
+  });
+
+  const onSubmitOneQuestion = useCallback(
+    (idAnswers: number | null) => {
+      let updatedAnswers;
+      if (questionIndex > -1) {
+        updatedAnswers = currentAnswers.map((item: any, index: number) =>
+          index === questionIndex ? {...item, idAnswers: idAnswers} : item,
+        );
+      } else {
+        updatedAnswers = [
+          ...currentAnswers,
+          {idQuestion: question.id, idAnswers: idAnswers},
+        ];
+      }
+      setValue('resultOfUser', updatedAnswers);
+    },
+    [currentAnswers, question.id, questionIndex, setValue],
+  );
+
+  useEffect(() => {
+    if (questionIndex === -1 && !notActive) {
+      onSubmitOneQuestion(null);
     }
-    setValue('answersSubmit', updatedAnswers);
-  };
+  }, [notActive, onSubmitOneQuestion, question.id, questionIndex]);
 
   return (
     <ScrollView style={styles.container}>
@@ -50,6 +65,7 @@ const Part2Question = (props: TPart2Question) => {
         <View style={styles.content}>
           {question?.answers.map((item, index) => (
             <ItemAnswer
+              key={index + 'answer-part2' + uid}
               answer={item}
               selected={selected}
               setSelected={setSelected}

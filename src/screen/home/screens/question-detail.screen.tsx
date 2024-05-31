@@ -14,21 +14,23 @@ import {EPart} from '@/enum/part';
 import Part5Question from '../components/part-5-question';
 import {useSharedValue} from 'react-native-reanimated';
 import {PaginationItem} from '@/screen/documents/exam-tips/exam-tips.detail';
-import globalStyles, {color} from '@/global-style';
+import {color} from '@/global-style';
 import {useForm} from 'react-hook-form';
-import {useQuery} from '@tanstack/react-query';
+import {useMutation, useQuery} from '@tanstack/react-query';
 import homeService from '../services/home.services';
 import {
   IResponseQuestion,
   IResponseQuestionGroup,
+  ISubmitQuestionInput,
 } from '../services/home.model';
-import {Button, Icon} from '@rneui/themed';
+import {Icon} from '@rneui/themed';
 import ModalAction from '@/screen/components/modal-confirm/modal-action';
 import Part1Question from '../components/part-1-question';
 import Part2Question from '../components/part-2-question';
 import Part3Question from '../components/part-3-question';
+import Loading from '@/screen/components/loading/loading';
 
-const {width, height} = Dimensions.get('screen');
+const {width} = Dimensions.get('screen');
 
 type props = StackScreenProps<THomeStackParamList, 'QuestionDetailScreen'>;
 
@@ -41,7 +43,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
     endReach: false,
     visibleModal: false,
   });
-  const [indexView, setIndexView] = useState(0);
+  const [indexView, setIndexView] = useState(-100);
   const flatListRef = useRef(null);
 
   const {
@@ -50,16 +52,20 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
     formState: {errors},
     getValues,
     setValue,
+    reset,
   } = useForm({
     defaultValues: {
-      answersSubmit: [],
+      resultOfUser: [],
     },
   });
 
   const renderBackButton = useCallback(
     () => (
       <Pressable
-        onPress={() => navigation.goBack()}
+        onPress={() => {
+          reset();
+          navigation.goBack();
+        }}
         style={{
           width: 40,
           aspectRatio: 1,
@@ -70,7 +76,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
         <Icon type="ionicon" name="arrow-back" color={'black'} size={26} />
       </Pressable>
     ),
-    [navigation],
+    [navigation, reset],
   );
 
   const titleRender = useCallback(() => {
@@ -91,8 +97,16 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
     }
   }, [pageIndex, partId]);
 
+  const {mutate: submitQuestion, status: statusSubmit} = useMutation({
+    mutationFn: (dataSubmit: ISubmitQuestionInput) =>
+      homeService.submitQuestion(dataSubmit),
+    onSuccess: data => {
+      console.log(data);
+    },
+  });
+
   const onSubmit = (data: any) => {
-    console.log(data, 'hehe');
+    submitQuestion(data);
   };
 
   useEffect(() => {
@@ -134,8 +148,8 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
             return (
               <View style={{width: width}} key={index + 'part1' + uid}>
                 {(indexView === index ||
-                  indexView + 1 === index ||
-                  indexView - 1 === index) && (
+                  (indexView < 6 ? indexView + 1 : indexView) === index ||
+                  (indexView > 0 ? indexView - 1 : indexView) === index) && (
                   <Part1Question
                     question={item}
                     setValue={setValue}
@@ -150,8 +164,8 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
             return (
               <View style={{width: width}} key={index + 'part2' + uid}>
                 {(indexView === index ||
-                  indexView + 1 === index ||
-                  indexView - 1 === index) && (
+                  (indexView < 30 ? indexView + 1 : indexView) === index ||
+                  (indexView > 0 ? indexView - 1 : indexView) === index) && (
                   <Part2Question
                     question={item}
                     setValue={setValue}
@@ -165,11 +179,15 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
           case EPart.Part5:
             return (
               <View style={{width: width}} key={index + 'part5' + uid}>
-                <Part5Question
-                  question={item}
-                  setValue={setValue}
-                  getValues={getValues}
-                />
+                {(indexView === index ||
+                  indexView + 1 === index ||
+                  indexView - 1 === index) && (
+                  <Part5Question
+                    question={item}
+                    setValue={setValue}
+                    getValues={getValues}
+                  />
+                )}
               </View>
             );
           default:
@@ -205,7 +223,6 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
     viewableItems: ViewToken[];
     changed: ViewToken[];
   }) => {
-    console.log(info.viewableItems?.length, 'hehe');
     setIndexView(info.viewableItems[0]?.index as number);
     progressValue.value = info.viewableItems[0]?.index as number;
     setPageIndex((info.viewableItems[0]?.index as number) + 1);
@@ -273,7 +290,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
                     backgroundColor={color.green_base_500}
                     animValue={progressValue}
                     index={index}
-                    key={index}
+                    key={index + uid + 'pagination'}
                     length={getQuestionUser?.data?.length}
                     widthMax={widthPagination()}
                     fullWidth
@@ -284,6 +301,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
           </View>
         </View>
       )}
+
       <FlatList
         ref={flatListRef}
         data={getQuestionUser ? getQuestionUser.data : []}
@@ -310,7 +328,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
           isVisible={state.visibleModal}
           closeModal={() => setState(prev => ({...prev, visibleModal: false}))}
           onSubmit={handleSubmit(onSubmit)}
-          content="hehe"
+          content="Bạn có thể xem kết quả và đáp án, sau khi đã nộp bài."
           textCancel="Huỷ bỏ"
           textSubmit="Nộp"
           animationIn="fadeInRight"
@@ -319,6 +337,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
           disable={false}
         />
       )}
+      {statusSubmit === 'pending' && <Loading />}
     </SafeAreaView>
   );
 };

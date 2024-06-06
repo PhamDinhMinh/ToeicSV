@@ -27,8 +27,9 @@ import {Icon} from '@rneui/themed';
 import ModalAction from '@/screen/components/modal-confirm/modal-action';
 import Part1Question from '../components/part-1-question';
 import Part2Question from '../components/part-2-question';
-import Part3Question from '../components/part-3-question';
 import Loading from '@/screen/components/loading/loading';
+import Part34Question from '../components/part-3-4-question';
+import Part67Question from '../components/part-6-7-question';
 
 const {width} = Dimensions.get('screen');
 
@@ -64,6 +65,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
       <Pressable
         onPress={() => {
           reset();
+          setIndexView(-1);
           navigation.goBack();
         }}
         style={{
@@ -91,11 +93,36 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
       case EPart.Part6:
         return 'Câu ' + (pageIndex * 4 - 3) + ' - ' + pageIndex * 4;
       case EPart.Part7:
-        return 'Câu ' + pageIndex;
+        if (indexView < 4) {
+          return (
+            'Câu ' + Number((pageIndex - 1) * 2 + 1) + ' - ' + pageIndex * 2
+          );
+        } else if (indexView < 7) {
+          return (
+            'Câu ' +
+            Number(9 + (pageIndex - 5) * 3) +
+            ' - ' +
+            Number(8 + (pageIndex - 4) * 3)
+          );
+        } else if (indexView < 10) {
+          return (
+            'Câu ' +
+            Number(18 + (pageIndex - 8) * 4) +
+            ' - ' +
+            Number(17 + (pageIndex - 7) * 4)
+          );
+        }
+        return (
+          'Câu ' +
+          Number(30 + (pageIndex - 11) * 5) +
+          ' - ' +
+          Number(29 + (pageIndex - 10) * 5)
+        );
+
       default:
         return 'Câu ' + pageIndex;
     }
-  }, [pageIndex, partId]);
+  }, [indexView, pageIndex, partId]);
 
   const {mutate: submitQuestion, status: statusSubmit} = useMutation({
     mutationFn: (dataSubmit: ISubmitQuestionInput) =>
@@ -107,6 +134,8 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
 
   const onSubmit = (data: any) => {
     submitQuestion(data);
+    setState({endReach: false, visibleModal: false});
+    // navigation.replace('ResultSubmitScreen', {});
   };
 
   useEffect(() => {
@@ -197,16 +226,70 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
         switch (partId) {
           case EPart.Part3:
             return (
-              <View style={{width: width}} key={index + 'part1' + uid}>
+              <View style={{width: width}} key={index + 'part3' + uid}>
                 {(indexView === index ||
-                  indexView + 1 === index ||
-                  indexView - 1 === index) && (
-                  <Part3Question
-                    question={item}
+                  (indexView < 13 ? indexView + 1 : indexView) === index ||
+                  (indexView > 0 ? indexView - 1 : indexView) === index) && (
+                  <Part34Question
+                    groupQuestion={item}
                     setValue={setValue}
                     getValues={getValues}
                     indexView={indexView}
                     notActive={indexView !== index}
+                    indexSTTGroup={index}
+                  />
+                )}
+              </View>
+            );
+          case EPart.Part4:
+            return (
+              <View style={{width: width}} key={index + 'part4' + uid}>
+                {(indexView === index ||
+                  (indexView < 10 ? indexView + 1 : indexView) === index ||
+                  (indexView > 0 ? indexView - 1 : indexView) === index) && (
+                  <Part34Question
+                    groupQuestion={item}
+                    setValue={setValue}
+                    getValues={getValues}
+                    indexView={indexView}
+                    notActive={indexView !== index}
+                    indexSTTGroup={index}
+                  />
+                )}
+              </View>
+            );
+          case EPart.Part6:
+            return (
+              <View style={{width: width}} key={index + 'part6' + uid}>
+                {(indexView === index ||
+                  indexView + 1 === index ||
+                  indexView - 1 === index) && (
+                  <Part67Question
+                    groupQuestion={item}
+                    setValue={setValue}
+                    getValues={getValues}
+                    indexView={indexView}
+                    notActive={indexView !== index}
+                    indexSTTGroup={index}
+                    partId={EPart.Part6}
+                  />
+                )}
+              </View>
+            );
+          case EPart.Part7:
+            return (
+              <View style={{width: width}} key={index + 'part7' + uid}>
+                {(indexView === index ||
+                  indexView + 1 === index ||
+                  indexView - 1 === index) && (
+                  <Part67Question
+                    groupQuestion={item}
+                    setValue={setValue}
+                    getValues={getValues}
+                    indexView={indexView}
+                    notActive={indexView !== index}
+                    indexSTTGroup={index}
+                    partId={EPart.Part7}
                   />
                 )}
               </View>

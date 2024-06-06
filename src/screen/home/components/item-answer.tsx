@@ -2,6 +2,7 @@ import {Pressable, StyleSheet, Text} from 'react-native';
 import React from 'react';
 import {IAnswers} from '../services/home.model';
 import globalStyles, {color} from '@/global-style';
+import {EPart} from '@/enum/part';
 
 type TItemAnswer = {
   answer: IAnswers;
@@ -10,11 +11,19 @@ type TItemAnswer = {
   setSelected?: any;
   onSubmitOneQuestion: (idAnswers: number | null) => void;
   listening?: boolean;
+  part?: number;
 };
 
 const ItemAnswer = (props: TItemAnswer) => {
-  const {answer, index, onSubmitOneQuestion, selected, setSelected, listening} =
-    props;
+  const {
+    answer,
+    index,
+    onSubmitOneQuestion,
+    selected,
+    setSelected,
+    listening,
+    part,
+  } = props;
 
   const handlePress = () => {
     setSelected({
@@ -46,7 +55,9 @@ const ItemAnswer = (props: TItemAnswer) => {
         </Text>
       </Pressable>
       <Text style={styles.textContentAnswer}>
-        {!listening ? String.fromCharCode(65 + index) : answer?.content}
+        {!listening || part === EPart.Part3
+          ? answer?.content
+          : String.fromCharCode(65 + index)}
       </Text>
     </Pressable>
   );

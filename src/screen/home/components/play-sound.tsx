@@ -8,6 +8,7 @@ import {
   IResponseQuestion,
   IResponseQuestionGroup,
 } from '../services/home.model';
+import {useIsFocused} from '@react-navigation/native';
 
 type TPlaySound = {
   indexView?: number;
@@ -17,7 +18,8 @@ type TPlaySound = {
 
 const PlaySound = ({indexView, question, paused}: TPlaySound) => {
   const {position, duration} = useProgress();
-  const [play, setPlay] = useState(false);
+  const [play, setPlay] = useState(paused);
+  const focused = useIsFocused();
 
   const setUpPlayer = useCallback(async () => {
     try {
@@ -46,6 +48,9 @@ const PlaySound = ({indexView, question, paused}: TPlaySound) => {
 
   const seekBySeconds = async (seconds: number) => {
     const newPosition = Math.max(0, Math.min(position + seconds, duration));
+    if (newPosition === duration) {
+      setPlay(false);
+    }
     await TrackPlayer.seekTo(newPosition);
   };
 
@@ -54,31 +59,45 @@ const PlaySound = ({indexView, question, paused}: TPlaySound) => {
   };
 
   useEffect(() => {
-    setUpPlayer();
-  }, [setUpPlayer]);
-
-  useEffect(() => {
     const resetTrackPlayer = async () => {
-      setPlay(false);
-      await TrackPlayer.reset();
+      setPlay(true);
+      TrackPlayer.reset();
+      await TrackPlayer.add({
+        id: question?.id,
+        url:
+          question?.audioUrl ??
+          'https://res.cloudinary.com/dq8tazie4/raw/upload/v1716041942/files/fyqbjnatukzdbwigmqky.mp3',
+      });
+      await TrackPlayer.play();
     };
     resetTrackPlayer();
-  }, [indexView]);
+  }, [indexView, paused, question?.audioUrl, question?.id]);
+
+  useEffect(() => {
+    setUpPlayer();
+    const endListener = TrackPlayer.addEventListener(
+      'playback-queue-ended',
+      () => {
+        setPlay(false);
+      },
+    );
+    if (!focused) {
+      TrackPlayer.reset();
+    }
+
+    return () => {
+      endListener.remove();
+    };
+  }, [focused, play, question.audioUrl, question.id, setUpPlayer]);
 
   return (
     <View style={styles.sliderView}>
       <Pressable style={styles.viewIcon} onPress={() => seekBySeconds(-5)}>
         <Icon type="material" name="replay-5" color={'white'} size={24} />
       </Pressable>
-      {!play || paused ? (
+      {!play ? (
         <Pressable
           onPress={async () => {
-            await TrackPlayer.add({
-              id: question?.id,
-              url:
-                question?.audioUrl ??
-                'https://res.cloudinary.com/dq8tazie4/raw/upload/v1716041942/files/fyqbjnatukzdbwigmqky.mp3',
-            });
             TrackPlayer.play();
             setPlay(true);
           }}>

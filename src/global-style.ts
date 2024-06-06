@@ -228,8 +228,8 @@ const globalStyles = StyleSheet.create({
 export const theme = createTheme({
   lightColors: {
     white: '#FFF',
-    primary: '#89B05F',
-    secondary: '#ACC981',
+    primary: '#24d086',
+    secondary: '#24d0a3',
     background: '#F3FBED',
   },
   darkColors: {

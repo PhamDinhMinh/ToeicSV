@@ -123,27 +123,4 @@ const styles = StyleSheet.create({
   content: {
     paddingVertical: 10,
   },
-  flexBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  viewAnswers: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  viewSelect: {
-    width: 36,
-    height: 36,
-    borderRadius: 500,
-    borderWidth: 1,
-    borderColor: color.grey_300,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textContentAnswer: {
-    ...globalStyles.text15Regular,
-    paddingHorizontal: 10,
-    flex: 1,
-  },
 });

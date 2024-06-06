@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import PartDetailScreen from '@/screen/home/screens/part-detail.screen';
 import {IItemPart} from '@/screen/home/screens/home.screen';
 import QuestionDetailScreen from '@/screen/home/screens/question-detail.screen';
+import ResultSubmitScreen from '@/screen/home/screens/result-submit.screen';
 
 export type THomeStackParamList = {
   PartDetailScreen: {
@@ -11,6 +12,9 @@ export type THomeStackParamList = {
   QuestionDetailScreen: {
     partId: number;
     maxResultCount?: number;
+  };
+  ResultSubmitScreen: {
+    item?: any;
   };
 };
 
@@ -34,6 +38,14 @@ const HomeStack = () => {
       <Stack.Screen
         name="QuestionDetailScreen"
         component={QuestionDetailScreen}
+        options={{
+          headerShown: true,
+          title: '',
+        }}
+      />
+      <Stack.Screen
+        name="ResultSubmitScreen"
+        component={ResultSubmitScreen}
         options={{
           headerShown: true,
           title: '',

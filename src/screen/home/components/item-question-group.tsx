@@ -13,6 +13,7 @@ type TItemQuestionGroup = {
   notActive?: boolean;
   part?: number;
   indexView?: number;
+  onExam?: boolean;
 };
 
 const ItemQuestionGroup = (props: TItemQuestionGroup) => {
@@ -25,6 +26,7 @@ const ItemQuestionGroup = (props: TItemQuestionGroup) => {
     notActive,
     part,
     indexView,
+    onExam,
   } = props;
   const uid = useId();
   const currentAnswers = getValues('resultOfUser');
@@ -45,6 +47,24 @@ const ItemQuestionGroup = (props: TItemQuestionGroup) => {
     }
     return Number(indexQ + (indexViewItem - 10) * 5 + 30);
   };
+
+  const numberOnExam = useCallback(() => {
+    if ((part ?? 0) < 5) {
+      return ((indexSTTGroup ?? 0) - 31) * 3 + 32 + indexQ;
+    } else if ((part ?? 0) < 7) {
+      return 4 * (indexSTTGroup ?? 0) - 205 + indexQ;
+    }
+    if ((indexSTTGroup ?? 0) < 93) {
+      return Number(2 * (indexSTTGroup ?? 0) - 29) + indexQ;
+    }
+    if ((indexSTTGroup ?? 0) < 96) {
+      return Number(3 * (indexSTTGroup ?? 0) - 121 + indexQ);
+    }
+    if ((indexSTTGroup ?? 0) < 99) {
+      return Number(4 * (indexSTTGroup ?? 0) - 216 + indexQ);
+    }
+    return Number(5 * (indexSTTGroup ?? 0) - 314 + indexQ);
+  }, [indexQ, indexSTTGroup, part]);
 
   const [selected, setSelected] = useState({
     index: currentAnswers[questionIndex]?.idAnswers ?? 0,
@@ -84,10 +104,12 @@ const ItemQuestionGroup = (props: TItemQuestionGroup) => {
     <View style={{marginBottom: 14}}>
       <Text>
         Câu{' '}
-        {part === EPart.Part7
-          ? numberPart7()
-          : (indexSTTGroup ?? 0) * (part === EPart.Part6 ? 4 : 3) +
-            (indexQ + 1)}
+        {onExam
+          ? numberOnExam()
+          : part === EPart.Part7
+            ? numberPart7()
+            : (indexSTTGroup ?? 0) * (part === EPart.Part6 ? 4 : 3) +
+              (indexQ + 1)}
         : {question?.content}
       </Text>
       {question?.answers.map((item: any, index: number) => (

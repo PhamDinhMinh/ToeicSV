@@ -14,6 +14,7 @@ type TPart34Question = {
   indexView?: number;
   notActive?: boolean;
   indexSTTGroup?: number;
+  onExam?: boolean;
 };
 
 const Part34Question = (props: TPart34Question) => {
@@ -24,6 +25,7 @@ const Part34Question = (props: TPart34Question) => {
     indexView,
     notActive,
     indexSTTGroup,
+    onExam,
   } = props;
   const uid = useId();
   const [aspectRatio, setAspectRatio] = useState<number | undefined>(undefined);
@@ -72,6 +74,7 @@ const Part34Question = (props: TPart34Question) => {
               getValues={getValues}
               setValue={setValue}
               notActive={notActive}
+              onExam={onExam}
             />
           ))}
         </View>

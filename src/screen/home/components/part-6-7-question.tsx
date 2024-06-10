@@ -12,7 +12,6 @@ import FastImage from 'react-native-fast-image';
 import ItemQuestionGroup from './item-question-group';
 import globalStyles from '@/global-style';
 import {getCachedNetworkImageSize} from '@/utils/images/image';
-import {EPart} from '@/enum/part';
 import RenderHTML from 'react-native-render-html';
 import {Divider} from '@rneui/base';
 
@@ -26,6 +25,7 @@ type TPart67Question = {
   notActive?: boolean;
   indexSTTGroup?: number;
   partId?: number;
+  onExam?: boolean;
 };
 
 const Part67Question = (props: TPart67Question) => {
@@ -37,6 +37,7 @@ const Part67Question = (props: TPart67Question) => {
     indexSTTGroup,
     indexView,
     partId,
+    onExam,
   } = props;
   const uid = useId();
   const [aspectRatio, setAspectRatio] = useState<number | undefined>(undefined);
@@ -91,6 +92,7 @@ const Part67Question = (props: TPart67Question) => {
               notActive={notActive}
               part={partId}
               indexView={indexView ?? 0}
+              onExam={onExam}
             />
           ))}
         </ScrollView>

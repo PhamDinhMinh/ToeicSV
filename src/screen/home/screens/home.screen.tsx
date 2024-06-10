@@ -1,5 +1,6 @@
 import {
   Dimensions,
+  FlatList,
   Platform,
   Pressable,
   SafeAreaView,
@@ -9,7 +10,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useCallback, useId} from 'react';
+import React, {useCallback, useId, useMemo} from 'react';
 import Carousel from 'react-native-reanimated-carousel';
 import FastImage from 'react-native-fast-image';
 import {useSharedValue} from 'react-native-reanimated';
@@ -22,6 +23,10 @@ import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {StackScreenProps} from '@react-navigation/stack';
 import {TMainStackParamList} from '@/routes/main-stack';
 import {TMyTabsParamsList} from '@/routes/my-tabs';
+import homeService from '../services/home.services';
+import {useInfiniteQuery} from '@tanstack/react-query';
+import {IResponseExamAll} from '../services/home.model';
+import ItemExam from '../components/item-exam';
 
 const {width} = Dimensions.get('screen');
 
@@ -42,6 +47,40 @@ const HomeScreen = ({navigation}: props) => {
   const uid = useId();
   const progressValue = useSharedValue(0);
   const language = useTranslation();
+
+  const {data: getListExamToeic, isLoading} = useInfiniteQuery({
+    queryKey: ['list-exam-toeic'],
+    queryFn: ({pageParam}) => homeService.getAllExam(pageParam),
+    getNextPageParam: (lastPage, allPages, lastPageParams) => {
+      const skipCount = allPages.length * lastPageParams.maxResultCount;
+      return (allPages.length - 1) * lastPageParams.maxResultCount +
+        lastPage.data.length !==
+        lastPage.totalRecords
+        ? {
+            ...lastPageParams,
+            skipCount: skipCount,
+          }
+        : undefined;
+    },
+    initialPageParam: {skipCount: 0, maxResultCount: 10},
+  });
+
+  const dataProvider = useMemo(() => {
+    return getListExamToeic?.pages.map(page => page?.data).flat() ?? [];
+  }, [getListExamToeic?.pages]);
+
+  const renderItem = useCallback(
+    ({item, index}: {item: IResponseExamAll; index: number}) => {
+      return (
+        <ItemExam
+          exam={item}
+          key={index + 'exam' + uid}
+          navigation={navigation}
+        />
+      );
+    },
+    [navigation, uid],
+  );
 
   const imageBanners = [
     'https://images.ctfassets.net/unrdeg6se4ke/5WkAb12Zu1xXj2L1OwQ9eU/86c22cd763a0b4a8d1ba7a97a211f44a/toeic-danh-gia-trinh-do-giao-tiep-tieng-anh-trong-moi-truong-quoc-te.jpg?&fm=avif&w=1220&h=630',
@@ -144,6 +183,11 @@ const HomeScreen = ({navigation}: props) => {
     [navigation],
   );
 
+  const goToExamList = useCallback(
+    () => navigation.navigate('HomeStack', {screen: 'ExamListScreen'}),
+    [navigation],
+  );
+
   return (
     <ScrollView style={styles.container}>
       <SafeAreaView>
@@ -216,7 +260,37 @@ const HomeScreen = ({navigation}: props) => {
         </View>
       </View>
       <View style={styles.viewContent}>
-        <Text style={styles.textTitle}>{language.t('full-test')}</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <Text style={styles.textTitle}>{language.t('full-test')}</Text>
+          <Pressable onPress={goToExamList}>
+            <Text style={[styles.textTitle, {color: color.green_base_500}]}>
+              Tất cả
+            </Text>
+          </Pressable>
+        </View>
+        <View style={styles.containerExam}>
+          <FlatList
+            maxToRenderPerBatch={20}
+            contentContainerStyle={{
+              paddingHorizontal: 10,
+              paddingVertical: 5,
+            }}
+            data={dataProvider}
+            renderItem={renderItem}
+            refreshing={isLoading}
+            horizontal
+            showsVerticalScrollIndicator={false}
+            ListEmptyComponent={
+              isLoading ? undefined : (
+                <Text style={styles.text}>Không có đề thi</Text>
+              )
+            }
+          />
+        </View>
       </View>
     </ScrollView>
   );
@@ -262,5 +336,13 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+  containerExam: {
+    // marginHorizontal: 10,
+  },
+  text: {
+    ...globalStyles.text17Medium,
+    textAlign: 'center',
+    marginTop: '50%',
   },
 });

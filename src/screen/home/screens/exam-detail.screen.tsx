@@ -7,13 +7,8 @@ import {
   ViewToken,
 } from 'react-native';
 import React, {useCallback, useEffect, useId, useRef, useState} from 'react';
-import {StackScreenProps} from '@react-navigation/stack';
 import {THomeStackParamList} from '@/routes/home-stack';
-import {EPart} from '@/enum/part';
-import Part5Question from '../components/part-5-question';
-import {useSharedValue} from 'react-native-reanimated';
-import {PaginationItem} from '@/screen/documents/exam-tips/exam-tips.detail';
-import {color} from '@/global-style';
+import {StackScreenProps} from '@react-navigation/stack';
 import {useForm} from 'react-hook-form';
 import {useMutation, useQuery} from '@tanstack/react-query';
 import homeService from '../services/home.services';
@@ -22,29 +17,34 @@ import {
   IResponseQuestionGroup,
   ISubmitQuestionInput,
 } from '../services/home.model';
-import ModalAction from '@/screen/components/modal-confirm/modal-action';
+import {useSharedValue} from 'react-native-reanimated';
+import {PaginationItem} from '@/screen/documents/exam-tips/exam-tips.detail';
+import {color} from '@/global-style';
+import {EPart} from '@/enum/part';
 import Part1Question from '../components/part-1-question';
 import Part2Question from '../components/part-2-question';
-import Loading from '@/screen/components/loading/loading';
+import Part5Question from '../components/part-5-question';
 import Part34Question from '../components/part-3-4-question';
 import Part67Question from '../components/part-6-7-question';
 import RenderBackButton from '../components/render-back-button';
+import ModalAction from '@/screen/components/modal-confirm/modal-action';
+import Loading from '@/screen/components/loading/loading';
 
 const {width} = Dimensions.get('screen');
 
-type props = StackScreenProps<THomeStackParamList, 'QuestionDetailScreen'>;
+type props = StackScreenProps<THomeStackParamList, 'ExamDetailScreen'>;
 
-const QuestionDetailScreen = ({navigation, route}: props) => {
-  const {partId, maxResultCount} = route.params;
+const ExamDetailScreen = ({navigation, route}: props) => {
+  const {idExam} = route.params;
   const uid = useId();
   const progressValue = useSharedValue(0);
+  const [indexView, setIndexView] = useState(-100);
   const [pageIndex, setPageIndex] = useState(1);
+  const flatListRef = useRef(null);
   const [state, setState] = useState({
     endReach: false,
     visibleModal: false,
   });
-  const [indexView, setIndexView] = useState(-100);
-  const flatListRef = useRef(null);
 
   const {
     control,
@@ -56,62 +56,11 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
   } = useForm({
     defaultValues: {
       resultOfUser: [],
+      timeStart: '',
+      timeEnd: '',
+      idExam: idExam,
     },
   });
-
-  const renderBackButton = useCallback(
-    () => (
-      <RenderBackButton
-        navigation={navigation}
-        reset={reset}
-        setIndexView={setIndexView}
-      />
-    ),
-    [navigation, reset],
-  );
-
-  const titleRender = useCallback(() => {
-    switch (partId) {
-      case EPart.Part1:
-      case EPart.Part2:
-      case EPart.Part5:
-        return 'Câu ' + pageIndex;
-      case EPart.Part3:
-      case EPart.Part4:
-        return 'Câu ' + (pageIndex * 3 - 2) + ' - ' + pageIndex * 3;
-      case EPart.Part6:
-        return 'Câu ' + (pageIndex * 4 - 3) + ' - ' + pageIndex * 4;
-      case EPart.Part7:
-        if (indexView < 4) {
-          return (
-            'Câu ' + Number((pageIndex - 1) * 2 + 1) + ' - ' + pageIndex * 2
-          );
-        } else if (indexView < 7) {
-          return (
-            'Câu ' +
-            Number(9 + (pageIndex - 5) * 3) +
-            ' - ' +
-            Number(8 + (pageIndex - 4) * 3)
-          );
-        } else if (indexView < 10) {
-          return (
-            'Câu ' +
-            Number(18 + (pageIndex - 8) * 4) +
-            ' - ' +
-            Number(17 + (pageIndex - 7) * 4)
-          );
-        }
-        return (
-          'Câu ' +
-          Number(30 + (pageIndex - 11) * 5) +
-          ' - ' +
-          Number(29 + (pageIndex - 10) * 5)
-        );
-
-      default:
-        return 'Câu ' + pageIndex;
-    }
-  }, [indexView, pageIndex, partId]);
 
   const {mutate: submitQuestion, status: statusSubmit} = useMutation({
     mutationFn: (dataSubmit: ISubmitQuestionInput) =>
@@ -126,6 +75,60 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
     setState({endReach: false, visibleModal: false});
     navigation.replace('ResultSubmitScreen', {});
   };
+
+  const renderBackButton = useCallback(
+    () => (
+      <RenderBackButton
+        navigation={navigation}
+        reset={reset}
+        setIndexView={setIndexView}
+      />
+    ),
+    [navigation, reset],
+  );
+
+  const titleRender = useCallback(() => {
+    if (pageIndex < 32) {
+      return 'Câu ' + pageIndex;
+    } else if (pageIndex < 55) {
+      return (
+        'Câu ' + Number(3 * pageIndex - 64) + ' - ' + Number(pageIndex * 3 - 62)
+      );
+    } else if (pageIndex < 85) {
+      return 'Câu ' + Number(pageIndex + 46);
+    } else if (pageIndex < 89) {
+      return (
+        'Câu ' +
+        Number(4 * pageIndex - 209) +
+        ' - ' +
+        Number(pageIndex * 4 - 206)
+      );
+    }
+    if (pageIndex < 93) {
+      return (
+        'Câu ' + Number(2 * pageIndex - 31) + ' - ' + Number(pageIndex * 2 - 30)
+      );
+    }
+    if (pageIndex < 96) {
+      return (
+        'Câu ' +
+        Number(3 * pageIndex - 124) +
+        ' - ' +
+        Number(pageIndex * 3 - 122)
+      );
+    }
+    if (pageIndex < 99) {
+      return (
+        'Câu ' +
+        Number(4 * pageIndex - 220) +
+        ' - ' +
+        Number(pageIndex * 4 - 217)
+      );
+    }
+    return (
+      'Câu ' + Number(5 * pageIndex - 319) + ' - ' + Number(pageIndex * 5 - 315)
+    );
+  }, [pageIndex]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -142,13 +145,11 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
     titleRender,
   ]);
 
-  const {data: getQuestionUser} = useQuery({
-    queryKey: ['getQuestionUser', partId, maxResultCount],
+  const {data: getExamDetail, isLoading} = useQuery({
+    queryKey: ['get-exam-detail', idExam],
     queryFn: () =>
-      homeService.getQuestionUser({
-        partId: partId,
-        skipCount: 0,
-        maxResultCount: maxResultCount ?? 6,
+      homeService.getExamDetail({
+        id: idExam,
       }),
   });
 
@@ -161,13 +162,13 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
       index: number;
     }) => {
       if ('idGroupQuestion' in item) {
-        switch (partId) {
+        switch (item?.partId) {
           case EPart.Part1:
             return (
               <View style={{width: width}} key={index + 'part1' + uid}>
                 {(indexView === index ||
-                  (indexView < 6 ? indexView + 1 : indexView) === index ||
-                  (indexView > 0 ? indexView - 1 : indexView) === index) && (
+                  indexView + 1 === index ||
+                  indexView - 1 === index) && (
                   <Part1Question
                     question={item}
                     setValue={setValue}
@@ -182,8 +183,8 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
             return (
               <View style={{width: width}} key={index + 'part2' + uid}>
                 {(indexView === index ||
-                  (indexView < 30 ? indexView + 1 : indexView) === index ||
-                  (indexView > 0 ? indexView - 1 : indexView) === index) && (
+                  indexView + 1 === index ||
+                  indexView - 1 === index) && (
                   <Part2Question
                     question={item}
                     setValue={setValue}
@@ -212,13 +213,13 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
             return <></>;
         }
       } else {
-        switch (partId) {
+        switch (item?.partId) {
           case EPart.Part3:
             return (
               <View style={{width: width}} key={index + 'part3' + uid}>
                 {(indexView === index ||
-                  (indexView < 13 ? indexView + 1 : indexView) === index ||
-                  (indexView > 0 ? indexView - 1 : indexView) === index) && (
+                  indexView + 1 === index ||
+                  indexView - 1 === index) && (
                   <Part34Question
                     groupQuestion={item}
                     setValue={setValue}
@@ -226,6 +227,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
                     indexView={indexView}
                     notActive={indexView !== index}
                     indexSTTGroup={index}
+                    onExam={true}
                   />
                 )}
               </View>
@@ -234,8 +236,8 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
             return (
               <View style={{width: width}} key={index + 'part4' + uid}>
                 {(indexView === index ||
-                  (indexView < 10 ? indexView + 1 : indexView) === index ||
-                  (indexView > 0 ? indexView - 1 : indexView) === index) && (
+                  indexView + 1 === index ||
+                  indexView - 1 === index) && (
                   <Part34Question
                     groupQuestion={item}
                     setValue={setValue}
@@ -243,6 +245,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
                     indexView={indexView}
                     notActive={indexView !== index}
                     indexSTTGroup={index}
+                    onExam={true}
                   />
                 )}
               </View>
@@ -261,6 +264,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
                     notActive={indexView !== index}
                     indexSTTGroup={index}
                     partId={EPart.Part6}
+                    onExam={true}
                   />
                 )}
               </View>
@@ -279,6 +283,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
                     notActive={indexView !== index}
                     indexSTTGroup={index}
                     partId={EPart.Part7}
+                    onExam={true}
                   />
                 )}
               </View>
@@ -288,7 +293,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
         }
       }
     },
-    [getValues, indexView, partId, setValue, uid],
+    [getValues, indexView, setValue, uid],
   );
 
   const onViewableItemsChanged = (info: {
@@ -308,24 +313,6 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
       onViewableItemsChanged,
     },
   ]);
-
-  const widthPagination = useCallback(() => {
-    switch (partId) {
-      case EPart.Part1:
-      case EPart.Part2:
-      case EPart.Part5:
-        return width / (maxResultCount ?? 6);
-      case EPart.Part3:
-      case EPart.Part4:
-        return width / ((maxResultCount && maxResultCount / 3) ?? 6);
-      case EPart.Part6:
-        return width / ((maxResultCount && maxResultCount / 4) ?? 6);
-      case EPart.Part7:
-        return width / ((maxResultCount && 15) ?? 6);
-      default:
-        return width / (maxResultCount ?? 6);
-    }
-  }, [maxResultCount, partId]);
 
   const handleEndReached = ({distanceFromEnd}: any) => {
     if (distanceFromEnd >= 0) {
@@ -355,16 +342,16 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
               justifyContent: 'space-between',
               width: '100%',
             }}>
-            {getQuestionUser &&
-              getQuestionUser?.data?.map((_, index) => {
+            {getExamDetail?.data?.questionsOnExam &&
+              getExamDetail?.data?.questionsOnExam?.map((_, index) => {
                 return (
                   <PaginationItem
                     backgroundColor={color.green_base_500}
                     animValue={progressValue}
                     index={index}
                     key={index + uid + 'pagination'}
-                    length={getQuestionUser?.data?.length}
-                    widthMax={widthPagination()}
+                    length={getExamDetail?.data?.questionsOnExam?.length}
+                    widthMax={width / 103}
                     fullWidth
                     // {...paginationProps}
                   />
@@ -376,7 +363,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
 
       <FlatList
         ref={flatListRef}
-        data={getQuestionUser ? getQuestionUser.data : []}
+        data={getExamDetail?.data ? getExamDetail?.data?.questionsOnExam : []}
         renderItem={renderItem}
         horizontal={true}
         keyExtractor={(_, index) => index.toString()}
@@ -394,7 +381,6 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
         onEndReached={handleEndReached}
         onScroll={handleScroll}
       />
-
       {state.visibleModal && (
         <ModalAction
           isVisible={state.visibleModal}
@@ -409,12 +395,12 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
           disable={false}
         />
       )}
-      {statusSubmit === 'pending' && <Loading />}
+      {(statusSubmit === 'pending' || isLoading) && <Loading />}
     </SafeAreaView>
   );
 };
 
-export default QuestionDetailScreen;
+export default ExamDetailScreen;
 
 const styles = StyleSheet.create({
   pagination: {

@@ -44,3 +44,22 @@ export interface ISubmitQuestionInput {
   timeEnd?: any;
   idExam?: number;
 }
+
+export interface IResponseExamAll {
+  id: number;
+  nameExam: string;
+  listQuestionPart1: number[];
+  listQuestionPart2: number[];
+  listQuestionPart3: number[];
+  listQuestionPart4: number[];
+  listQuestionPart5: number[];
+  listQuestionPart6: number[];
+  listQuestionPart7: number[];
+}
+
+export interface IResponseExamDetail {
+  id: number;
+  nameExam: string;
+  creationTime: string;
+  questionsOnExam: (IResponseQuestion | IResponseQuestionGroup)[];
+}

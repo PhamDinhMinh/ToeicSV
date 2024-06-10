@@ -4,6 +4,7 @@ import {
   IResponseExamDetail,
   IResponseQuestion,
   IResponseQuestionGroup,
+  IResponseSubmit,
   ISubmitQuestionInput,
 } from './home.model';
 
@@ -26,7 +27,9 @@ class HomeService {
     };
   };
 
-  submitQuestion = async (params: ISubmitQuestionInput) => {
+  submitQuestion = async (
+    params: ISubmitQuestionInput,
+  ): Promise<IResponseSubmit> => {
     const url = this.RESULT + '/SubmitQuestion';
     const {data: response} = await axiosClient.post(url, params);
     return response;

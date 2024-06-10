@@ -20,6 +20,7 @@ import homeService from '../services/home.services';
 import {
   IResponseQuestion,
   IResponseQuestionGroup,
+  IResponseSubmit,
   ISubmitQuestionInput,
 } from '../services/home.model';
 import ModalAction from '@/screen/components/modal-confirm/modal-action';
@@ -116,15 +117,24 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
   const {mutate: submitQuestion, status: statusSubmit} = useMutation({
     mutationFn: (dataSubmit: ISubmitQuestionInput) =>
       homeService.submitQuestion(dataSubmit),
-    onSuccess: data => {
-      console.log(data);
+    onSuccess: (data: IResponseSubmit) => {
+      console.log(data, 'hehe');
+      navigation.replace('ResultSubmitScreen', {item: data});
     },
   });
 
   const onSubmit = (data: any) => {
     submitQuestion(data);
     setState({endReach: false, visibleModal: false});
-    navigation.replace('ResultSubmitScreen', {});
+    // navigation.replace('ResultSubmitScreen', {
+    //   item: {
+    //     details: ['minh'],
+    //     listeningCorrect: 2,
+    //     readingCorrect: 0,
+    //     totalCorrect: 1,
+    //     totalWrong: 5,
+    //   },
+    // });
   };
 
   useEffect(() => {

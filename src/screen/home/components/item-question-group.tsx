@@ -67,26 +67,26 @@ const ItemQuestionGroup = (props: TItemQuestionGroup) => {
   }, [indexQ, indexSTTGroup, part]);
 
   const [selected, setSelected] = useState({
-    index: currentAnswers[questionIndex]?.idAnswers ?? 0,
-    backgroundSelect: currentAnswers[questionIndex]?.idAnswers
+    index: currentAnswers[questionIndex]?.idAnswer ?? 0,
+    backgroundSelect: currentAnswers[questionIndex]?.idAnswer
       ? color.orange_500
       : 'white',
-    colorText: currentAnswers[questionIndex]?.idAnswers ? 'white' : 'black',
+    colorText: currentAnswers[questionIndex]?.idAnswer ? 'white' : 'black',
   });
 
   const onSubmitOneQuestion = useCallback(
-    (idAnswers: number | null) => {
+    (idAnswer: number | null) => {
       let updatedAnswers;
       const currentAnswers2 = getValues('resultOfUser');
 
       if (questionIndex > -1) {
         updatedAnswers = currentAnswers2.map((item: any, indexC: number) =>
-          indexC === questionIndex ? {...item, idAnswers: idAnswers} : item,
+          indexC === questionIndex ? {...item, idAnswer: idAnswer} : item,
         );
       } else {
         updatedAnswers = [
           ...currentAnswers2,
-          {idQuestion: question.id, idAnswers: idAnswers},
+          {idQuestion: question.id, idAnswer: idAnswer},
         ];
       }
       setValue('resultOfUser', updatedAnswers);

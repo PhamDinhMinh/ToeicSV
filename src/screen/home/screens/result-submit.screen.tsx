@@ -1,18 +1,24 @@
-import {Dimensions, SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import React, {useMemo} from 'react';
 import {THomeStackParamList} from '@/routes/home-stack';
 import {StackScreenProps} from '@react-navigation/stack';
 import FastImage from 'react-native-fast-image';
 import globalStyles, {color} from '@/global-style';
-import Slider from '@react-native-community/slider';
 import {Button} from '@rneui/themed';
-import {CommonActions, StackActions} from '@react-navigation/native';
+import {StackActions} from '@react-navigation/native';
 
 type props = StackScreenProps<THomeStackParamList, 'ResultSubmitScreen'>;
 
-const {height} = Dimensions.get('screen');
-
 const ResultSubmitScreen = ({navigation, route}: props) => {
+  const {item} = route.params;
+
+  const percent = useMemo(
+    () =>
+      ((item?.totalCorrect ?? 1) /
+        ((item?.totalWrong ?? 1) + (item?.totalCorrect ?? 1))) *
+      100,
+    [item?.totalCorrect, item?.totalWrong],
+  );
   return (
     <SafeAreaView style={styles.container}>
       <View style={{flex: 1}}>
@@ -35,20 +41,29 @@ const ResultSubmitScreen = ({navigation, route}: props) => {
             ...globalStyles.text14Medium,
             marginVertical: 10,
           }}>
-          Kết quả: 0/3
+          Kết quả: {item?.totalCorrect}/{item?.totalWrong}
         </Text>
         <View style={styles.content}>
           <View style={styles.viewResult}>
             <Text>Tỷ lệ đúng</Text>
             <View>
-              <Text>30%</Text>
+              <Text>{percent.toFixed(2)}%</Text>
             </View>
           </View>
           <View style={styles.slider}>
-            <View style={styles.viewSlider} />
+            <View
+              style={[
+                styles.viewSlider,
+                {
+                  width: `${percent}%`,
+                },
+              ]}
+            />
           </View>
           <Text style={styles.textBottom}>
-            Ráng giữ phong độ này của bạn nhé!
+            {percent > 70
+              ? 'Ráng giữ phong độ này của bạn nhé!'
+              : 'Cố gắng lên! Không được bỏ cuộc'}
           </Text>
         </View>
       </View>
@@ -117,7 +132,6 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   viewSlider: {
-    width: '50%',
     height: 5,
     backgroundColor: color.green_base_500,
     borderTopLeftRadius: 100,

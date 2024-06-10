@@ -27,24 +27,24 @@ const Part1Question = (props: TPart1Question) => {
   );
 
   const [selected, setSelected] = useState({
-    index: currentAnswers[questionIndex]?.idAnswers ?? 0,
-    backgroundSelect: currentAnswers[questionIndex]?.idAnswers
+    index: currentAnswers[questionIndex]?.idAnswer ?? 0,
+    backgroundSelect: currentAnswers[questionIndex]?.idAnswer
       ? color.orange_500
       : 'white',
-    colorText: currentAnswers[questionIndex]?.idAnswers ? 'white' : 'black',
+    colorText: currentAnswers[questionIndex]?.idAnswer ? 'white' : 'black',
   });
 
   const onSubmitOneQuestion = useCallback(
-    (idAnswers: number | null) => {
+    (idAnswer: number | null) => {
       let updatedAnswers;
       if (questionIndex > -1) {
         updatedAnswers = currentAnswers.map((item: any, index: number) =>
-          index === questionIndex ? {...item, idAnswers: idAnswers} : item,
+          index === questionIndex ? {...item, idAnswer: idAnswer} : item,
         );
       } else {
         updatedAnswers = [
           ...currentAnswers,
-          {idQuestion: question.id, idAnswers: idAnswers},
+          {idQuestion: question.id, idAnswer: idAnswer},
         ];
       }
       setValue('resultOfUser', updatedAnswers);

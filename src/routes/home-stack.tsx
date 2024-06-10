@@ -6,6 +6,7 @@ import QuestionDetailScreen from '@/screen/home/screens/question-detail.screen';
 import ResultSubmitScreen from '@/screen/home/screens/result-submit.screen';
 import ExamListScreen from '@/screen/home/screens/exam-list.screen';
 import ExamDetailScreen from '@/screen/home/screens/exam-detail.screen';
+import {IResponseSubmit} from '@/screen/home/services/home.model';
 
 export type THomeStackParamList = {
   PartDetailScreen: {
@@ -16,7 +17,7 @@ export type THomeStackParamList = {
     maxResultCount?: number;
   };
   ResultSubmitScreen: {
-    item?: any;
+    item?: IResponseSubmit;
   };
   ExamListScreen: undefined;
   ExamDetailScreen: {

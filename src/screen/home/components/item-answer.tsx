@@ -9,7 +9,7 @@ type TItemAnswer = {
   index: number;
   selected?: any;
   setSelected?: any;
-  onSubmitOneQuestion: (idAnswers: number | null) => void;
+  onSubmitOneQuestion: (idAnswer: number | null) => void;
   listening?: boolean;
   part?: number;
 };

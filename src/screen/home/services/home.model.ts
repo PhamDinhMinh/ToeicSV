@@ -63,3 +63,11 @@ export interface IResponseExamDetail {
   creationTime: string;
   questionsOnExam: (IResponseQuestion | IResponseQuestionGroup)[];
 }
+
+export interface IResponseSubmit {
+  details: any[];
+  listeningCorrect: number;
+  readingCorrect: number;
+  totalCorrect: number;
+  totalWrong: number;
+}

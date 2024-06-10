@@ -4,12 +4,12 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import SocialMediaScreen from '@/screen/social-media/screens/social-media.screen';
-import SettingStack from './setting-stack';
 import {useTranslation} from 'react-i18next';
 import TabUi from '@/screen/components/bottom-tab/tab-ui';
 import DocumentScreen from '@/screen/documents/document.screen';
 import SettingScreen from '@/screen/setting/screens/setting.screen';
 import HomeScreen from '@/screen/home/screens/home.screen';
+import StatisticsScreen from '@/screen/statistical/screens/statistics.screen';
 
 export type TMyTabsParamsList = {
   Home: undefined;
@@ -62,7 +62,7 @@ const MyTabs = () => {
           title: language.t('statistics-tab'),
           lazy: false,
         }}
-        component={SettingStack}
+        component={StatisticsScreen}
       />
       <Tab.Screen
         name="SocialMedia"

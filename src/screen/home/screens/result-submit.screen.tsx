@@ -73,6 +73,9 @@ const ResultSubmitScreen = ({navigation, route}: props) => {
           buttonStyle={styles.button}
           titleStyle={styles.titleStyle}
           title="Hiển thị đáp án"
+          onPress={() =>
+            navigation.navigate('ResultDetailScreen', {itemData: item})
+          }
         />
         <Button
           buttonStyle={styles.button}

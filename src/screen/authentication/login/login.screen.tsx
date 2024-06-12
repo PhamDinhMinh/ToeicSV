@@ -73,8 +73,8 @@ const LoginScreen = ({navigation}: props) => {
     mutate(data);
   };
 
-  const onError = (error: any) => {
-    console.log(error, 'Lỗi');
+  const onError = () => {
+    console.error();
   };
 
   return (

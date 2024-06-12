@@ -58,7 +58,7 @@ const ImageViewerDetail = ({
             });
           });
       })
-      .catch(error => console.log(error));
+      .catch(() => console.error);
   };
 
   return (

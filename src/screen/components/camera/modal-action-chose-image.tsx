@@ -26,8 +26,8 @@ const ChooseImage = (props: TChoseImage) => {
           closeModal();
           handleAction(getImageObjectFromPicker(result));
         })
-        .catch(error => {
-          console.log(error);
+        .catch(() => {
+          console.error('Lỗi');
         });
     }, 500);
   };
@@ -41,8 +41,8 @@ const ChooseImage = (props: TChoseImage) => {
         .then(result => {
           handleAction(getImageObjectFromPicker(result));
         })
-        .catch(error => {
-          console.log(error);
+        .catch(() => {
+          console.error('Lỗi');
         });
     }, 500);
   };

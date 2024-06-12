@@ -65,9 +65,60 @@ export interface IResponseExamDetail {
 }
 
 export interface IResponseSubmit {
-  details: any[];
+  details: string;
   listeningCorrect: number;
   readingCorrect: number;
   totalCorrect: number;
   totalWrong: number;
+}
+
+export interface IResultById {
+  data: string;
+  id: number;
+  timeStart: any;
+  timeEnd: any;
+  examName: null | string;
+}
+
+export interface IItemResult {
+  Id: number;
+  Content: string;
+  PartId: number;
+  ImageUrl: string[];
+  AudioUrl: null | string;
+  Transcription: string;
+  NumberSTT: number;
+  Type: number[];
+  IdGroupQuestion: null | number;
+  CreationTime: any;
+  Group: any;
+  Answer: {
+    Id: number;
+    Content: string;
+    IsBoolean: boolean;
+    Transcription: any;
+    AnswersQuestion: {
+      Id: number;
+      IsBoolean: boolean;
+    }[];
+  };
+}
+
+export interface IQuestionById {
+  content: string;
+  id: number;
+  transcription: string | null;
+  imageUrl: string[];
+  type: number[];
+  audioUrl: null | string;
+  partId: number;
+  groupData: {
+    transcription: string;
+    partId: number;
+    audioUrl: string | null;
+    content: null | string;
+    imageUrl: string[];
+    id: number;
+  };
+  answers: IAnswers[];
 }

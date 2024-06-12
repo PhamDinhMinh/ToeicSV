@@ -1,10 +1,12 @@
 import axiosClient from '@/utils/api/axios';
 import {
+  IQuestionById,
   IResponseExamAll,
   IResponseExamDetail,
   IResponseQuestion,
   IResponseQuestionGroup,
   IResponseSubmit,
+  IResultById,
   ISubmitQuestionInput,
 } from './home.model';
 
@@ -59,6 +61,20 @@ class HomeService {
     return {
       data: response.data,
     };
+  };
+
+  getResultById = async (params: {
+    id: number | undefined;
+  }): Promise<IResultById> => {
+    const url = this.RESULT + '/GetById';
+    const {data: response} = await axiosClient.get(url, {params});
+    return response.data;
+  };
+
+  getQuestionById = async (params: {id: number}): Promise<IQuestionById> => {
+    const url = this.QUESTION + '/GetQuestionById';
+    const {data: response} = await axiosClient.get(url, {params});
+    return response.data;
   };
 }
 

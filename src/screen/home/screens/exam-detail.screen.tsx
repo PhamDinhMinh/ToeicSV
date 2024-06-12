@@ -47,7 +47,6 @@ const ExamDetailScreen = ({navigation, route}: props) => {
   });
 
   const {
-    control,
     handleSubmit,
     formState: {errors},
     getValues,
@@ -66,14 +65,13 @@ const ExamDetailScreen = ({navigation, route}: props) => {
     mutationFn: (dataSubmit: ISubmitQuestionInput) =>
       homeService.submitQuestion(dataSubmit),
     onSuccess: data => {
-      console.log(data);
+      navigation.replace('ResultSubmitScreen', {item: data});
     },
   });
 
   const onSubmit = (data: any) => {
     submitQuestion(data);
     setState({endReach: false, visibleModal: false});
-    navigation.replace('ResultSubmitScreen', {});
   };
 
   const renderBackButton = useCallback(

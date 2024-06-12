@@ -7,6 +7,8 @@ import ResultSubmitScreen from '@/screen/home/screens/result-submit.screen';
 import ExamListScreen from '@/screen/home/screens/exam-list.screen';
 import ExamDetailScreen from '@/screen/home/screens/exam-detail.screen';
 import {IResponseSubmit} from '@/screen/home/services/home.model';
+import ResultDetailScreen from '@/screen/home/screens/result-detail.screen';
+import QuestionResultDetailScreen from '@/screen/home/screens/question-result-detail.screen';
 
 export type THomeStackParamList = {
   PartDetailScreen: {
@@ -22,6 +24,15 @@ export type THomeStackParamList = {
   ExamListScreen: undefined;
   ExamDetailScreen: {
     idExam: number;
+  };
+  ResultDetailScreen: {
+    idResult?: number;
+    itemData?: IResponseSubmit;
+  };
+  QuestionResultDetailScreen: {
+    idQuestion: number;
+    idAnswers?: number;
+    isBoolean?: boolean;
   };
 };
 
@@ -72,6 +83,22 @@ const HomeStack = () => {
         options={{
           headerShown: true,
           title: '',
+        }}
+      />
+      <Stack.Screen
+        name="ResultDetailScreen"
+        component={ResultDetailScreen}
+        options={{
+          headerShown: true,
+          title: '',
+        }}
+      />
+      <Stack.Screen
+        name="QuestionResultDetailScreen"
+        component={QuestionResultDetailScreen}
+        options={{
+          headerShown: true,
+          title: 'Giải thích',
         }}
       />
     </Stack.Navigator>

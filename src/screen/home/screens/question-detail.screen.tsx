@@ -48,9 +48,8 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
   const flatListRef = useRef(null);
 
   const {
-    control,
     handleSubmit,
-    formState: {errors},
+    // formState: {errors},
     getValues,
     setValue,
     reset,
@@ -118,7 +117,6 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
     mutationFn: (dataSubmit: ISubmitQuestionInput) =>
       homeService.submitQuestion(dataSubmit),
     onSuccess: (data: IResponseSubmit) => {
-      console.log(data, 'hehe');
       navigation.replace('ResultSubmitScreen', {item: data});
     },
   });
@@ -126,15 +124,6 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
   const onSubmit = (data: any) => {
     submitQuestion(data);
     setState({endReach: false, visibleModal: false});
-    // navigation.replace('ResultSubmitScreen', {
-    //   item: {
-    //     details: ['minh'],
-    //     listeningCorrect: 2,
-    //     readingCorrect: 0,
-    //     totalCorrect: 1,
-    //     totalWrong: 5,
-    //   },
-    // });
   };
 
   useEffect(() => {

@@ -12,7 +12,7 @@ import {useIsFocused} from '@react-navigation/native';
 
 type TPlaySound = {
   indexView?: number;
-  question: IResponseQuestion | IResponseQuestionGroup;
+  question: IResponseQuestion | IResponseQuestionGroup | any;
   paused?: boolean;
 };
 

@@ -83,9 +83,9 @@ const HomeScreen = ({navigation}: props) => {
   );
 
   const imageBanners = [
-    'https://images.ctfassets.net/unrdeg6se4ke/5WkAb12Zu1xXj2L1OwQ9eU/86c22cd763a0b4a8d1ba7a97a211f44a/toeic-danh-gia-trinh-do-giao-tiep-tieng-anh-trong-moi-truong-quoc-te.jpg?&fm=avif&w=1220&h=630',
-    'https://bizweb.dktcdn.net/100/242/347/files/anh-the-thi-toeic-1-jpeg.jpg?v=1686276810389',
-    'https://maythongdich.com/upload/app-luyen-thi-toeic/Ung-dung-Toeic-Mastery.jpg',
+    require('@/assets/images/banner/banner_1.jpeg'),
+    require('@/assets/images/banner/banner_2.jpeg'),
+    require('@/assets/images/banner/banner_3.jpeg'),
     'https://media.kenhtuyensinh.vn/images/cms/2018/10/tong-hop-cac-hinh-thuc-luyen-thi-toeic-online-1.jpg',
   ];
 
@@ -201,13 +201,15 @@ const HomeScreen = ({navigation}: props) => {
             (progressValue.value = absoluteProgress)
           }
           data={imageBanners}
-          renderItem={({item, index}: {item: string; index: number}) => (
-            <FastImage
-              key={index + uid + 'banner'}
-              style={styles.imageBanner}
-              source={{uri: item}}
-              resizeMode={FastImage.resizeMode.cover}
-            />
+          renderItem={({item, index}: {item: any; index: number}) => (
+            <View>
+              <FastImage
+                key={index + uid + 'banner'}
+                style={styles.imageBanner}
+                source={index !== 3 ? item : {uri: item}}
+                resizeMode={FastImage.resizeMode.cover}
+              />
+            </View>
           )}
         />
         {!!progressValue && (

@@ -54,7 +54,7 @@ const GrammarScreen = ({navigation, route}: props) => {
           }
         : undefined;
     },
-    initialPageParam: {skipCount: 0, maxResultCount: 10, type},
+    initialPageParam: {skipCount: 0, maxResultCount: 13, type},
   });
 
   const onRefresh = () => {

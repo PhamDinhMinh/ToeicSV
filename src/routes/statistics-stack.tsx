@@ -1,20 +1,39 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {useTranslation} from 'react-i18next';
+import HistoryAllScreen from '@/screen/statistical/screens/history-all.screen';
+import RankScreen from '@/screen/statistical/screens/rank.screen';
 
-export type TStatisticsStackParamList = {};
+export type TStatisticsStackParamList = {
+  HistoryAllScreen: undefined;
+  RankScreen: undefined;
+};
 
 const Stack = createStackNavigator<TStatisticsStackParamList>();
 
 const StatisticsStack = () => {
-  const language = useTranslation();
-
   return (
     <Stack.Navigator
       screenOptions={{
         headerBackTitleVisible: false,
         headerTitleAlign: 'center',
-      }}></Stack.Navigator>
+      }}>
+      <Stack.Screen
+        name="HistoryAllScreen"
+        component={HistoryAllScreen}
+        options={{
+          headerShown: true,
+          title: 'Lịch sử đã làm',
+        }}
+      />
+      <Stack.Screen
+        name="RankScreen"
+        component={RankScreen}
+        options={{
+          headerShown: true,
+          title: 'Xếp hạng thành viên',
+        }}
+      />
+    </Stack.Navigator>
   );
 };
 

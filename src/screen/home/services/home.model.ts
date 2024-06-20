@@ -97,11 +97,11 @@ export interface IItemResult {
     Content: string;
     IsBoolean: boolean;
     Transcription: any;
-    AnswersQuestion: {
-      Id: number;
-      IsBoolean: boolean;
-    }[];
   };
+  AnswersQuestion: {
+    Id: number;
+    IsBoolean: boolean;
+  }[];
 }
 
 export interface IQuestionById {

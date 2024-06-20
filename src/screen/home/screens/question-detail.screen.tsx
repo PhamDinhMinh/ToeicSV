@@ -15,7 +15,7 @@ import {useSharedValue} from 'react-native-reanimated';
 import {PaginationItem} from '@/screen/documents/exam-tips/exam-tips.detail';
 import {color} from '@/global-style';
 import {useForm} from 'react-hook-form';
-import {useMutation, useQuery} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import homeService from '../services/home.services';
 import {
   IResponseQuestion,
@@ -39,6 +39,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
   const {partId, maxResultCount} = route.params;
   const uid = useId();
   const progressValue = useSharedValue(0);
+  const queryClient = useQueryClient();
   const [pageIndex, setPageIndex] = useState(1);
   const [state, setState] = useState({
     endReach: false,
@@ -117,6 +118,8 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
     mutationFn: (dataSubmit: ISubmitQuestionInput) =>
       homeService.submitQuestion(dataSubmit),
     onSuccess: (data: IResponseSubmit) => {
+      queryClient.refetchQueries({queryKey: ['getHistoryForUser']});
+      queryClient.refetchQueries({queryKey: ['getRanks']});
       navigation.replace('ResultSubmitScreen', {item: data});
     },
   });
@@ -376,6 +379,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
       <FlatList
         ref={flatListRef}
         data={getQuestionUser ? getQuestionUser.data : []}
+        pagingEnabled
         renderItem={renderItem}
         horizontal={true}
         keyExtractor={(_, index) => index.toString()}

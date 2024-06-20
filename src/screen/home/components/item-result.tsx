@@ -20,7 +20,7 @@ const ItemResult = (props: TItemResult) => {
       </Text>
       <View style={styles.answersView}>
         {itemResult &&
-          itemResult?.Answer?.AnswersQuestion?.map((answer, indexA) => (
+          itemResult?.AnswersQuestion?.map((answer, indexA) => (
             <View
               key={indexA + 'answers' + uid}
               style={[

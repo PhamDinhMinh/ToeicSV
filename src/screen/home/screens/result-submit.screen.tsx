@@ -41,7 +41,8 @@ const ResultSubmitScreen = ({navigation, route}: props) => {
             ...globalStyles.text14Medium,
             marginVertical: 10,
           }}>
-          Kết quả: {item?.totalCorrect}/{item?.totalWrong}
+          Kết quả: {item?.totalCorrect}/
+          {Number((item?.totalWrong ?? 0) + (item?.totalCorrect ?? 0))}
         </Text>
         <View style={styles.content}>
           <View style={styles.viewResult}>

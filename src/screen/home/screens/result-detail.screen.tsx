@@ -66,7 +66,12 @@ const ResultDetailScreen = ({navigation, route}: props) => {
         }
       } else {
         return (
-          <ItemResult itemResult={item} index={index} navigation={navigation} />
+          <ItemResult
+            itemResult={item}
+            index={index}
+            navigation={navigation}
+            key={'question' + item?.Id + index}
+          />
         );
       }
     },
@@ -101,7 +106,7 @@ const ResultDetailScreen = ({navigation, route}: props) => {
         renderItem={renderItem}
         keyExtractor={(_, index) => index.toString()}
         getItemLayout={(_, index) => {
-          return {length: width, offset: width * index, index};
+          return {length: width, offset: width, index};
         }}
         initialScrollIndex={0}
         showsVerticalScrollIndicator={false}

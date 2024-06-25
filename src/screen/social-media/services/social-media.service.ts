@@ -54,14 +54,14 @@ class SocialMediaService {
     };
   };
 
-  createPost = async (params: any): Promise<any> => {
+  createPost = async (input: any): Promise<any> => {
     const url = this.PATH_POST + '/Create';
-    return axiosClient.post(url, params);
+    return axiosClient.post(url, input);
   };
 
-  updatePost = (params: any) => {
+  updatePost = (input: any) => {
     const url = this.PATH_POST + '/Update';
-    return axiosClient.put(url, params);
+    return axiosClient.put(url, input);
   };
 
   deletePost = async (params: any) => {
@@ -88,6 +88,12 @@ class SocialMediaService {
     return axiosClient.post(url, params);
   };
 
+  updateComment = async (input: any) => {
+    const url = this.PATH_COMMENT + '/Update';
+    const {data: response} = await axiosClient.put(url, input);
+    return response;
+  };
+
   deleteComment = async (params: any) => {
     const url = this.PATH_COMMENT + '/Delete';
     const {data: response} = await axiosClient.delete(url, {params: params});
@@ -108,9 +114,9 @@ class SocialMediaService {
     };
   };
 
-  createOrUpdateReact = async (params: IInputReact) => {
+  createOrUpdateReact = async (input: IInputReact) => {
     const url = this.PATH_REACT + '/CreateOrUpdate';
-    return axiosClient.post(url, params);
+    return axiosClient.post(url, input);
   };
 
   getUserInformation = async (params: {

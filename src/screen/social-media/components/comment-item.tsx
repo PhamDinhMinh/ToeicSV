@@ -23,6 +23,7 @@ import ActionDeleteModal from '@/screen/components/modal-confirm/action-delete-m
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import socialMediaService from '../services/social-media.service';
 import Toast from 'react-native-toast-message';
+import CommentEditor from './comment-editor';
 
 const haftHeight = Dimensions.get('screen').height / 2;
 
@@ -151,7 +152,7 @@ const CommentItem = (props: TCommentItem) => {
   };
 
   const handleEdit = () => {
-    setModalEdit(true);
+    setTimeout(() => setModalEdit(true), 500);
   };
 
   const handlePress = () => {
@@ -489,11 +490,13 @@ const CommentItem = (props: TCommentItem) => {
         isPending={isPendingDelete}
       />
 
-      {/* <CommentEditor
-        modalEdit={modalEdit}
-        setModalEdit={setModalEdit}
-        commentItem={comment}
-      />  */}
+      {modalEdit && (
+        <CommentEditor
+          modalEdit={modalEdit}
+          setModalEdit={setModalEdit}
+          commentItem={comment}
+        />
+      )}
     </KeyboardAvoidingView>
   ) : null;
 };

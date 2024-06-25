@@ -14,6 +14,7 @@ import socialMediaService from '../services/social-media.service';
 import Toast from 'react-native-toast-message';
 import FastImage from 'react-native-fast-image';
 import FeelEmotions from './feeling-emotions/feeling-emotions';
+import Loading from '@/screen/components/loading/loading';
 
 type THeaderSocialPostItem = {
   post: IPostResponse;
@@ -192,6 +193,7 @@ const HeaderSocialPostItem = (props: THeaderSocialPostItem) => {
         content={language.t('confirm-delete-post')}
         isPending={isPendingDelete}
       />
+      {isPendingDelete && <Loading />}
     </View>
   );
 };

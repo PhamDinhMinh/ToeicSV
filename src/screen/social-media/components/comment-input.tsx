@@ -59,7 +59,7 @@ const CommentInput = (props: TCommentInput) => {
           <View style={{flexDirection: 'row'}}>
             <Text>{language.t('reply')} </Text>
             <Text style={[styles.textUserRep, {...globalStyles.text15Bold}]}>
-              {commentReplay?.user?.fullName?.replace(/^\s+/, '')}
+              {commentReplay?.user?.name?.replace(/^\s+/, '')}
             </Text>
           </View>
           <Button

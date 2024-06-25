@@ -69,49 +69,47 @@ const CommentItem = (props: TCommentItem) => {
     setShowModalEmoji(false);
   };
 
-  //   const {mutate: createOrUpdatePostReact} = useMutation({
-  //     mutationFn: (params: {
-  //       reactState?: number | null;
-  //       isCancel?: boolean;
-  //       create?: boolean;
-  //     }) => {
-  //       type TPayload = {
-  //         reactState?: number | null;
-  //         commentId?: number;
-  //         postId?: number;
-  //         isCancel?: boolean;
-  //         creatorUserId: number;
-  //         creatorTenantId: number | null;
-  //       };
-  //       const payload: TPayload = {
-  //         commentId: comment.id,
-  //         reactState: params.reactState,
-  //         isCancel: params.isCancel,
-  //         creatorUserId: comment.user.id,
-  //         creatorTenantId: comment?.user?.tenantId,
-  //       };
-  //       return SocialPostApi.createOrUpdatePostReactQuery(payload);
-  //     },
-  //     onSuccess: (_, params) => {
-  //       params.isCancel
-  //         ? setReact({
-  //             reactState: params.reactState,
-  //             countReact: react.countReact - 1,
-  //             isLoading: false,
-  //           })
-  //         : params.create
-  //         ? setReact({
-  //             reactState: params.reactState,
-  //             countReact: react.countReact + 1,
-  //             isLoading: false,
-  //           })
-  //         : setReact({
-  //             reactState: params.reactState,
-  //             countReact: react.countReact,
-  //             isLoading: false,
-  //           });
-  //     },
-  //   });
+  const {mutate: createOrUpdatePostReact} = useMutation({
+    mutationFn: (params: {
+      reactState?: number | null;
+      isCancel?: boolean;
+      create?: boolean;
+    }) => {
+      type TPayload = {
+        reactState?: number | null;
+        commentId?: number;
+        postId?: number;
+        isCancel?: boolean;
+        creatorUserId: number;
+      };
+      const payload: TPayload = {
+        commentId: comment.id,
+        reactState: params.reactState,
+        isCancel: params.isCancel ?? false,
+        creatorUserId: comment.user.id,
+      };
+      return socialMediaService.createOrUpdateReact(payload);
+    },
+    onSuccess: (_, params) => {
+      params.isCancel
+        ? setReact({
+            reactState: params.reactState,
+            countReact: react.countReact - 1,
+            isLoading: false,
+          })
+        : params.create
+          ? setReact({
+              reactState: params.reactState,
+              countReact: react.countReact + 1,
+              isLoading: false,
+            })
+          : setReact({
+              reactState: params.reactState,
+              countReact: react.countReact,
+              isLoading: false,
+            });
+    },
+  });
 
   const handleOnLongPress = () => {
     buttonRef.current.measure(
@@ -131,25 +129,25 @@ const CommentItem = (props: TCommentItem) => {
   };
 
   const handlePressOut = async () => {
-    // if (increment) {
-    //   setShowModalEmoji(false);
-    //   if (react.reactState !== null && react.reactState !== -1) {
-    //     createOrUpdatePostReact({reactState: null, isCancel: true});
-    //   } else {
-    //     createOrUpdatePostReact({reactState: 0, isCancel: false, create: true});
-    //   }
-    // }
-    // setIncrement(true);
+    if (increment) {
+      setShowModalEmoji(false);
+      if (react.reactState !== null && react.reactState !== -1) {
+        createOrUpdatePostReact({reactState: null, isCancel: true});
+      } else {
+        createOrUpdatePostReact({reactState: 0, isCancel: false, create: true});
+      }
+    }
+    setIncrement(true);
   };
 
   const handleChooseIcon = (index: number) => {
-    // setReact({...react, isLoading: true});
-    // if (react.reactState !== null) {
-    //   createOrUpdatePostReact({reactState: index, create: false});
-    // } else {
-    //   createOrUpdatePostReact({reactState: index, create: true});
-    // }
-    // setShowModalEmoji(false);
+    setReact({...react, isLoading: true});
+    if (react.reactState !== null) {
+      createOrUpdatePostReact({reactState: index, create: false});
+    } else {
+      createOrUpdatePostReact({reactState: index, create: true});
+    }
+    setShowModalEmoji(false);
   };
 
   const handleEdit = () => {
@@ -362,12 +360,12 @@ const CommentItem = (props: TCommentItem) => {
             <View>
               {react.countReact > 0 ? (
                 <Pressable
-                  // onPress={() =>
-                  //   navigation.navigate('SocialListReactScreen', {
-                  //     postId: comment.postId,
-                  //     commentId: comment.id,
-                  //   })
-                  // }
+                  onPress={() =>
+                    navigation.navigate('SocialListLikeScreen', {
+                      postId: comment.postId,
+                      commentId: comment.id,
+                    })
+                  }
                   style={{
                     flexDirection: 'row',
                     alignItems: 'center',

@@ -9,6 +9,7 @@ type TSingleImage = {
   toggleOverlay: (index: number) => void;
   style?: any;
   resizeMode?: ResizeMode;
+  thumbnail?: boolean;
 };
 
 const SingleImage = ({
@@ -16,6 +17,7 @@ const SingleImage = ({
   toggleOverlay,
   style,
   resizeMode,
+  thumbnail,
 }: TSingleImage) => {
   const [aspectRatio, setAspectRatio] = useState<number | undefined>(undefined);
   useEffect(() => {
@@ -36,7 +38,7 @@ const SingleImage = ({
           source={{uri: image}}
           style={{
             width: '100%',
-            aspectRatio: aspectRatio ?? 1.5,
+            aspectRatio: thumbnail ? 1.5 : aspectRatio ?? 1.5,
             borderRadius: 10,
           }}
         />

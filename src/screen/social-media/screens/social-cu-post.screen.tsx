@@ -28,10 +28,20 @@ import {useMutation, useQueryClient} from '@tanstack/react-query';
 import socialMediaService from '../services/social-media.service';
 import Toast from 'react-native-toast-message';
 import Loading from '@/screen/components/loading/loading';
+import {TPickedImage} from '@/utils/images/image';
+import ImageThumbnail from '../components/thumbnail/ImageThumbnail';
+import ImageCropPicker from 'react-native-image-crop-picker';
+import uploadService from '@/utils/api/image-file';
 
 const {width} = Dimensions.get('screen');
 
 type props = StackScreenProps<TSocialMediaStackParamList, 'SocialCUPostScreen'>;
+type TState = {
+  imageUrls: string[];
+  listImagesPost: TPickedImage[];
+  isLoading: boolean;
+  isUpload: boolean;
+};
 
 const SocialCUPostScreen = ({navigation, route}: props) => {
   const {post, indexEmoji} = route.params;
@@ -40,6 +50,13 @@ const SocialCUPostScreen = ({navigation, route}: props) => {
   const queryClient = useQueryClient();
   const account = useAccountStore(state => state?.account);
   const avatarDefault = useAvatarDefault(state => state?.avatarDefault);
+
+  const [state, setState] = useState<TState>({
+    imageUrls: post?.imageUrls ?? [],
+    listImagesPost: [],
+    isLoading: false,
+    isUpload: false,
+  });
 
   const {
     control,
@@ -71,12 +88,88 @@ const SocialCUPostScreen = ({navigation, route}: props) => {
     setValue('emotionId', indexEmoji);
   }, [indexEmoji, setValue]);
 
-  const takeImage = (items: any) => {};
+  const takeImage = (items: any) => {
+    setBackground(prev => ({...prev, index: null}));
+    addListImage([items]);
+  };
 
-  const chooseImage = (items: any) => {};
+  const chooseImage = (items: any) => {
+    let countSame = 0;
+    let listImages: any[] = [];
+    items.map((item: any) => {
+      let itemSame = state?.listImagesPost?.find(itemFile => {
+        return itemFile.uri === item.uri;
+      });
+      if (!itemSame) {
+        listImages.push(item);
+      } else {
+        countSame++;
+      }
+    });
+    addListImage(listImages);
+    if (countSame) {
+      return Toast.show({
+        type: 'warn',
+        text1: `Có ${countSame} ảnh hoặc video trùng nhau`,
+        topOffset: 80,
+        visibilityTime: 500,
+        text1Style: {fontSize: 16, fontWeight: '400'},
+      });
+    }
+  };
+
+  const addListImage = (images: TPickedImage[]) => {
+    let listImage: TPickedImage[] = state.listImagesPost;
+    let listPath: any[] = [];
+    images
+      .filter(
+        (image: any) =>
+          state.imageUrls.findIndex((i: string) => i === image.path) === -1,
+      )
+      .forEach(image => {
+        listImage = [...listImage, image];
+        listPath = [...listPath, image.uri];
+      });
+    setState({
+      ...state,
+      imageUrls: [...state.imageUrls, ...listPath],
+      listImagesPost: listImage,
+    });
+  };
+
+  const deleteImage = (item: string) => {
+    setState(old => ({
+      ...old,
+      imageUrls: state.imageUrls.filter((i: string) => i !== item),
+      listImagesPost: state.listImagesPost.filter(
+        (i: TPickedImage) => i.uri !== item,
+      ),
+    }));
+    setValue(
+      'imageUrls',
+      getValues('imageUrls').filter((i: string) => i !== item),
+    );
+  };
+
+  const cleanupSingleImage = (i: string) => {
+    ImageCropPicker.cleanSingle(i)
+      .then(() => {
+        deleteImage(i);
+      })
+      .catch(() => {
+        deleteImage(i);
+      });
+  };
 
   const {mutate: createPost, status: statusCreate} = useMutation({
-    mutationFn: (params: any) => socialMediaService.createPost(params),
+    mutationFn: async (params: any) => {
+      let dataCreate = params;
+      if (params?.imageUrls) {
+        const response = await uploadService.uploadImages(params?.imageUrls);
+        dataCreate = {...dataCreate, imageUrls: response.data};
+      }
+      return socialMediaService.createPost(dataCreate);
+    },
     onSuccess: () => {
       queryClient.refetchQueries({queryKey: ['list-post']});
       navigation.goBack();
@@ -207,6 +300,18 @@ const SocialCUPostScreen = ({navigation, route}: props) => {
     });
   }, [language, navigation, post, renderLeft, renderRight]);
 
+  useEffect(() => {
+    if (state.imageUrls.length === 0) {
+      setBackground(prev => ({...prev, choseGround: true}));
+    } else {
+      setBackground({index: null, choseGround: false, openGroundPost: false});
+    }
+  }, [state.imageUrls.length]);
+
+  useEffect(() => {
+    setValue('imageUrls', state?.listImagesPost);
+  }, [setValue, state?.listImagesPost]);
+
   const inputAccessoryViewID = 'contentInput';
 
   return (
@@ -328,8 +433,15 @@ const SocialCUPostScreen = ({navigation, route}: props) => {
               />
             </Pressable>
           )}
-          {/* <View style={{flexDirection: 'row', marginTop: 10, flexWrap: 'wrap'}}>
-          </View> */}
+          <View style={{flexDirection: 'row', marginTop: 10, flexWrap: 'wrap'}}>
+            {state?.imageUrls?.map((img: string | null) => (
+              <ImageThumbnail
+                link={img}
+                key={img}
+                cleanupSingleImage={cleanupSingleImage}
+              />
+            ))}
+          </View>
         </View>
       </ScrollView>
       <View>
@@ -407,7 +519,6 @@ const SocialCUPostScreen = ({navigation, route}: props) => {
           <FooterCUPost
             takeImage={takeImage}
             chooseImage={chooseImage}
-            newfeed
             post={post}
             navigation={navigation}
           />

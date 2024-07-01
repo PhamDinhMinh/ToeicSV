@@ -1,18 +1,17 @@
 import {Pressable, StyleSheet, Text, View, ViewStyle} from 'react-native';
-import React, {useState} from 'react';
-import {Button, Icon, useTheme} from '@rneui/themed';
+import React from 'react';
+import {Button, Icon} from '@rneui/themed';
 import MaskedView from '@react-native-masked-view/masked-view';
 import LinearGradient from 'react-native-linear-gradient';
 import globalStyles from '@/global-style';
 import {useTranslation} from 'react-i18next';
 import ImageCropPicker from 'react-native-image-crop-picker';
-import RNModal from 'react-native-modal';
+import {getImageObjectFromPicker} from '@/utils/images/image';
 
 type TFooterCUPost = {
   chooseImage: Function;
   takeImage: Function;
   containerStyle?: ViewStyle;
-  newfeed: boolean;
   post: any;
   hideKeyboard?: Function;
   navigation: any;
@@ -24,22 +23,35 @@ const FooterCUPost = (props: TFooterCUPost) => {
     takeImage = () => {},
     containerStyle,
     hideKeyboard,
-    newfeed = false,
     post = undefined,
     navigation,
   } = props;
   const language = useTranslation();
-  const [modalVisible, setModalVisible] = useState(false);
 
-  const {theme} = useTheme();
-
-  const chooseImageHandle = () => {};
-
-  const chooseCamera = () => {
-    newfeed ? setModalVisible(!modalVisible) : takeImageHandle('camera');
+  const chooseImageHandle = () => {
+    ImageCropPicker.openPicker({
+      mediaType: 'photo',
+      cropping: false,
+      multiple: true,
+      maxFiles: 100,
+    })
+      .then(imagesOrVideo => {
+        chooseImage(imagesOrVideo.map(item => getImageObjectFromPicker(item)));
+      })
+      .catch(() => {});
   };
 
-  const takeImageHandle = async (item: any) => {};
+  const takeImageHandle = async (item: any) => {
+    ImageCropPicker.openCamera({
+      mediaType: item,
+    })
+      .then(image => {
+        takeImage(getImageObjectFromPicker(image));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   return (
     <View style={[styles.container, containerStyle]}>
@@ -58,22 +70,22 @@ const FooterCUPost = (props: TFooterCUPost) => {
         </MaskedView>
         <Text style={styles.text}>{language.t('image')}</Text>
       </Pressable>
-      {newfeed && (
-        <Pressable
-          style={styles.itemContainer}
-          onPress={() =>
-            navigation.navigate('SocialFeelEmojiScreen', {post: post})
-          }>
-          <Icon
-            type="material"
-            name="insert-emoticon"
-            size={30}
-            color="#F5C33B"
-          />
-          <Text style={styles.text}>{language.t('feeling')}</Text>
-        </Pressable>
-      )}
-      <Pressable onPress={chooseCamera} style={styles.itemContainer}>
+      <Pressable
+        style={styles.itemContainer}
+        onPress={() =>
+          navigation.navigate('SocialFeelEmojiScreen', {post: post})
+        }>
+        <Icon
+          type="material"
+          name="insert-emoticon"
+          size={30}
+          color="#F5C33B"
+        />
+        <Text style={styles.text}>{language.t('feeling')}</Text>
+      </Pressable>
+      <Pressable
+        onPress={() => takeImageHandle('camera')}
+        style={styles.itemContainer}>
         <MaskedView
           style={styles.iconContainer}
           maskElement={
@@ -100,38 +112,6 @@ const FooterCUPost = (props: TFooterCUPost) => {
           onPress={() => hideKeyboard()}
         />
       )}
-      {/* <RNModal
-        animationIn="slideInUp"
-        animationOut="fadeOutDown"
-        isVisible={modalVisible}
-        onBackdropPress={chooseCamera}
-        backdropOpacity={0.2}
-        style={{alignItems: 'center'}}
-        useNativeDriverForBackdrop={true}>
-        <View style={styles.modalChoose}>
-          <Text style={styles.textModal}>
-            {language.t(languageKeys.newfeed.post.chooseImageorVideo)}
-          </Text>
-          <View style={styles.groupButton}>
-            <Button
-              buttonStyle={[
-                styles.button,
-                {backgroundColor: theme.colors.primary},
-              ]}
-              title={language.t('camera')}
-              onPress={() => takeImageHandle('camera')}
-            />
-            <Button
-              buttonStyle={[
-                styles.button,
-                {backgroundColor: theme.colors.primary},
-              ]}
-              title={language.t('video')}
-              onPress={() => takeImageHandle('video')}
-            />
-          </View>
-        </View>
-      </RNModal> */}
     </View>
   );
 };

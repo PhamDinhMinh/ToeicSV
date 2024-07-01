@@ -68,7 +68,7 @@ const SocialCUPostScreen = ({navigation, route}: props) => {
     defaultValues: {
       contentPost: post?.contentPost ?? '',
       imageUrls: post?.imageUrls ?? [],
-      emotionId: indexEmoji,
+      emotionId: post ? post?.emotionId : indexEmoji,
       backGroundId: post?.backGroundId ?? null,
       //   listImage: [] as TPickedImage[],
     },
@@ -329,14 +329,15 @@ const SocialCUPostScreen = ({navigation, route}: props) => {
           <Text style={styles.textName}>
             {account?.name?.replace(/^\s+/, '')}
           </Text>
-          {indexEmoji !== null && indexEmoji !== undefined && (
+          {(post?.emotionId ||
+            (indexEmoji !== null && indexEmoji !== undefined)) && (
             <>
               <Text style={{...globalStyles.text16Regular}}>
                 {language.t('progress')}
               </Text>
               <FastImage
                 source={{
-                  uri: FeelEmotions[indexEmoji].icon,
+                  uri: FeelEmotions[indexEmoji ?? post?.emotionId].icon,
                 }}
                 style={{width: 20, height: 20}}
               />
@@ -344,7 +345,8 @@ const SocialCUPostScreen = ({navigation, route}: props) => {
                 {language.t('feel')}
               </Text>
               <Text style={{...globalStyles.text16Regular}}>
-                {language.t(FeelEmotions[indexEmoji].des) ?? ''}
+                {language.t(FeelEmotions[indexEmoji ?? post?.emotionId].des) ??
+                  ''}
               </Text>
             </>
           )}

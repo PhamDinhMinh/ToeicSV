@@ -174,11 +174,11 @@ const SocialCUPostScreen = ({navigation, route}: props) => {
           statusCreate === 'pending' ||
           statusUpdate === 'pending'
         }
-        titleStyle={{...styles.buttonTitle}}
+        titleStyle={[styles.buttonTitle, {color: 'black'}]}
         containerStyle={styles.buttonContainer}
         buttonStyle={styles.button}
         linearGradientProps={{
-          colors: [color.green_base_300, color.green_base_500],
+          colors: ['white', color.green_base_500],
           start: {x: 0, y: 0},
           end: {x: 1, y: 0},
         }}

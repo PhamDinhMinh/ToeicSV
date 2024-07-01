@@ -3,19 +3,16 @@ import React from 'react';
 import {Icon} from '@rneui/themed';
 
 type TRenderBackButton = {
-  reset: any;
-  setIndexView: any;
-  navigation: any;
+  setModalConfirm: any;
 };
 
 const RenderBackButton = (props: TRenderBackButton) => {
-  const {reset, setIndexView, navigation} = props;
+  const {setModalConfirm} = props;
+
   return (
     <Pressable
       onPress={() => {
-        reset();
-        setIndexView(-1);
-        navigation.goBack();
+        setModalConfirm(true);
       }}
       style={{
         width: 40,

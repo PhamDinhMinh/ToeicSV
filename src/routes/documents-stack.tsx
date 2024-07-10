@@ -71,14 +71,14 @@ const DocumentsStack = () => {
           headerShown: true,
         }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="VocabularyScreen"
         component={VocabularyScreen}
         options={{
           headerTitle: 'Vocabulary',
           headerShown: true,
         }}
-      />
+      /> */}
     </Stack.Navigator>
   );
 };

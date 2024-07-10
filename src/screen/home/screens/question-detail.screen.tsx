@@ -121,6 +121,7 @@ const QuestionDetailScreen = ({navigation, route}: props) => {
   });
 
   const onSubmit = (data: any) => {
+    // console.log(data, 'sao lại lỗi dị trời huhu');
     submitQuestion(data);
     setState({endReach: false, visibleModal: false});
   };

@@ -61,13 +61,13 @@ const DocumentScreen = ({navigation}: props) => {
       route: 'GrammarScreen',
       content: 'Ngữ pháp',
     },
-    {
-      nameIcon: 'book',
-      typeIcon: 'ionicon',
-      colorIcon: color.grey_800,
-      route: 'VocabularyScreen',
-      content: 'Bộ từ vựng',
-    },
+    // {
+    //   nameIcon: 'book',
+    //   typeIcon: 'ionicon',
+    //   colorIcon: color.grey_800,
+    //   route: 'VocabularyScreen',
+    //   content: 'Bộ từ vựng',
+    // },
     {
       nameIcon: 'lightbulb-auto',
       typeIcon: 'material-community',

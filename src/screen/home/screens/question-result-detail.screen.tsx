@@ -110,7 +110,7 @@ const QuestionResultDetailScreen = ({route}: props) => {
               resizeMode={FastImage.resizeMode.contain}
             />
           )}
-          {getQuestionById?.imageUrl[0] && (
+          {(getQuestionById?.imageUrl?.length ?? 0) > 0 && (
             <FastImage
               source={{uri: getQuestionById?.imageUrl[0]}}
               style={{

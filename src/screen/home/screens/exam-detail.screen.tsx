@@ -29,6 +29,7 @@ import Part67Question from '../components/part-6-7-question';
 import RenderBackButton from '../components/render-back-button';
 import ModalAction from '@/screen/components/modal-confirm/modal-action';
 import Loading from '@/screen/components/loading/loading';
+import ModalConfirm from '@/screen/components/modal-confirm/modal-confirm';
 
 const {width} = Dimensions.get('screen');
 
@@ -41,6 +42,7 @@ const ExamDetailScreen = ({navigation, route}: props) => {
   const [indexView, setIndexView] = useState(-100);
   const [pageIndex, setPageIndex] = useState(1);
   const flatListRef = useRef(null);
+  const [modalConfirm, setModalConfirm] = useState(false);
   const [state, setState] = useState({
     endReach: false,
     visibleModal: false,
@@ -75,14 +77,8 @@ const ExamDetailScreen = ({navigation, route}: props) => {
   };
 
   const renderBackButton = useCallback(
-    () => (
-      <RenderBackButton
-        navigation={navigation}
-        reset={reset}
-        setIndexView={setIndexView}
-      />
-    ),
-    [navigation, reset],
+    () => <RenderBackButton setModalConfirm={setModalConfirm} />,
+    [],
   );
 
   const titleRender = useCallback(() => {
@@ -391,6 +387,18 @@ const ExamDetailScreen = ({navigation, route}: props) => {
           animationOut="fadeInLeft"
           swipeDirection={['left', 'right']}
           disable={false}
+        />
+      )}
+      {modalConfirm && (
+        <ModalConfirm
+          closeModal={() => setModalConfirm(false)}
+          content="Nếu bạn thoát ra, các câu trả lời sẽ bị xoá. Bạn vẫn muốn thoát?"
+          isVisible={modalConfirm}
+          handlePress={() => {
+            setIndexView(-1);
+            reset();
+            navigation.goBack();
+          }}
         />
       )}
       {(statusSubmit === 'pending' || isLoading) && <Loading />}

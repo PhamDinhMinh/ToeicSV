@@ -40,14 +40,18 @@ const useListSetting = () => {
             nameIcon: 'moon',
             typeIcon: 'ionicon',
             size: 20,
-            route: 'InformationScreen',
+            function: () => {
+              Alert.alert('Chưa có giao diện. Hãy quay lại sau');
+            },
           },
           {
             title: 'Giao diện đáp án',
             nameIcon: 'information-circle',
             typeIcon: 'ionicon',
             size: 20,
-            route: 'ChangePassword',
+            function: () => {
+              Alert.alert('Chưa có giao diện. Hãy quay lại sau');
+            },
           },
         ],
       },

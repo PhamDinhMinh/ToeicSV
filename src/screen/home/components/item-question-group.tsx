@@ -78,10 +78,13 @@ const ItemQuestionGroup = (props: TItemQuestionGroup) => {
     (idAnswer: number | null) => {
       let updatedAnswers;
       const currentAnswers2 = getValues('resultOfUser');
-
-      if (questionIndex > -1) {
+      const indexOnCurrent =
+        currentAnswers2.findIndex(
+          (item: any) => item.idQuestion === question.id,
+        ) ?? -1;
+      if (indexOnCurrent > -1) {
         updatedAnswers = currentAnswers2.map((item: any, indexC: number) =>
-          indexC === questionIndex ? {...item, idAnswer: idAnswer} : item,
+          indexC === indexOnCurrent ? {...item, idAnswer: idAnswer} : item,
         );
       } else {
         updatedAnswers = [
@@ -91,7 +94,7 @@ const ItemQuestionGroup = (props: TItemQuestionGroup) => {
       }
       setValue('resultOfUser', updatedAnswers);
     },
-    [getValues, question.id, questionIndex, setValue],
+    [getValues, question.id, setValue],
   );
 
   useEffect(() => {
@@ -103,7 +106,7 @@ const ItemQuestionGroup = (props: TItemQuestionGroup) => {
   return (
     <View style={{marginBottom: 14}}>
       <Text>
-        Câu{' '}
+        Câu {question.id} hih
         {onExam
           ? numberOnExam()
           : part === EPart.Part7

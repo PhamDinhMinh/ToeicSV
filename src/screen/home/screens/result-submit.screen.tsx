@@ -32,8 +32,17 @@ const ResultSubmitScreen = ({navigation, route}: props) => {
           <Text style={styles.textTitle}>
             Bạn đã hoàn thành bài luyện tập này
           </Text>
-          <Text>Mô tả ảnh</Text>
-          <Text>(Nghe hiểu)</Text>
+          {item?.idExam ? (
+            <>
+              <Text>Nghe hiểu</Text>
+              <Text>Đọc hiểu</Text>
+            </>
+          ) : (
+            <>
+              <Text>Mô tả ảnh</Text>
+              <Text>(Nghe hiểu)</Text>
+            </>
+          )}
         </View>
         <Text
           style={{
@@ -67,6 +76,21 @@ const ResultSubmitScreen = ({navigation, route}: props) => {
               : 'Cố gắng lên! Không được bỏ cuộc'}
           </Text>
         </View>
+        {item?.idExam && (
+          <View style={[styles.content, {marginTop: 20}]}>
+            <Text>
+              Điểm nghe:{' '}
+              {(((item?.listeningCorrect ?? 1) > 1
+                ? item?.listeningCorrect
+                : 1) ?? 1 - 1) * 5}
+            </Text>
+            <Text>
+              Điểm đọc:{' '}
+              {(((item?.readingCorrect ?? 1) > 1 ? item?.readingCorrect : 1) ??
+                1 - 1) * 5}
+            </Text>
+          </View>
+        )}
       </View>
 
       <View style={styles.footer}>

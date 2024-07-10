@@ -57,8 +57,6 @@ const ExamDetailScreen = ({navigation, route}: props) => {
   } = useForm({
     defaultValues: {
       resultOfUser: [],
-      timeStart: '',
-      timeEnd: '',
       idExam: idExam,
     },
   });

@@ -1,5 +1,4 @@
 import {
-  Dimensions,
   FlatList,
   Pressable,
   SafeAreaView,
@@ -15,8 +14,6 @@ import ItemResult from '../components/item-result';
 import {IItemResult} from '../services/home.model';
 import globalStyles, {color} from '@/global-style';
 import {StackActions} from '@react-navigation/native';
-
-const {width} = Dimensions.get('screen');
 
 type props = StackScreenProps<THomeStackParamList, 'ResultDetailScreen'>;
 
@@ -47,7 +44,73 @@ const ResultDetailScreen = ({navigation, route}: props) => {
           case 0:
             return (
               <>
-                <Text>Part 1: Mô tả hình ảnh</Text>
+                <Text style={styles.title}>Part 1: Mô tả hình ảnh</Text>
+                <ItemResult
+                  itemResult={item}
+                  index={index}
+                  navigation={navigation}
+                />
+              </>
+            );
+          case 6:
+            return (
+              <>
+                <Text style={styles.title}>Part 2: Hỏi - Đáp</Text>
+                <ItemResult
+                  itemResult={item}
+                  index={index}
+                  navigation={navigation}
+                />
+              </>
+            );
+          case 30:
+            return (
+              <>
+                <Text style={styles.title}>Part 3: Đoạn hội thoại</Text>
+                <ItemResult
+                  itemResult={item}
+                  index={index}
+                  navigation={navigation}
+                />
+              </>
+            );
+          case 69:
+            return (
+              <>
+                <Text style={styles.title}>Part 4: Bài nói chuyện ngắn</Text>
+                <ItemResult
+                  itemResult={item}
+                  index={index}
+                  navigation={navigation}
+                />
+              </>
+            );
+          case 99:
+            return (
+              <>
+                <Text style={styles.title}>Part 5: Câu không hoàn chỉnh</Text>
+                <ItemResult
+                  itemResult={item}
+                  index={index}
+                  navigation={navigation}
+                />
+              </>
+            );
+          case 129:
+            return (
+              <>
+                <Text style={styles.title}>Part 6: Hoàn thành đoạn văn</Text>
+                <ItemResult
+                  itemResult={item}
+                  index={index}
+                  navigation={navigation}
+                />
+              </>
+            );
+          case 145:
+            return (
+              <>
+                <Text style={styles.title}>Part 6: Đọc hiểu đoạn văn</Text>
                 <ItemResult
                   itemResult={item}
                   index={index}
@@ -105,12 +168,10 @@ const ResultDetailScreen = ({navigation, route}: props) => {
         data={dataObjects ? dataObjects : []}
         renderItem={renderItem}
         keyExtractor={(_, index) => index.toString()}
-        getItemLayout={(_, index) => {
-          return {length: width, offset: width, index};
-        }}
         initialScrollIndex={0}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{padding: 0, margin: 0}}
+        maxToRenderPerBatch={20}
       />
     </SafeAreaView>
   );
@@ -127,6 +188,12 @@ const styles = StyleSheet.create({
     marginHorizontal: '20%',
     borderRadius: 12,
     marginBottom: 10,
+  },
+  title: {
+    ...globalStyles.text18Medium,
+    paddingLeft: 10,
+    color: color.green_base_500,
+    marginTop: 10,
   },
   renderRight: {
     marginRight: 10,

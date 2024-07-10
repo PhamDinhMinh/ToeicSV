@@ -84,7 +84,7 @@ const FooterCUPost = (props: TFooterCUPost) => {
         <Text style={styles.text}>{language.t('feeling')}</Text>
       </Pressable>
       <Pressable
-        onPress={() => takeImageHandle('camera')}
+        onPress={() => takeImageHandle('photo')}
         style={styles.itemContainer}>
         <MaskedView
           style={styles.iconContainer}

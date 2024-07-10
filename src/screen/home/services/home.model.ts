@@ -70,6 +70,7 @@ export interface IResponseSubmit {
   readingCorrect: number;
   totalCorrect: number;
   totalWrong: number;
+  idExam?: number;
 }
 
 export interface IResultById {

@@ -1,6 +1,6 @@
 import React from 'react';
 import ExamTipScreen from '@/screen/documents/exam-tips/exam-tips.screen';
-import VocabularyScreen from '@/screen/documents/vocabulary/vocabulary.screen';
+// import VocabularyScreen from '@/screen/documents/vocabulary/vocabulary.screen';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useTranslation} from 'react-i18next';
 import GrammarDetailScreen from '@/screen/documents/grammars/grammar-detail.screen';
